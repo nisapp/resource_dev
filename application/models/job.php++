@@ -1,0 +1,116 @@
+<?php if (!defined('BASEPATH'))exit('No direct script access allowed');
+	Class Job extends CI_Model
+	{
+	  function __construct()
+		{
+        // Call the Model constructor
+        parent::__construct();
+		}
+		function GetJobData($jobid = false)
+		{
+				$this->db->select('j.* , u.first_name , u.last_name,u.id as tbluserid');
+				$this->db->from('jobs as j , users as u');
+				$this->db->join('assigned_users as au', 'j.id = au.job_id', 'left');
+				$this->db->where('u.id = au.user_id');
+				if($jobid != false)
+				{
+					$this->db->where('j.id',$jobid);
+					$this->db->limit('1');
+				}
+				
+				 $query = $this->db->get();
+				 return $query;
+		}
+		
+		function InsertJobData()
+		{
+					$job_title = $this->input->post('txt_jname');
+					$description = $this->input->post('txtarea_desc');
+					$location = $this->input->post('txt_location');
+					$start_date = $this->input->post('txt_startdate');
+					$end_date = $this->input->post('txt_enddate');
+					if($this->input->post('chk_iscomplete')=="complete")
+					$is_done = "1";
+					else
+					$is_done = "0";
+					$assigneduser = $this->input->post('sel_assign_user');
+					
+                    $data = array(
+                        'job_title'=>$job_title,
+                        'description'=>$description,
+                        'location'=>$location,
+                        'start_date'=>$start_date,
+                        'end_date'=>$end_date,
+                        'is_done'=>$is_done 
+                    );
+                    $this->db->trans_start();
+					$this->db->insert('jobs',$data);
+					$lastjobid=$this->db->insert_id();
+					if(isset($assigneduser))
+					{
+					$assignjdata = array(
+                        'user_id'=>$assigneduser,
+                        'job_id'=>$lastjobid
+						);
+					$this->db->insert('assigned_users',$assignjdata);
+					}
+					$this->db->trans_complete();
+					return $this->db->trans_status();//giving the status of the transaction 
+		
+		}
+		function UpdateJobData($updatejobid)
+		{
+				$job_title = $this->input->post('txt_jname');
+				$description = $this->input->post('txtarea_desc');
+				$location = $this->input->post('txt_location');
+				$start_date= $this->input->post('txt_startdate');
+				$end_date = $this->input->post('txt_enddate');
+				$assign_user_id = $this->input->post('sel_assign_user');
+				if($this->input->post('chk_iscomplete')=="complete")
+					$is_done = "1";
+				else
+					$is_done = "0";
+					
+				$datatoupdate = array(
+					'job_title'=>$job_title,
+					'description'=>$description,
+					'location'=>$location,
+					'start_date'=>$start_date,
+					'end_date'=>$end_date,
+					'is_done'=>$is_done 
+				);
+				$this->db->where('id',$updatejobid);
+				$statusupdate = $this->db->update('jobs', $datatoupdate);
+				if($statusupdate){
+					$assigneduser = $this->input->post('sel_assign_user');
+					$assignjdata = array(
+                        'user_id'=>$assigneduser,
+					);
+					$this->db->where('job_id',$updatejobid);
+					
+					$statusupdate2=$this->db->update('assigned_users',$assignjdata);
+							
+				}
+				return $statusupdate2;
+		
+		}
+		function DeleteJobData($deleteid)
+		{
+				 $this->db->query("DELETE j, au	FROM jobs j LEFT JOIN assigned_users au ON j.id = au.job_id WHERE j.id = $deleteid");
+				return ($this->db->affected_rows() > 0) ? TRUE : FALSE;		
+		}
+		
+		function GetAssignedVideosToUser($userid)
+		{
+		
+				$this->db->select('v.*');
+				$this->db->from('videos as v , users as u');
+				$this->db->join('assigned_videos as av ', 'u.id = av.user_id', 'left');
+				$this->db->where('v.id = av.video_id');
+				$this->db->where('u.id',$userid);
+				$query = $this->db->get();
+				return $query;
+		}
+	 
+	}
+	?>

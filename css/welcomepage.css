@@ -1,0 +1,167 @@
+body {
+	background: url('../images/background_1.jpg') no-repeat;
+	background-repeat:no-repeat;
+	background-position: top center;
+	overflow-x: hidden;
+}
+
+#container {
+	margin: 105px auto;
+	margin-bottom: 10px;
+	width: 570px;
+	border-radius: 20px;
+	padding: 20px;
+	background-color:rgba(0,0,0,0.8);
+	text-shadow: 3px 2px rgb(24, 24, 23);
+}
+
+#page_content {
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 2.2em;
+	word-spacing: 2px;
+	font-family: sans-serif;
+}
+
+#pre_title, #page_title, #email_content, #page_content, #image_button, #container_footer, #form_content, footer {
+	text-align: center;
+	color: white;
+}
+
+#page_title{
+	color: #e2f015;
+	font-size: 7em;
+	margin-top: -10px;
+
+}
+
+#image_button img{
+	margin: 10px 0px;
+}
+
+footer {
+	font-family: sans-serif;
+	font-size: 0.8em;
+}
+
+footer a {
+	text-decoration: none;
+	color: #2a8ae6;
+}
+
+.cls {
+	clear: both;
+}
+/*for gvo like page*/
+#main {
+	float: left;
+	position: relative;
+	left: 50%;
+}
+
+#main_wrapper{
+	float: left;
+	position: relative;
+	left: -50%;
+}
+
+#wrapper {
+	float: left;
+}
+#header {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.signup {
+	font-size: 5.4em;
+	color: #d5f6ff;
+	text-shadow: 3px 3px rgba(0, 0, 0, 0.4);
+	margin: 0px;
+}
+
+#signup_form {
+	float: left;
+	height: 425px;
+	width: 400px;
+	margin: -8px 0 0 97px;
+	background: url('../images/form_background.png') no-repeat;
+	text-align: center;
+}
+
+.createaccount {
+	font-size: 1.4em;
+	color: #ecffb7;
+	font-family: sans-serif;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.step{
+	margin: 30px 0 20px 0;
+}
+
+#click_here img{
+	margin-top: 10px;
+}
+#no_thanks {
+	padding: 0px 50px;
+	margin-top: 20px;
+	font-size: 13px;
+	font-family:"Times New Roman",Georgia,Serif;
+}
+
+#no_thanks a{
+	color: white;
+	
+}
+
+#username {
+	height: 50px;	
+	width: 300px;
+	border-radius: 20px;
+	font-size: 1.5em;
+	padding: 10px 20px;
+	margin-bottom: 10px;
+}
+
+footer {
+	/* position: absolute; */
+	bottom: 10;
+	width: 100%;
+}
+
+#step2 {
+	display: none;
+}
+
+#click_here {
+	margin-left: -130px;
+}
+
+#save_form {
+	margin-left: -120px;
+}
+
+#show_video {
+	position: relative;
+	top: -310px;
+	left: 5px;
+}
+
+#show_video iframe {
+	width: 537px;
+	height: 310px;
+}
+
+@-moz-document url-prefix() {
+    #show_video {
+        top: -317px;
+        left: -3px;
+    }
+
+    #show_video iframe {
+		width: 545px;
+		height: 312px;
+	}
+}
