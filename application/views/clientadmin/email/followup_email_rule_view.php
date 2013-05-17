@@ -61,7 +61,7 @@
 			
 				if (array_key_exists('is_followup_email_data_exist', $followup_mail_data))
 				{
-					echo '<input type="text" name="is_update" value="1" >';
+					echo '<input type="hidden" name="is_update" value="1" >';
 				}
 			}
 		

@@ -50,36 +50,65 @@
 			}
 		}
 	 
+		function check_for_valid_affliate_id($id){
+			$this -> db -> select('*');
+			$this -> db -> from('users');
+			$this -> db -> where('user_track_id', $id);
+			$query = $this->db->get();
+			return $query->num_rows;
+		}
+
 		function signup($wholedata=array())
-		{
-			//execute the insert operation 
-			$result = $this->db->insert('users',$wholedata);
-			if($result)
-			{
-				$lastuserid = $this->db->insert_id();
-				$track_id = $lastuserid.$this->create_track_id($length=6,$use_upper=1,$use_lower=1,$use_number=1,$use_custom="@");
-				$datatoupdate = array(
-									'user_track_id'=>$track_id,
-								);
-				$this->db->where('id', $lastuserid);
-				$this->db->trans_start();
-				$status = $this->db->update('users', $datatoupdate);
-				if($status){
-					$this->send_signup_mail($wholedata['user_email']);
-	 			}		
-				$this->db->trans_complete();
-				
-				$userarray = array(
-					'id' => $lastuserid,
-					'user_name'	=> $wholedata['user_name'],
-					'full_name' =>$wholedata['first_name']." ".$wholedata['last_name'],
-					'role'  => $wholedata['role'],
-					'user_tack_id'  => $track_id
-				);
-				return $userarray;
+		{	
+			$is_refer=0;
+			$is_valid_affliate_id=1;
+			if (array_key_exists('affiliate_user_id', $wholedata)){
+				$is_refer=1;
+				$aff_res=$this->check_for_valid_affliate_id($wholedata['affiliate_user_id']);
+				if($aff_res!=0){
+					// echo 'Valid_affliate_id';
+					// die("valid");
+					$is_valid_affliate_id=1;
+				}else{
+					$is_valid_affliate_id=0;
+					// echo 'invalid_affliate_id';
+					return 'invalid_affliate_id';
+					die(' Die due to invalid_affliate_id');
+				}	
+				// echo "The 'first' element is in the array-{$wholedata[affiliate_user_id]}";
+			}
+			if($is_valid_affliate_id==1){
+				//execute the insert operation 
+				$result = $this->db->insert('users',$wholedata);
+				if($result)
+				{
+					$lastuserid = $this->db->insert_id();
+					$track_id = $lastuserid.$this->create_track_id($length=6,$use_upper=1,$use_lower=1,$use_number=1,$use_custom="#");
+					$datatoupdate = array(
+										'user_track_id'=>$track_id,
+									);
+					$this->db->where('id', $lastuserid);
+					$this->db->trans_start();
+					$status = $this->db->update('users', $datatoupdate);
+					if($status){
+						$this->send_signup_mail($wholedata['user_email']);
+					}		
+					$this->db->trans_complete();
+					
+					$userarray = array(
+						'id' => $lastuserid,
+						'user_name'	=> $wholedata['user_name'],
+						'full_name' =>$wholedata['first_name']." ".$wholedata['last_name'],
+						'role'  => $wholedata['role'],
+						'user_track_id'  => $track_id
+					);
+					return $userarray;
+				}
+			}else{
+				return false;
 			}
 		}
-		 
+			 
 		 /*******=======---------------- Create Custom/Random String ---------- =========************/
 
     /*---Let??? see the  Function parameters Specificateion-------------------
@@ -122,17 +151,15 @@
 		}
 		/*******=======-------------End of  Create Custom/Random String ---------- =========**********/
 		
-		function check_email_exists($emailaddress)
+		function check_username_exists($username)
 		{
-			$this -> db -> select('user_email');
+			$this -> db -> select('user_name');
 			$this -> db -> from('users');
-			$this -> db -> where('user_email', $emailaddress);
+			$this -> db -> where('user_name', $username);
 			$query = $this->db->get();
-			if($query->num_rows == 1) {
-				return $query->result();			
-			}else{
-				return false;
-			}
+			return $query->num_rows;
+			// die(">>>>");
+			// return $query->num_rows;
 		}
 		
 		function get_admin_login_detail(){
@@ -214,6 +241,8 @@
 			return $status;
 		}
 
+		
+	
 	 //here the login functions ends now the user management functions on the admin end as well as user's front end
 	 
 	 

@@ -1,4 +1,8 @@
 <?php
+	// $t=$this->session->all_userdata();
+	// echo '<pre>';
+	// print_r($t);
+	// echo '</pre>';
 	$is_afflitate_user=$this->session->userdata('affuserid');
 	$is_fresh_signup=1;
 	if(isset($is_afflitate_user) && $is_afflitate_user!=''){
@@ -32,8 +36,45 @@
 	<title>Money Formula</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url().'/css/userlogin.css'; ?> ">
 	<style type="text/css">
-		
-		body {
+.imgtick{
+	float: left;
+	position: absolute;
+	margin-top: 5%;
+	left: 89%;
+}
+.infomessage{
+	border: solid 1px black;
+	position: fixed;
+	top: 60%;
+	background-color: white;
+	z-index: 100;
+	height: 100px;
+	margin-top: -200px;
+	width: 100%;
+	background: #00ADEB;
+	color: #fff;
+	text-align: center;
+	font-size: 25px;
+	padding-top: 21px;
+	display: none;
+}		
+#infomessage2{
+	background: none repeat scroll 0 0 #AFEEEE;
+    border: 1px solid black;
+    color: red;
+    display: none;
+    font-size: 25px;
+    height: 80px;
+    margin-top: -200px;
+    padding-top: 30px;
+    position: fixed;
+    text-align: center;
+    top: 60%;
+    width: 100%;
+    z-index: 100;
+	display: none;
+}		
+body {
 	background: url('images/background_1.png') no-repeat;
 	background-repeat:no-repeat;
 	background-position: top center;
@@ -183,6 +224,9 @@
 	<!--[if gt IE 6]>
 		<link rel="stylesheet" type="text/css" href="css/style-ie.css" />
 	<![endif]-->
+	<script src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>scripts/user_registration.js" type="text/javascript"></script>
+						
 </head>
 <body>
 	<!-- login<div id="top">
@@ -202,6 +246,10 @@
 
 
 	<div id="container-wrap" style="padding-top:20px;">
+	
+	<div class="infomessage" id="infomessage"></div>
+	<div class="infomessage2" id="infomessage2"></div>
+	
 		<div id="wrapper-inner">
 			<div id="container">
 					
@@ -215,14 +263,14 @@
                                                     
 							<!--<label>Username:</label>
 							<input type="text" name="username" />-->
-                                                        <input type="text" name="username" value="Username" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;; this.style.color=&#39;#000&#39;; this.onfocus=&#39;&#39;; " >
+							<input type="text" name="username" value="Username" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;; this.style.color=&#39;#000&#39;; this.onfocus=&#39;&#39;; " >
 							<font style="font-size:10px;color:red;text-align:center;" class="sub_alert"><?php echo form_error('username'); ?>
 							</font><!---->
 						</div>
 						<div>
 							<!--<label>Password: <a href="forgot_password.html" rel="forgot_password" class="forgot linkform">Forgot your password?</a></label>
 							<input type="password" name="password" />-->
-                                                        <input type="password" name="password" value="Password" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;; this.style.color=&#39;#000&#39;; this.onfocus=&#39;&#39;; " >
+							<input type="password" name="password" value="Password" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;; this.style.color=&#39;#000&#39;; this.onfocus=&#39;&#39;; " >
 							<font style="font-size:10px;color:red;text-align:center;" class="sub_alert"><?php echo form_error('password'); ?></font>
 						</div>
 						<div class="bottom">
@@ -244,7 +292,6 @@
 
 				<div id="winner">
 					<div class="video_preveiw" style="width:50%;margin-left: 0px;float: left;" >
-						<script src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
 						<script type="text/javascript" src="<?php echo base_url(); ?>jwplayer/jwplayer.js"></script>
 						<script type="text/javascript" src="<?php echo base_url(); ?>scripts/previewplayer.js"></script>
 						<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
@@ -254,17 +301,33 @@
 				
 				<input type="hidden" id="id_videopreview" value="<?php echo $login_video;?>">
 				<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
-				<form action="register/verifysignup" method="post" >
+				<input type="hidden" id="is_avail" name="is_avail" value="-1">
+				
+				<form action="<?php echo base_url();?>register/verifysignup" method="post" >
 					<div id="form_content">
-			            	<input type="text" name="login_firstname" id="login_firstname" placeholder="First Name*" value="First Name*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;; this.style.color=&#39;#000&#39;; this.onfocus=&#39;&#39;; " >
-				            <input type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" value="Last Name*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
-			            	<input type="email" name="login_email" required="required" id="login_email" placeholder="Email Address*" value="Email Address*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
-				            <input type="text" required="required" name="login_username" id="login_username" placeholder="Username*" value="Username*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
-				            <input type="text" name="login_phone" id="login_phone" placeholder="Phone Number*" value="Phone Number*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
-				            <input type="password" name="login_password" id="login_password" placeholder="Password*" value="Password*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
+			            	
+						<input type="text" name="login_firstname" id="login_firstname" placeholder="First Name*" value="First Name*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;; this.style.color=&#39;#000&#39;; this.onfocus=&#39;&#39;; " >
+						
+						<input type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" value="Last Name*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
+						
+						<!--<font style="font-size:12px;color:red;text-align:center;"><?php echo form_error('login_firstname');?></font>
+											
+						<font style="font-size:12px;color:red;text-align:center;"><?php echo form_error('login_lastname');?></font>	-->
+    
+						<input type="email" name="login_email" required="required" id="login_email" placeholder="Email Address*" value="Email Address*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
+						
+						<input type="text" required="required" name="login_username" onkeyup="username_check()" id="login_username" placeholder="minimum length 5" value="Username*" style="color: rgb(0, 0, 0);"  onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
+						
+						<input type="text" name="login_phone" id="login_phone" placeholder="Phone Number*" value="Phone Number*" style="color: rgb(0, 0, 0);" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
+						
+						<img id="tick" class='imgtick' src="<?php echo base_url();?>images/tick.png" style="display:none">
+						<img id="cross" class='imgtick' src="<?php echo base_url();?>images/cross.png" style="display:none" >
+						
+						<input type="password" name="login_password" id="login_password" placeholder="Password*" value="Password*" style="color: rgb(0, 0, 0);"  onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;">
 							<?php
 								if(!$is_fresh_signup){
 							?>
+								
 								<input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $is_afflitate_user; ?>">
 				            <?php } ?>
 			 		</div>

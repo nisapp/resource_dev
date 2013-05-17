@@ -51,18 +51,18 @@
 		
 		function UpdateLogoData($updatelogoid)
 		{
-				$video_name = $this->input->post('txt_vname');
-				$description = $this->input->post('txtarea_vdescription');
-				$video_in_folder = $this->input->post('hidd_video');
-				$strdate=date("Y-m-d");
-				$datatoupdate = array(
-						'file_name'=>$video_name,
-                        'description'=>$description,
-						'is_show'=>'Y',
-                        'type'=>'logo',
-                        'added_date'=>$strdate,
-						'file_name_in_folder'=>$video_in_folder
-				);
+			$video_name = $this->input->post('txt_vname');
+			$description = $this->input->post('txtarea_vdescription');
+			$video_in_folder = $this->input->post('hidd_video');
+			$strdate=date("Y-m-d");
+			$datatoupdate = array(
+					'file_name'=>$video_name,
+					'description'=>$description,
+					'is_show'=>'Y',
+					'type'=>'logo',
+					'added_date'=>$strdate,
+					'file_name_in_folder'=>$video_in_folder
+			);
 				
 			$this->db->where('Id', $updatelogoid);
 			$this->db->trans_start();

@@ -33,6 +33,9 @@
             color: #fff;
             font-weight: bold;
         }
+		body{
+				background: url("<?php echo base_url();?>furley_bg.png") repeat scroll 0 0 #EEEEEE;
+		}
     </style>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->

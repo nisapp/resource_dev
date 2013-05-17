@@ -92,11 +92,9 @@
 				$this->load->view('admin/_layout_main.php', $this->data);
 			}
 	}
-	
-	
 	 
 	 
-	 }
+ }
 	 
 	
 	 

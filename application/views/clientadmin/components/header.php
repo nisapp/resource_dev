@@ -1,8 +1,5 @@
 <?php
-	function curPageName() {
-	 return substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
-	}
-	$curPageName=curPageName();
+	$curPageName=$view_name;
 ?>
   <head>
     <meta charset="utf-8">
@@ -105,16 +102,17 @@ var jq172 = jQuery.noConflict();
     
     <div class="sidebar-nav">
         <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
-        <ul id="dashboard-menu" class="nav nav-list collapse in">
+        <ul id="dashboard-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clientdashboard' || $curPageName=='promote_site_view' || $curPageName=='under_client_listing')){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Home</a></li>
             <li><a href="<?php echo base_url(); ?>clientadmin/promotesite">Promote Site</a></li>
             <li><a href="<?php echo base_url(); ?>clientadmin/promotesite/downclient">My Downline</a></li>
             
         </ul>
+
 		<a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Email Rules<i class="icon-chevron-up"></i></a>
-        <ul id="accounts-menu" class="nav nav-list collapse">
-            <li ><a href="<?php echo base_url(); ?>clientadmin/email"> Welcome Email</a></li>
-            <li ><a href="<?php echo base_url(); ?>clientadmin/email/femail"> Follow Up email</a></li>
+        <ul id="accounts-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='welcome_email_rule_view' || $curPageName=='followup_email_rule_view')){ echo 'in'; } ?>">
+            <li><a href="<?php echo base_url(); ?>clientadmin/email"> Welcome Email</a></li>
+            <li><a href="<?php echo base_url(); ?>clientadmin/email/femail"> Follow Up email</a></li>
         </ul>
 
 

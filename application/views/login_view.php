@@ -12,32 +12,29 @@
     </head>
     <body>
 		<div class="wrapper">
-			<h1>Welcome Super Admin</h1>
+			<h1 align="center">Welcome Super Admin</h1>
 			<!--<h2>Demo: click the <span>orange links</span> to see the form animating and switching</h2>-->
 			<div class="content">
 				<div id="form_wrapper" class="form_wrapper">
 					<!--<form class="register">-->
 					<?php 
-					$classesregister = array('class' => 'register');
-					echo form_open('login/verifysignup',$classesregister); ?>
-						<h3>Register</h3>
+					// $classesregister = array('class' => 'register active');
+					// echo form_open('login/verifysignup',$classesregister); ?>
+					<!--	<h3>Register</h3>
 						<div class="column">
 							<div>
 								<label>First Name:</label>
-								<!--<input type="text" />-->
 								<?php echo form_input('login_firstname', set_value('login_fistname')); ?>
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>Last Name:</label>
 								<?php echo form_input('login_lastname', set_value('login_lastname')); ?>
-								<!--<input type="text" name="login_username" />-->
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>Website:</label>
 								<?php echo form_input('login_website', set_value('login_website')); ?>
-								<!--<input type="text" value="http://"/>-->
 								<span class="error">This is an error</span>
 							</div>
 						</div>
@@ -45,33 +42,26 @@
 							<div>
 								<label>Username:</label>
 								<?php echo form_input('login_username', set_value('login_username')); ?>
-								<!--<input type="text"/>-->
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>Email:</label>
 								<?php echo form_input('login_email', set_value('login_email')); ?>
-								<!--<input type="text" />-->
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>Password:</label>
 								<input type="password" name="login_password" />
 								<?php //echo form_input('login_password', set_value('login_password')); ?>
-								<!--<input type="password" />-->
 								<span class="error">This is an error</span>
 							</div>
 						</div>
 						<div class="bottom">
-							<!--<div class="remember">
-								<input type="checkbox" />
-								<span>Send me updates</span>
-							</div>-->
 							<input type="submit" value="Register" name="login_register" />
 							<a href="index.html" rel="login" class="linkform">You have an account already? Log in here</a>
 							<div class="clear"></div>
-						</div>
-					<?php echo form_close(); 
+						</div>-->
+					<?php //echo form_close(); 
 					 $classesandactive = array('class' => 'login active');
 					echo form_open('login/verifylogin',$classesandactive);  ?>
 					<!--<form class="login active" action="verifylogin" method="post" >-->
@@ -83,14 +73,16 @@
 							</font>
 						</div>
 						<div>
-							<label>Password: <a href="forgot_password.html" rel="forgot_password" class="forgot linkform">Forgot your password?</a></label>
+							<label>Password: 
+								<!--<a href="forgot_password.html" rel="forgot_password" class="forgot linkform">Forgot your password?</a>-->
+							</label>
 							<input type="password" name="password" />
 							<font style="font-size:10px;color:red;text-align:center;" class="sub_alert"><?php echo form_error('password'); ?></font>
 						</div>
 						<div class="bottom">
-							<div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>
+							<!--<div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>-->
 							<input type="submit" value="Login"></input>
-							<a href="register.html" rel="register" class="linkform">You don't have an account yet? Register here</a>
+							<!--<a href="register.html" rel="register" class="linkform">You don't have an account yet? Register here</a>-->
 							<div class="clear"></div>
 						</div>
 					<?php echo form_close(); ?>

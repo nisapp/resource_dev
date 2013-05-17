@@ -14,21 +14,18 @@
 	 
 	 function index()
 	 {
-           /*
-	   if($this->session->userdata('logged_in'))
-	   {//*/
+	   if($this->session->userdata('client_login'))
+	   {
 			$query = $this->video->GetWelVideoData();
 			$result	= $query->result();
 			$data['query'] = $result[0];
 			$session_data = $this->session->userdata('client_login');
 			$data['username'] = $session_data['username'];
 			$this->load->view('welcome_view',$data);
-           /*             
-	   }
-           else{
+	   }else{
 			//If no session, redirect to login page
-			redirect('/login', 'refresh');
-	   }//*/
+			redirect('login/clientlogin', 'refresh');
+	   }
 	 }
 	 function programs($id=0){
              $data['step']=1;

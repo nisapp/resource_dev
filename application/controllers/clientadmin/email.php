@@ -15,7 +15,9 @@ class Email extends CI_Controller {
 	}
 
 	function show_error_view(){
-		$this->load->view('clientadmin/error_view.php');
+		$this->data['error_message']='Please First Login to access this page';
+		$this->data['error_redirect']=base_url().'login/clientlogin';
+		$this->load->view('clientadmin/error_view.php',$this->data);
 	}
 	 
 	function index()
@@ -30,9 +32,13 @@ class Email extends CI_Controller {
 	}
 
 	function femail(){
-		$this->data['followup_mail_data']= $this->client->get_followup_email_data();  
-		$this->data['subview']=  'clientadmin/email/followup_email_rule_view';
-		$this->load->view('clientadmin/_layout_main.php', $this->data);
+		$session_login_client=$this->session->userdata('client_login');
+		if (($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user'))
+		{
+			$this->data['followup_mail_data']= $this->client->get_followup_email_data();  
+			$this->data['subview']=  'clientadmin/email/followup_email_rule_view';
+			$this->load->view('clientadmin/_layout_main.php', $this->data);
+		}
 	}
 	
 	function setfollowrule(){
@@ -83,6 +89,6 @@ class Email extends CI_Controller {
 		}
 	}
 	
-	}
+}
 	 
 	?>

@@ -217,7 +217,11 @@ body{
 
     <h1>Log in to your <strong>resourcebay.com</strong> account!</h1>
     <p class="register">Not a member? <a href="<?php echo base_url(); ?>">Register here!</a></p>
-    
+	
+	<font style="font-size:12px;color:red;text-align:center;">
+		<?php echo form_error('password'); ?>
+	</font>	
+	
     <div>
     	<label for="login_username">Username</label> 
     	<input type="text" name="username" id="login_username" class="field required" title="Please provide your username" />

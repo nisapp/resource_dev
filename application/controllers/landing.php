@@ -16,6 +16,7 @@ class Landing extends CI_Controller {
 	 function index()
 	 {
 		$this->load->helper(array('form'));
+		$this->session->unset_userdata('affuserid');
 		// $this->data['query'] = $this->logo->GetInitData();
 		// $this->load->view('landing_view',$this->data);
 		$this->load->view('landing_view');
