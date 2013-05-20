@@ -58,6 +58,22 @@
 			return $query->num_rows;
 		}
 
+		function check_for_allready_signup($info=array()){
+			// echo '<pre>';
+			// print_r($info);
+			// echo '</pre>';
+
+			$this -> db -> select('*');
+			$this -> db -> from('users');
+			$this -> db -> where('affiliate_user_id', $info['affiliate_user_id']);
+			$this -> db -> where('user_email', $info['user_email']);
+			$this -> db -> where('role', 'user');
+			$query = $this->db->get();
+			// echo $query->num_rows;
+			// die();
+			return $query->num_rows;
+		}
+		
 		function signup($wholedata=array())
 		{	
 			$is_refer=0;
@@ -78,6 +94,15 @@
 				// echo "The 'first' element is in the array-{$wholedata[affiliate_user_id]}";
 			}
 			if($is_valid_affliate_id==1){
+				//check whether user allready signup using same link
+				if($is_refer==1){
+					$is_first_signup=$this->check_for_allready_signup($wholedata);
+					if($is_first_signup!=0){
+						return 'allready_signup';
+						die('die due to allready_signup');
+					}	
+				}
+				
 				//execute the insert operation 
 				$result = $this->db->insert('users',$wholedata);
 				if($result)

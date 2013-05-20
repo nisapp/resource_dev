@@ -23,22 +23,31 @@ function username_check(){
 					if(response==1){
 						// alert('aval');
 						$('#is_avail').val('1');
-						$('#login_username').css('border', '3px green solid');	
+						$('#login_username').css({
+							'border':'3px pink solid',
+							'background':'green',
+							'color':'#FFF',
+							
+						});	
 						$('#tick').fadeIn();
 						$('#cross').hide();
 						// $("#avlmsg").html('Available');
-						$("#infomessage").html('Congrats User-Name Available');
-						$("#infomessage").fadeIn().delay(1000).fadeOut('fast'); 
+						// $("#infomessage").html('Congrats User-Name Available');
+						// $("#infomessage").fadeIn().delay(1000).fadeOut('fast'); 
 					}else{
 						// alert(' Not Avail');
 						$('#is_avail').val('0');
-						$('#login_username').css('border', '3px red solid');
+						$('#login_username').css({
+							'border':'3px pink solid',
+							'background':'red',
+							'color':'#FFF',
+							'font-weight':'bold',
+						});	
 						$('#cross').fadeIn();
 						$('#tick').hide();
 						// $("#avlmsg").html('Not Available');
-						$("#infomessage2").html('Opps User-Name Not Available');
-						$("#infomessage2").fadeIn().delay(1000).fadeOut('fast'); 
-						
+						// $("#infomessage2").html('Opps User-Name Not Available');
+						// $("#infomessage2").fadeIn().delay(1000).fadeOut('fast'); 
 					 }
 				}
 		});

@@ -17,7 +17,6 @@
 		$this->load->helper(array('form'));
 		$this->data['query'] = $this->logo->GetInitData();
 		$this->load->view('user_registration',$this->data);
-		// $this->load->view('landing_view');
 	 }
 	 
 	 
@@ -103,13 +102,13 @@
 			   $this->form_validation->set_rules('login_username','Username','trim|required|min_length[5]|xss_clean');			   
                $this->form_validation->set_rules('login_email','Email','required|valid_email|xss_clean');
                $this->form_validation->set_rules('login_password','Password','required|min_length[5]|xss_clean|callback_insert_database');
-			   
-                    if ($this->form_validation->run() == FALSE) {
+				// echo '>>>>>>>--'.$this->form_validation->run();
+				// die();
+                    if($this->form_validation->run()==FALSE){
 						// echo 'I m in error';
 						$this->data['query'] = $this->logo->GetInitData();
 						$this->load->view('user_registration',$this->data);
-                     }
-                     else {
+                     }else{
 							// echo 'I m Not in error';
 							redirect('home', 'refresh');
 					}
@@ -151,9 +150,24 @@
 
 			//calling the modal class
 			$result = $this->user->signup($wholedata);
-			
-			if($result!='invalid_affliate_id')
+				
+			if($result=='invalid_affliate_id')
 			{	
+				// echo 'invalid_affliate_id_eeeeeeeeee';
+				$this->data['error_message']='Either invalid Link or Some error occur';
+				$this->data['error_redirect']=base_url().'register';
+				$this->load->view('error_view.php',$this->data);
+				return false;
+				die();
+				
+			}else if($result=='allready_signup'){
+				// echo 'allready_signup_error_eeeeeeeeeee';
+				$this->data['error_message']='You allready signup using this link<br/>Click below link for login';
+				$this->data['error_redirect']=base_url().'login/clientlogin';
+				$this->load->view('error_view.php',$this->data);
+				return false;
+				die();
+			}else{
 				// send follow up email after user sign up by affliate user
 				if (array_key_exists('affiliate_user_id', $wholedata)){
 					$this->client->send_followup_email($wholedata);
@@ -176,17 +190,15 @@
 									);
 				$this->session->set_userdata('client_login', $sess_array);
 				return TRUE;
-			}
-			else
-			{
-				$this->data['error_message']='Either invalid url or Some error occur';
-				$this->data['error_redirect']=base_url().'register';
-				$this->load->view('error_view.php',$this->data);
-				//$this->form_validation->set_message('insert_database', 'error saving user data');
-				return false;
+				die();
+				
 			}
 		}else{
-			echo 'user name allready exist';
+			// echo 'user name allready exist error';
+			$this->data['error_message']='Opps! User name allready exist error<br/>Click below link for login';
+			$this->data['error_redirect']=base_url();
+			$this->load->view('error_view.php',$this->data);
+			return false;
 			return false;
 			die();
 		}

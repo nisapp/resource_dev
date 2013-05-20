@@ -79,7 +79,8 @@ foreach($query->result() as $marketing ){
 			<!--<a href="<?php echo base_url();?>admin/videos/updatevideo/<?php echo $marketing->id; ?>" ><i class="icon-pencil"></i></a>-->
               <i onclick="delpro(this.id);" id="<?php echo $marketing->id; ?>" class="icon-remove" style="cursor:pointer"></i>
               <a href="<?php echo base_url();?>admin/marketing/delete_marketing/<?php echo $marketing->id; ?>" ></a>
-			  <a href="<?php echo base_url();?>admin/marketing/edit/<?php echo $marketing->id; ?>" >Edit</a>
+			  <a href="<?php echo base_url();?>admin/marketing/edit/<?php echo $marketing->id; ?>" >Edit</a> 
+                          <a href="<?php echo base_url();?>admin/marketing/preview/<?php echo $marketing->id; ?>" >Preview</a>
           </td>
         </tr>
 <?php } ?>  
