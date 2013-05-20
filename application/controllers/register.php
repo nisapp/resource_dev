@@ -16,6 +16,18 @@
 	 {
 		$this->load->helper(array('form'));
 		$this->data['query'] = $this->logo->GetInitData();
+		$this->data['title'] = 'Registration';
+		$this->data['stylelist'][]='css/style.css';
+		// $this->data['stylelist'][]='css/jsplayer_custom.css';
+
+		$this->data['scriptlist'][]='scripts/html5.js';
+		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+		$this->data['scriptlist'][]='scripts/html5.js';
+		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+		$this->data['scriptlist'][]='scripts/previewplayer.js';
+		
+		$this->data['scriptlist'][]='scripts/user_registration.js';
+		
 		$this->load->view('user_registration',$this->data);
 	 }
 	 
