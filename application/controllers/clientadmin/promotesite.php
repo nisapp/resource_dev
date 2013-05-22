@@ -46,8 +46,8 @@ class Promotesite extends CI_Controller {
 	
 	function invite()
 	{
-		$this->form_validation->set_rules('txtFname', 'fname', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('txtLname', 'Lname', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('txtFname', 'First Name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('txtLname', 'Last Name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtEmail', 'Email', 'trim|required|valid_email|xss_clean|callback_send_afflate_link');
 		if($this->form_validation->run() == FALSE)
 		{

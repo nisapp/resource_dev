@@ -1,119 +1,66 @@
-<?php
-	$curPageName=$view_name;
+<?php 
+$session_data = $this->session->userdata('client_login');
+// echo '<pre>';
+// print_r($session_data);
+// echo '</pre>';
+// $data['fullname']=$session_data['fullname'];
 ?>
-  <head>
-    <meta charset="utf-8">
-    <title>Client Admin</title>
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<html>
+    <head>
+        <title>::-::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'allMoney';}?>-::-::</title>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css">
+		<script src="<?php echo base_url()?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url()?>scripts/html5.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			setTimeout(function() { 
+				$('.infomessage').fadeOut('fast');
+			} , 1750);
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/lib/bootstrap/css/bootstrap.css">
-    
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/theme.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/lib/font-awesome/css/font-awesome.css">
+		</script>
+    </head>
+<body>
+<div id="wrapper">
+	<div class="siteHeaderBg">
+        <div class="wrapperOuter">
+             <div class="wrapperMain">
+					<!--header-->
+						<div class="siteHeader">
+							<!-- logo -->
+							<div class="logo">
+								<h3><a href="<?php echo base_url(); ?>">Logo</a></h3>
+							</div>
+							<!-- /logo -->
+							<!-- header right -->
+							<div class="siteHeaderRight">
+								<div class="sponsor">
+									Your Sponsor :  <a href="#"> Sponsor Name</a>
+								 </div>
+								 <nav class="headertop">
+									<ul>
+										<li><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></li>
+										<li><a href="<?php echo base_url()?>clientadmin/setting">Edit Profile</a></li>
+										<li><a class="last" href="<?php echo base_url()?>clientadmin/clientdashboard/logout">Logout</a></li>
+									</ul>
+								 </nav>
+							</div>
+							<!-- /header right -->
+						</div>
+						<!--/header-->
+			 </div>
+            <!-- container -->
+            <div id="container">
+            	<div class="wrapperMain containermain">
+					<nav class="maniNav">
+						<ul>
+							<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Home</a></li>
+							<li><a href="#">E.A.P Training</a></li>                 
+							<li><a href="<?php echo base_url(); ?>clientadmin/promotesite" >Promote Web</a></li>
+							<li><a href="<?php echo base_url(); ?>home/programs">Programs Joined</a></li>
+							<li><a href="<?php echo base_url(); ?>clientadmin/promotesite/downclient">Tools</a>
+							</li>
+							<li><a href="<?php echo base_url(); ?>clientadmin/email">Bonuses</a></li>
+							<li><a class="last" href="<?php echo base_url(); ?>clientadmin/email/femail">Contact Support</a></li>
 
-    <script src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
-	<script src="<?php echo base_url(); ?>css/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-	<!--<script>
-var jq172 = jQuery.noConflict();
-</script>-->
-    <style type="text/css">
-        #line-chart {
-            height:300px;
-            width:800px;
-            margin: 0px auto;
-            margin-top: 1em;
-        }
-        .brand { font-family: georgia, serif; }
-        .brand .first {
-            color: #ccc;
-            font-style: italic;
-        }
-        .brand .second {
-            color: #fff;
-            font-weight: bold;
-        }
-    </style>
-<script type="text/javascript">
-	setTimeout(function() {
-		$('.infomessage').fadeOut('fast');
-	} , 1750);
-
-</script>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <!--<link rel="shortcut icon" href="../assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
-  </head>
-
-  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
-  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
-  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
-  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
-  <!--[if (gt IE 9)|!(IE)]><!--> 
-  <body class=""> 
-
-  <!--<![endif]-->
-    
-    <div class="navbar">
-        <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    
-                    <!--<li><a href="<?php echo base_url()?>clientadmin/setting" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>-->
-                    <li id="fat-menu" class="dropdown">
-                        <a href="<?php echo base_url()?>clientadmin/clientdashboard/logout" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                             My Account
-                        </a>
-						<ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="<?php echo base_url()?>clientadmin/setting">Edit Account Detail</a></li>
-								<li class="divider"></li>
-							<li><a tabindex="-1" href="<?php echo base_url()?>clientadmin/setting/changepassword">Change Password</a></li>
-								<li class="divider"></li>
-                            <li><a tabindex="-1" class="visible-phone" href="#">Change Password</a></li>
-								<li class="divider visible-phone"></li>
-                            <li><a tabindex="-1" href="<?php echo base_url()?>clientadmin/clientdashboard/logout">Logout</a></li>
-							
-                        </ul>
-                        <!--<ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="#">My Account</a></li>
-                            <li class="divider"></li>
-                            <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
-                            <li class="divider visible-phone"></li>
-                            <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
-                        </ul>-->
-                    </li>
-                    
-                </ul>
-                <a class="brand" href="index.html"><span class="first">Welcome</span> <span class="second"><?php echo $this->session->userdata['client_login']['fullname'];?></span></a>
-        </div>
-    </div>
-    
-
-
-    
-    <div class="sidebar-nav">
-        <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
-        <ul id="dashboard-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clientdashboard' || $curPageName=='promote_site_view' || $curPageName=='under_client_listing')){ echo 'in'; } ?>">
-            <li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Home</a></li>
-            <li><a href="<?php echo base_url(); ?>clientadmin/promotesite">Promote Site</a></li>
-            <li><a href="<?php echo base_url(); ?>clientadmin/promotesite/downclient">My Downline</a></li>
-            
-        </ul>
-
-		<a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Email Rules<i class="icon-chevron-up"></i></a>
-        <ul id="accounts-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='welcome_email_rule_view' || $curPageName=='followup_email_rule_view')){ echo 'in'; } ?>">
-            <li><a href="<?php echo base_url(); ?>clientadmin/email"> Welcome Email</a></li>
-            <li><a href="<?php echo base_url(); ?>clientadmin/email/femail"> Follow Up email</a></li>
-        </ul>
-
-
-    </div>
+						</ul>
+					</nav>
+					

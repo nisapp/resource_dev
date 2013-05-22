@@ -3,44 +3,50 @@
 <?php }else if (isset($status) && $status=="updatefailure"){?>
 			<div class="infomessage"><?php echo "Opps ! Error in Account updated !!"?> </div>
 <?php } ?>
-    <div class="content">
-        <div class="header">
-            <h1 class="page-title">
-			Account Setting
-			</h1>
-        </div>
-        
-		<ul class="breadcrumb">
-			<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Home</a> <span class="divider">/</span></li>
-			<li class="active">Account Setting</li>
-		</ul>
-<style>
-.view_only{
-	border:none  !important;
-	background-color:wheat !important;
-}
-</style>
-<div class="container-fluid">
-<form method="post" action="<?php echo base_url()?>clientadmin/promotesite/invite">
-<div class="row-fluid">
-	<div class="dialog">
-        <div class="block">
-            <p class="block-heading">Account Setting</p>
-            <div class="block-body">
-                    <label>First Name</label>
-                    <input type="text" class="span12 view_only" readonly="true" value=<?php echo $account_detail['first_name']; ?> >
-                    <label>Last Name</label>
-                    <input type="text" class="span12 view_only" readonly="true" value=<?php echo $account_detail['last_name']; ?> >
-                    <label>Email Address</label>
-                    <input type="text" class="span12 view_only" readonly="true" value=<?php echo $account_detail['user_email']; ?> >
-                    <label>Username</label>
-                    <input type="text" class="span12 view_only" readonly="true" value=<?php echo $account_detail['user_name']; ?> >
-                    <label>Phone Number</label>
-                    <input type="text" class="span12 view_only" readonly="true" value=<?php echo $account_detail['phone_number']; ?> >
-					To change password <a href="<?php echo base_url();?>clientadmin/setting/changepassword">Click here </a>
-                    <a href="<?php echo base_url();?>clientadmin/setting/editdetail" class="btn btn-primary pull-right">Edit Detail</a>
-                    <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</form>
+
+<!-- promoteArea -->
+<div class="promoteArea">
+	<table id="rounded-corner" align="center">
+		<thead>
+			<tr>
+				<th  scope="col" colspan="2" align="center">Account Detail</th>
+			</tr>
+		</thead>
+	<tfoot>
+    	<tr>
+        	<td class="rounded-foot-left">
+			<a  class="btnlink" href="<?php echo base_url();?>clientadmin/setting/changepassword">Change Password </a>
+			</td>
+			<td class="rounded-foot-right">
+				<a href="<?php echo base_url();?>clientadmin/setting/editdetail" class="btnlink">Edit Detail</a>
+			</td>
+        </tr>
+    </tfoot>
+		<tbody>
+			<tr>
+				<td class="field_title">First name</td>
+				<td class="field_data"><?php echo $account_detail['first_name'];?></td>
+			</tr>
+			<tr>
+				<td class="field_title">Last name</td>
+				<td class="field_data"><?php echo $account_detail['last_name'];?></td>
+			</tr>
+			<tr>
+				<td class="field_title">Email Address</td>
+				<td class="field_data"><?php echo $account_detail['user_email'];?></td>
+			</tr>
+			<tr>
+				<td class="field_title">Username</td>
+				<td class="field_data"><?php echo $account_detail['user_name'];?></td>
+			</tr>
+			<tr>
+				<td class="field_title">Phone Number</td>
+				<td class="field_data"><?php echo $account_detail['phone_number'];?></td>
+			</tr>
+			
+			
+			
+	  </tbody>
+	</table>
+ </div>
+<!-- /promoteArea -->

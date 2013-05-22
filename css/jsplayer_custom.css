@@ -1,0 +1,14 @@
+.video_preveiw{
+	margin: 38px 3px 2px 115px;
+	position: absolute;
+	text-align: center;
+	width: 50%;
+}
+#videopreview_wrapper{
+	height: 412px !important;
+	width: 119% !important;
+} 
+img#videobg{
+	margin-left: 6%;
+	width: 90%;
+}

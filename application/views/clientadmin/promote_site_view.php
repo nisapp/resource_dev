@@ -1,55 +1,58 @@
 <?php if (isset($status) && $status=="success"){?>
 			<div class="infomessage"><?php echo "Invitation send Successfully"?> </div>
 <?php } ?>
-  <style>
-	.hidecat{
-		width:270px;
-		color: rgb(85, 85, 85);
-		display: inline-block;
-		font-size: 14px;
-		height: 20px;
-		line-height: 20px;
-		margin-bottom: 9px;
-		padding: 4px 6px;
-	}
-  </style>
-    <div class="content">
-        <div class="header">
-            <h1 class="page-title">
-			Invite User
-			</h1>
-        </div>
-        
-		<ul class="breadcrumb">
-			<li><a href="admin/dashboard">Home</a> <span class="divider">/</span></li>
-			<li class="active">Promote Site</li>
-		</ul>
-
-<div class="container-fluid">
-<form method="post" action="<?php echo base_url()?>clientadmin/promotesite/invite">
-<div class="row-fluid">
-	<div class="well">
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#home" data-toggle="tab">Details</a></li>
-		</ul>
-		<div id="myTabContent" class="tab-content">
-				<div class="tab-pane active in" id="home" style="width:50%;float: left;">
-					<label>First Name: </label>
-					<input type="text" name="txtFname" class="input-xlarge val_dis_enb" required placeholder="First name" /> 
-					<label>Last Name: </label>
-					<input type="text" name="txtLname" class="input-xlarge val_dis_enb" required placeholder="Last name" /> 
-					<label>Email Id: </label>
-					<input type="email" name="txtEmail" class="input-xlarge val_dis_enb" required placeholder="Email-id of invite user" /> 
-
-				</div>
-		</div>
-		<div class="btn-toolbar">
-			<input class="btn btn-primary val_dis_enb" type="submit" name="invite" value="Invite" />
-			<a href="<?php echo base_url();?>clientadmin/clientdashboard" data-toggle="modal" class="btn">Cancel</a>
-
-			<div class="btn-group">
-			</div>
-		</div>
+<!-- promoteArea -->
+<div class="promoteArea">
+<form method="post" action="<?php echo base_url()?>clientadmin/promotesite/invite" novalidate>
+	<table id="rounded-corner" align="center" style="back">
+		<thead>
+			<tr>
+				<th scope="col" colspan="2" align="center" >Invite User</th>
+			</tr>
+		</thead>
 	
-	</div>
+		<tbody>
+			<tr>
+				<td class="field_title">First Name:</td>
+				<td class="field_data">
+					<input type="text" name="txtFname" class="ac_input" required placeholder="First name" />
+					<font style="font-size:12px;color:red;text-align:left;">
+						<?php echo form_error('txtFname'); ?>
+					</font>	
+				</td>
+				
+			</tr>
+			<tr>
+				<td class="field_title">Last Name:</td>
+				<td class="field_data">
+					<input type="text" class="ac_input" name="txtLname"  placeholder="Last Name" >
+					<font style="font-size:12px;color:red;text-align:left;">
+						<?php echo form_error('txtLname'); ?>
+					</font>
+				</td>
+			</tr>
+			<tr>
+				<td class="field_title">Email Id:</td>
+				<td class="field_data">
+					<input type="email" name="txtEmail" class="ac_input" required placeholder="Email-id of invite user" />
+					<font style="font-size:12px;color:red;text-align:left;">
+						<?php echo form_error('txtEmail'); ?>
+					</font>	
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center">
+				<input type="submit" class="btn" value="Invite" >
+					<a href="<?php echo base_url()?>clientadmin/clientdashboard"> 
+						<input type="button" class="btn" value="cancel">
+					</a>
+				</td>
+			</tr>
+			
+			
+	  </tbody>
+	</table>
 </form>
+ </div>
+<!-- /promoteArea -->

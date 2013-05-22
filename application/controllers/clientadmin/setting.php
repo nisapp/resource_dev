@@ -19,11 +19,10 @@
 	 {
 		if($this->session->userdata('client_login'))
 		{
-			// $session_data = $this->session->userdata('client_login');
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
-			// $this->data['username'] = $session_data['username'];
+			$this->data['metatitle'] = 'Account Setting';
 			$this->data['subview']=  'clientadmin/client_account_setting_view';
-			$this->load->view('clientadmin/_layout_main.php', $this->data);
+			$this->load->view('clientadmin/_layout_main', $this->data);
 		}
 		else
 		{
@@ -36,6 +35,7 @@
 		$this->form_validation->set_rules('txtCurrent', 'Current Password', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtNewpwd', 'New Password', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtConfirmpwd', 'Confirm Password', 'trim|required|xss_clean|matches[txtNewpwd]');
+		$this->data['metatitle'] = 'Change Password';
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->data['subview']=  'clientadmin/change_password_view';
@@ -54,7 +54,7 @@
 		}
 	}
 	function changepassword(){
-			// $this->data['account_detail'] = $this->client->get_current_login_client_detail();
+			$this->data['metatitle'] = 'Change Password';
 			$this->data['subview']=  'clientadmin/change_password_view';
 			$this->load->view('clientadmin/_layout_main.php', $this->data);
 	}
