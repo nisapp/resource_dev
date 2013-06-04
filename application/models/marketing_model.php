@@ -40,9 +40,9 @@ class Marketing_Model extends CI_Model {
             $this->load->library('session');
             $user = $this->session->userdata('logged_in');
             $data = array(
-                'video' =>$info['video']['full_path'],
+                'video' =>$info['video']['file_name'],
                 'link' =>$link,
-                'logo' =>$info['logo']['full_path'],
+                'logo' =>$info['logo']['file_name'],
                 'title' =>$title,
                 'description'=>$description
             );
@@ -67,7 +67,7 @@ class Marketing_Model extends CI_Model {
            if($this->input->post('source') === 'upload'){
                 if ($this->upload->do_upload('video')) {
                     $info=$this->upload->data();
-                    $video = $info['full_path'];
+                    $video = $info['file_name'];
                     $videdata['video']=$video;
                 }
                 else{
@@ -80,7 +80,7 @@ class Marketing_Model extends CI_Model {
             }
             if($this->upload->do_upload('logo')){
                 $logo = $this->upload->data();
-                $videdata['logo']=$logo['full_path'];
+                $videdata['logo']=$logo['file_name'];
             }
             else{
                 $logo = '';
@@ -88,11 +88,25 @@ class Marketing_Model extends CI_Model {
             $this->db->where('id',$id);
             $this->db->update('marketing_programs',$videdata);
         }
+        function getStoredPrograms($id){
+            $this->db->select('sp.*, mp.title as title');
+            $this->db->from('stored_programs as sp');
+            $this->db->join('marketing_programs as mp',"mp.id=sp.programid");
+            $this->db->where('userid',$id);
+            $query = $this->db->get();
+            return $query;
+        }
+        function userData($id){
+            $this->db->select('*');
+            $this->db->from('users');
+            $this->db->where('id',$id);
+            $query = $this->db->get();
+            return $query;
+        }
    
 
 	
-	function remove_marketing($id=null)
-	{
+	function remove_marketing($id=null){
 		$this->db->delete('marketing_programs', array('id' => $id)); 
 		// echo $this->db->last_query(); 
 		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;	

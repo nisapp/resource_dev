@@ -100,6 +100,59 @@
 				//$this->email->print_debugger();
 		}
 		
+		function save_emp_id_from_dashboard($gvoid = false){
+			$login_client=$this->get_current_login_client_detail();
+					
+			$datatoupdate = array(
+									'emp_netwrok_user_name'=>$gvoid
+								);
+			$this->db->where('id', $login_client['id']);
+			$this->db->where('user_track_id', $login_client['user_track_id']);
+			$this->db->trans_start();
+			$status = $this->db->update('users', $datatoupdate);
+			$this->db->trans_complete();
+			if($status){
+				return true;
+			};
+		}
+		
+		function save_pure_id_from_dashboard($gvoid = false){
+			$login_client=$this->get_current_login_client_detail();
+					
+			$datatoupdate = array(
+									'leverage_user_name'=>$gvoid
+								);
+			$this->db->where('id', $login_client['id']);
+			$this->db->where('user_track_id', $login_client['user_track_id']);
+			$this->db->trans_start();
+			$status = $this->db->update('users', $datatoupdate);
+			$this->db->trans_complete();
+			if($status){
+				return true;
+			};
+		}
+		function save_gvo_id_from_dashboard($gvoid = false){
+				$login_client=$this->get_current_login_client_detail();
+					
+				$datatoupdate = array(
+										'gvo_user_name'=>$gvoid
+									);
+				$this->db->where('id', $login_client['id']);
+				$this->db->where('user_track_id', $login_client['user_track_id']);
+				$this->db->trans_start();
+				$status = $this->db->update('users', $datatoupdate);
+				$this->db->trans_complete();
+				if($status){
+					return true;
+				};
+				
+				// echo '<pre>';
+				// print_r($info);
+				// echo '</pre>';
+				// die();
+				// return true;
+		}	
+		
 		function remove_client($deleteid = false)
 		{
 			$this->db->delete('users', array('id' => $deleteid,'role'=>'user')); 
@@ -150,12 +203,18 @@
 			$lname = $this->input->post('txtLname');
 			$phone = $this->input->post('txtPhone');
 			$email = $this->input->post('txtEmail');
+			$gvo_name = $this->input->post('txt_gvo_user');
+			$leverage_name = $this->input->post('txt_lev_user');
+			$empower_name = $this->input->post('txt_emp_user');
 			
 			$datatoupdate = array(
 								'first_name'=>$fname,
 								'last_name'=>$lname,
 								'phone_number'=>$phone,
-								'user_email'=>$email
+								'user_email'=>$email,
+								'gvo_user_name'=>$gvo_name,
+								'leverage_user_name'=>$leverage_name,
+								'emp_netwrok_user_name'=>$empower_name
 							);
 			
 			$this->db->where('id', $session_login_client['id']);
@@ -338,7 +397,46 @@
 			return $result;
 		}
 		/*===============End of Code for follow up email rule ====================*/
-	
+		function save_program_affliate_id($progid){
+			$login_client=$this->get_current_login_client_detail();
+			$user_id=$login_client['id'];
+			$affliate_id=$this->input->post('aff_id');
+			$program_id=$this->input->post('prog_id');
+			$data = array(
+                        'userid'=>$user_id,
+                        'programid'=>$program_id,
+                        'affilateid'=>$affliate_id,
+						);
+			// check for duplicate
+			$this->db->select('s.*');
+			$this->db->from('stored_programs as s');
+			$this->db->where('userid',$user_id);
+			$this->db->where('programid',$program_id);
+			$query = $this->db->get();
+			$is_record_exist=$query->num_rows;
+			// echo $this->db->last_query(); 
+			$this->db->trans_start();
+			if(isset($is_record_exist) && $is_record_exist=='0'){ 
+				$result=$this->db->insert('stored_programs',$data);
+			}else{
+				$result = $this->db->update('stored_programs', $data); 
+			}
+			$this->db->trans_complete();
+			// echo $result;
+			if($result){
+				return true;
+			}else{
+				return false;
+			}
+			// return $query;			
+			// echo '<pre>';
+			// print_r($login_client);
+			// echo '</pre>';die();
+
+		}	
+
+
+		
 	/* ### **** ### *** ###-- End of Code to set Email rules --### *** ### *** ### **** ### *** ### ****/
 		function send_followup_email($user_detail=array())
 		{

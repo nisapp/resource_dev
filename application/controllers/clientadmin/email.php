@@ -16,7 +16,7 @@ class Email extends CI_Controller {
 
 	function show_error_view(){
 		$this->data['error_message']='Please First Login to access this page';
-		$this->data['error_redirect']=base_url().'login/clientlogin';
+		$this->data['error_redirect']=base_url().'login';
 		$this->load->view('clientadmin/error_view.php',$this->data);
 	}
 	 

@@ -9,7 +9,7 @@
 		// check for validate user login
 		$session_login_user=$this->session->userdata('logged_in');
 		if (!($session_login_user['login_state'] == 'active' && $session_login_user['role'] == 'admin')) {
-			redirect('login', 'refresh');
+			redirect('/', 'refresh');
 		}
 	 }
 	 
@@ -23,9 +23,10 @@
 		 $this->load->view('admin/_layout_main.php', $this->data);
 	   }
    else
-	   {
+	   {	
 	     //If no session, redirect to login page
-     redirect('login', 'refresh');
+			redirect('login', 'refresh');
+			// redirect('/home');
 	   }
 	 }
 	 

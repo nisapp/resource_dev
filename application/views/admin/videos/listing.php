@@ -47,7 +47,8 @@ else if (isset($status) && $status=="failure"){ ?>
           <th>#</th>
           <th>Video Name</th>
           <th>Description</th>
-          <th>Added Date</th>
+          <th>Last modified</th>
+          <th>Video Type</th>
           <th style="width: 26px;">Action</th>
         </tr>
       </thead>
@@ -55,15 +56,42 @@ else if (isset($status) && $status=="failure"){ ?>
 
 <?php 
 $i=1;
+$video_type='';
+$change_url='';
  foreach($query->result() as $singlevideo ){
+	$video_type=$singlevideo->type;
+	switch($video_type){
+		case 'login_video':$video_type='Login Video';
+							$change_url=base_url().'admin/videos/change_login_video';
+							break;
+		case 'welcome_video':$video_type='Welcome Video';
+								$change_url=base_url().'admin/videos/change_welcome_video';
+								break;
+		case 'gvo_video':$video_type='Gvo Video';
+								$change_url=base_url().'admin/videos/change_gvo_video';
+								break;
+		case 'emp_video':$video_type='Empower Video';
+								$change_url=base_url().'admin/videos/change_emp_video';
+								break;
+		case 'pure_leverage_video':$video_type='Pure Leverage Video';
+								$change_url=base_url().'admin/videos/change_pure_lev';
+								break;
+		case 'next_video':$video_type='What Next Video';
+								$change_url=base_url().'admin/videos/change_next_video';
+								break;
+							
+	}
 
-?> <tr>
+?> 
+	
+		<tr>
           <td><?php echo $i; ?></td>
           <td><?php echo $singlevideo->file_name; ?></td>
           <td><?php echo $singlevideo->description; ?></td>
-          <td>2013-02-05<?php //echo $singlevideo->added_date; ?></td>
+          <td><?php echo $singlevideo->added_date; ?></td>
+          <td><span class="v_type"><?php echo $video_type; ?><span></td>
           <td>
-              <a href="<?php echo base_url();?>admin/videos/change_login_video/<?php echo $singlevideo->Id; ?>" >Change</a>
+              <a class="edit_video" href="<?php echo $change_url.'/'.$singlevideo->Id; ?>" >Change</a>
 			  
           </td>
         </tr>

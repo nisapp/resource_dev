@@ -56,7 +56,7 @@ if(isset($todo) && $todo=="updation")
 <?php 
 }
 ?> 
-	<a href="<?php echo base_url();?>admin/videos" data-toggle="modal" class="btn">Cancel</a>
+	<a href="<?php echo base_url();?>admin/videos"  class="btn">Cancel</a>
 	
   <div class="btn-group">
   </div>

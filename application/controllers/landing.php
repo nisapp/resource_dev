@@ -11,6 +11,11 @@ class Landing extends CI_Controller {
 	    $this->load->model('logo','',TRUE);
 	    $this->load->model('user','',TRUE);
 	    //$this->load->model('video','',TRUE);
+		$session_login_client=$this->session->userdata('client_login');
+		if (!empty($session_login_client)) {
+			redirect('clientadmin/clientdashboard', 'refresh');
+		}//*/
+            
 	 }
 	 	 
 	 function index()
@@ -19,13 +24,11 @@ class Landing extends CI_Controller {
 		// unset previous affuserid from session
 		$this->session->unset_userdata('affuserid');
 		
-		$this->data['title']='allMoney';
+		$this->data['title']='Easy Access Profits';
 		$this->data['stylelist'][]='css/style.css';
+		$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-		$this->data['scriptlist'][]='scripts/html5.js';
-		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
-		$this->data['scriptlist'][]='scripts/previewplayer.js';
 		
 		$this->load->view('landing_view',$this->data);
 	 }
@@ -33,15 +36,11 @@ class Landing extends CI_Controller {
 		$affuser_id = $this->uri->segment(3);
 		// $this->data['affuserid'] = $this->uri->segment(3);
 		$this->session->set_userdata('affuserid', $affuser_id);
-		
-		$this->data['title']='allMoney';
+		$this->data['title']='Invite User';
 		$this->data['stylelist'][]='css/style.css';
+		$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-		$this->data['scriptlist'][]='scripts/html5.js';
-		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
-		$this->data['scriptlist'][]='scripts/previewplayer.js';
-		
 		$this->load->view('landing_view',$this->data);
 	 }
 }

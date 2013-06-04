@@ -48,6 +48,7 @@
 	}
 	
 	function edit($id = 0){//Edit data of registered videos
+            $this->data['scripts'][]='ckeditor/ckeditor.js';
             if($id==0){
                 redirect("/admin/marketing");
             }
@@ -78,9 +79,34 @@
             }
 		
 	}
-	
+	function preview($id=0){
+            if($id==0){
+                redirect('/admin/marketing');
+            }
+            $this->data['scripts'][]='video-js/video-js.css';
+            $this->data['scripts'][]='video-js/video.js';
+            //$this->data['scripts'][]='scripts/program_video.js';
+            //$this->data['styles'][]='css/video.css';
+            //$this->data['styles'][]='css/video-js.css';
+            $this->data['styles'][]='css/view_program.css';
+            $this->data['query']=$this->marketing_model->GetMarketingData($id);
+            $this->data['subview'] =  'admin/marketing/preview';
+            $this->load->view('admin/_layout_main.php', $this->data);
+        }
+        function userprograms($id){
+            $userdata=$this->marketing_model->userData($id);
+            if(!isset($id)||$userdata->num_rows==0){
+                redirect("/admin/clients");
+            }
+            $usesrrow = $userdata->first_row();
+            $this->data['user']=$usesrrow->first_name.' '.$usesrrow->last_name;
+            $this->data['query']=$this->marketing_model->getStoredPrograms($id);
+            $this->data['subview']='admin/marketing/stored_programs';
+            $this->load->view('admin/_layout_main.php', $this->data);
+        }
 	function add() {//Add video
             //Video can be uploded from pc or link of youtube video
+            $this->data['scripts'][]='ckeditor/ckeditor.js';
         $config['upload_path'] = './uploads/temp/';
         $config['allowed_types'] = 'avi|flv|wmv|mp4|mp3|gif|jpg|png';
         $config['max_size'] = '10000';
@@ -99,7 +125,7 @@
                 }
             }
             elseif($this->input->post('source') === 'youtube'){
-                $info['video']['full_path']=$this->input->post('video_youtube');
+                $info['video']['file_name']=$this->input->post('video_youtube');
             }
             else{
                 $errors[]="Please don't try to break this site.";
@@ -108,7 +134,7 @@
                 $errors[] = "<p>You don't select correct LOGO file!</p>";//$this->upload->display_errors('logo');
             } 
             else {
-                $info['logo'] = $this->upload->data();
+                $info['logo'] = $this->upload->data(); 
             }
             if(!empty($errors)){
                 $this->data['errors']=$errors;

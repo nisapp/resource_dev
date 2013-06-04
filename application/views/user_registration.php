@@ -124,7 +124,7 @@ img#videobg{
                                 <li>Free</li>
                                 <li>Easy Setup</li>
                                 <li>No Programming or Technical Skills</li>
-                                <li>Dasy Access Profit</li>
+                                <li>Easy Access Profit</li>
                              </ul>
                         </div>
                         <div class="sponsorid">

@@ -10,21 +10,12 @@ $(document).ready(function(){
     $("input").focusout(function(){
         focus =0;
     });
-    $("#store_program").submit(function(){
-        if($("input").val()===''){
+    $("#save_affiliate_id").submit(function(){
+        alert('submit');
+        if($("#save_affiliate_id input[type='text']").val()===''||
+                $("#save_affiliate_id input[type='text']").val()==='Enter Program Affiliate ID Here'){
+            alert("Affiliate ID can't be empty!");
             return false;
         }
     });
-    
-    var baseurl = $("#baseurl").val();
-
-var previewfile = $("#id_videopreview").val();
-if(previewfile=="")
-{
-	previewfile = "20051210-w50s.flv";
-}
-jwplayer("videopreview").setup({
-        file: baseurl+'uploads/temp/'+previewfile,
-		image: baseurl+'uploads/images/preview.jpg',
-    }).play();
 });

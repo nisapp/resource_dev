@@ -12,8 +12,7 @@
 			$this->load->library('form_validation');
 		}
 	 	 
-		function index()
-		{
+		function admin_login(){//admin login--index
 			/*======---- This code is not add by me------=====*/
 			if($this->session->userdata('logged_in')){
 			//Chek if user has already loged in redirect to dashaboard if role is admin and to home if user 
@@ -25,14 +24,37 @@
 					redirect('/home');
 				}
 			}
+                        $this->load->helper(array('form'));
 			/*======---- End of the code is not add by me------=====*/
 
-			$this->load->helper(array('form'));
-			$this->load->view('login_view');
+			if($this->input->post('admin_login')!==FALSE){
+				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
+
+				if($this->form_validation->run() == FALSE)
+				{
+					//Field validation failed.  User redirected to login page
+					$this->load->view('login_view');
+				}
+				else
+				{
+				//Go to private area
+					$sessionarray = $this->session->userdata('logged_in');
+					if($sessionarray['role'] == "admin"){
+						redirect('admin/dashboard', 'refresh');
+					}
+					else
+					{
+						redirect('clientadmin/clientdashboard', 'refresh');
+					}
+				}		
+			}else{
+				$this->load->view('login_view');
+			}
 		}
 		//to verify the login 
 		
-		
+		/*
 		function verifylogin(){
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
@@ -51,10 +73,10 @@
 				}
 				else
 				{
-					redirect('home', 'refresh');
+					redirect('clientadmin/clientdashboard', 'refresh');
 				}
 			}		
-		}
+		}//*/
 		
 		
 		//this function is associated with the verification of the user data against database calling the model file from this function 
@@ -87,10 +109,38 @@
 		   }
 		 }
 		 
-		function clientlogin(){
-			$this->load->view('client_login_view');
+		function index(){//clientlogin
+			if($this->input->post('client_login')!==NULL){
+				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_client_database');
+
+				if($this->form_validation->run() == FALSE)
+				{
+					//Field validation failed.  User redirected to login page
+					$this->load->view('client_login_view');
+					// echo 'Error';
+				}
+				else
+				{
+					$client_sessionarray = $this->session->userdata('client_login');
+					// echo '<pre>';
+					// print_r($client_sessionarray);
+					// echo '</pre>';
+					// die("hhhhhhhhhhhhh");
+					if($client_sessionarray['role'] == "user"){
+						redirect('clientadmin/clientdashboard', 'refresh');
+					}
+					else
+					{
+						redirect('login', 'refresh');
+					}
+					// echo 'sssss';
+				}
+			}else{
+					$this->load->view('client_login_view');
+			}
 		}
-		
+		/*
 		function verifyclientlogin(){
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_client_database');
@@ -117,7 +167,7 @@
 				}
 				// echo 'sssss';
 			}
-		}
+		}//*/
 		
 		function check_client_database($password){
 			$username = $this->input->post('username');
@@ -127,7 +177,7 @@
 				$sess_array = array();
 				foreach($result as $row)
 				{
-					$sess_array = array(
+					$response_1 = array(
 									'id' => $row->id,
 									'username' => $row->user_name,
 									'fullname' => $row->first_name." ".$row->last_name,
@@ -135,6 +185,21 @@
 									'login_state' => 'active',
 									'user_track_id' => $row->user_track_id,
 									);
+					if($row->affiliate_user_id!=''){	
+						$sponser_qry=$this->client->GetClientData($row->affiliate_user_id);
+						$sponser_data=$sponser_qry->row_array();
+						$sponser_full_name=$sponser_data['first_name'].' '.$sponser_data['last_name'];
+						
+						// echo '<pre>';
+						// print_r($sponser_data);
+						// echo '</pre>';die();
+
+						$is_sponser=array('sponser_full_name'=>$sponser_full_name);		
+						
+						$sess_array=array_merge($response_1,$is_sponser);			
+					}else{
+						$sess_array=$response_1;
+					}
 					$this->session->set_userdata('client_login', $sess_array);
 				}
 				return TRUE;

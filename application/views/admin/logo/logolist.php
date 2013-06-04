@@ -56,7 +56,7 @@ $i=1;
           <td><?php //echo base_url().'/uploads/logo/'.$singlevideo->file_name_in_folder; ?>
 		  <img src="<?php echo base_url().'/uploads/logo/'.$singlevideo->file_name_in_folder; ?>" height="70px" width="100px" /></td>
           <td>
-              <a href="<?php echo base_url();?>admin/logos/change_logo/<?php echo $singlevideo->Id; ?>" >Change</a>
+              <a class="edit_video" href="<?php echo base_url();?>admin/logos/change_logo/<?php echo $singlevideo->Id; ?>" >Change</a>
 			  
           </td>
         </tr>

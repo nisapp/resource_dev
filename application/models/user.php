@@ -8,9 +8,44 @@
 		
 		public function send_signup_mail($email){		 
 			$this->email->from(ADMIN_EMAIL,ADMIN_NAME);
-			$this->email->to($email);			
+			$this->email->to($email);
+		$firstname = $this->input->post('login_firstname');
+		$lastname = $this->input->post('login_lastname');
+		$username = $this->input->post('login_username');
+		$loginphone = $this->input->post('login_phone');
+		$password = $this->input->post('login_password');
+                $login_link = base_url()."";
+                $message = "
+                    <p>Dear $firstname $lastname.</p>
+                    <p>Thanks for signup&nbsp;and w<span style='font-family:arial,tahoma,verdana,sans-serif'><span style='font-size:small'>elcome to our system! We</span>&nbsp;<span style='font-size:small'>will be here to support you every step of</span>&nbsp;<span style='font-size:small'>the way on your journey to success online.</span><br />
+                    <span style='font-size:small'>The first thing you need to do is login:</span><br />
+                    <a href='http://'".$login_link."><span style='font-size:small'>$login_link</span></a><br />
+                        Login:&nbsp;</span>$username</p>
+                    <p><span style='font-family:arial,tahoma,verdana,sans-serif'>Password:&nbsp;</span>$password<br />
+                    <span style='font-family:arial,tahoma,verdana,sans-serif'><span style='font-size:small'>Once you&#39;re inside the system, all you</span><br />
+                    <span style='font-size:small'>need to do is watch the welcome video</span><br />
+                    <span style='font-size:small'>and follow the steps on the left.</span></span></p>
+                    <p><span style='font-family:arial,tahoma,verdana,sans-serif; font-size:small'>Best regards</span><br />
+                    <span style='font-family:arial,tahoma,verdana,sans-serif'>Login:&nbsp;</span>&quot;Teame name&quot;</p>
+                        ";
+                $message1 = "
+Dear $firstname $lastname.
+
+Thanks for signup and welcome to our system! We will be here to support you every step of the way on your journey to success online.
+The first thing you need to do is login:
+$login_link
+Login: $username
+
+Password: $password
+Once you're inside the system, all you
+need to do is watch the welcome video
+and follow the steps on the left.
+
+Best regards
+Login: 'Teame name'
+                        ";
 			$this->email->subject('Email Test');
-			$this->email->message('Thanks for signup.');
+			$this->email->message($message1);
 			$this->email->send();
 			//$this->email->print_debugger();
 		}

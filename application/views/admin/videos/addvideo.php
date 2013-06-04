@@ -1,6 +1,9 @@
-<div class="infomessage" style="display:none;" ><?php echo "Video has been Uploaded Successfully"?> </div>
-  <div class="errormessage" style="display:none;" ><?php echo "Please choose correct Video Format" ?> </div>
-  <style>
+<?php if (isset($status) && $status=="updatesuccess"){?>
+			<div class="infomessage"><?php echo "Login video has been Uploaded Successfully"?> </div>
+<?php }else if (isset($status) && $status=="updatefailure"){?>
+			<div class="errormessage"><?php echo "Opps ! Some error occur !!"?> </div>
+<?php } ?>
+<style>
 	.hidecat{
 		width:270px;
 		color: rgb(85, 85, 85);
@@ -15,48 +18,29 @@
     <div class="content">
         <div class="header">
             <h1 class="page-title">
-			<?php if(isset($todo) && $todo=="updation")
-					{
-						echo 'Update Video '.$videodataarray->file_name;
-					}else{
-						echo 'Add New Video';
-					} 
-			?>
+					Login Video
 			</h1>
         </div>
         
 		<ul class="breadcrumb">
 			<li><a href="admin/dashboard">Home</a> <span class="divider">/</span></li>
 			<li><a href="#">Videos</a> <span class="divider">/</span></li>
-			<li class="active">Add Video</li>
+			<li class="active">Add Login Video</li>
 		</ul>
 
         <div class="container-fluid">
             <div class="row-fluid">
 <?php 
-if(isset($todo) && $todo=="updation")
-{
-	
- echo form_open('admin/videos/change_login_video/'.$videodataarray->Id); 
- }
- else{
- echo form_open('admin/videos/savevideo'); 
- }
- ?>
+	//form_open('admin/videos/change_gvo_video/'.$videodataarray->Id); 
+?>
+ <form enctype="multipart/form-data" method="post" action="<?php echo base_url();?>admin/videos/change_login_video/<?php echo $videodataarray->Id;?>">
 <div class="btn-toolbar">
-<?php 
-if(isset($todo) && $todo=="updation")
-{
-?>
+
+
 <input class="btn btn-primary val_dis_enb" type="submit" name="update_video" value="Update" />
- <?php }else //showing the default page
-{
-?>
-<input class="btn btn-primary val_dis_enb" type="submit" name="save_video" value="Save" />
-<?php 
-}
-?> 
-	<a href="<?php echo base_url();?>admin/videos" data-toggle="modal" class="btn">Cancel</a>
+ 
+
+<a href="<?php echo base_url();?>admin/videos" class="btn">Cancel</a>
 	
   <div class="btn-group">
   </div>
@@ -68,37 +52,26 @@ if(isset($todo) && $todo=="updation")
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home" style="width:50%;float: left;">
 		
-        <label>Video Name: </label>
-        <input type="text" name="txt_vname" class="input-xlarge val_dis_enb" value="<?php if(isset($todo) && $todo=="updation")
-{ echo $videodataarray->file_name;}?>" /> 
-        <label>Video Description:</label>
-        <textarea  rows="3" name="txtarea_vdescription" class="input-xlarge val_dis_enb"><?php if(isset($todo) && $todo=="updation")
-{ echo $videodataarray->description ;}?></textarea>
+        <label>Login Video Name: </label>
+        <input type="text" name="txt_vname" class="input-xlarge val_dis_enb" value="<?php echo $videodataarray->file_name; ?>" /> 
+        <label>Login Video Description:</label>
+        <textarea  rows="3" name="txtarea_vdescription" class="input-xlarge val_dis_enb"><?php echo $videodataarray->description ; ?></textarea>
          
 		
-		<script src="<?php echo base_url(); ?>uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
-		<script src="<?php echo base_url(); ?>scripts/uploaderatadmin.js" type="text/javascript"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>uploadify/uploadify.css">
-        <form enctype="multipart/form-data"  >
-			<label>Upload the video </label>
-			<div id="queue"></div>
-			<div id="progress" ></div>
-			<input id="file_upload" name="file_upload" type="file" multiple="true">
-		</form>
-		<input type="hidden" id="timestamp" value="<?php echo $timestamp = time();?>" />
-		<input type="hidden" id="token" value="<?php echo md5('unique_salt' . $timestamp);?>" />
+		<label>Upload Login video </label>
+		<input id="file_upload" name="file_upload" type="file" >
+
 		<input type="hidden" id="baseurl" value="<?php echo base_url();?>" />
-		<input type="hidden" id="hidd_video" name="hidd_video" value="<?php if(isset($todo) && $todo=="updation"){ echo $videodataarray->file_name_in_folder; }?>" />
-		
-	
+		<input type="hidden" id="hidd_video" name="hidd_video" value="<?php echo $videodataarray->file_name_in_folder; ?>" />
       </div>
 	  
-	  <!--<div class="video_preveiw" style="width:50%;float: left;" >
-	  <script type="text/javascript" src="<?php //echo base_url(); ?>jwplayer/jwplayer.js"></script>
-	  <script type="text/javascript" src="<?php //echo base_url(); ?>scripts/previewplayer.js"></script>
-		<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
-		<div id="videopreview">Loading the player...</div>
-	  </div>-->
+		<!--<div class="video_preveiw" style="width:50%;float: left;" >
+				<script type="text/javascript" src="<?php echo base_url(); ?>jwplayer/jwplayer.js"></script>
+				<script type="text/javascript" src="<?php echo base_url(); ?>scripts/previewplayer.js"></script>
+				<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
+				<div id="videopreview">Loading the player...</div>
+		</div>-->
+	  
       </form>
   </div>
 </div>

@@ -64,6 +64,7 @@ foreach($query->result() as $client ){
 			<!--<a href="<?php echo base_url();?>admin/videos/updatevideo/<?php echo $client->id; ?>" ><i class="icon-pencil"></i></a>-->
               <i onclick="delpro(this.id);" id="<?php echo $client->id; ?>" class="icon-remove" style="cursor:pointer"></i>
               <a href="<?php echo base_url();?>admin/clients/delete_client/<?php echo $client->id; ?>" ></a>
+              <a href="<?php echo base_url();?>admin/marketing/userprograms/<?php echo $client->id; ?>" >View Programs</a>
           </td>
         </tr>
 <?php  ++$i; } ?>  

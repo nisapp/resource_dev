@@ -12,7 +12,7 @@
 		$this->load->model('user','',TRUE);
 	}
 	 	 
-	 function index()
+	 function oldindex()
 	 {
 		$this->load->helper(array('form'));
 		$this->data['query'] = $this->logo->GetInitData();
@@ -29,9 +29,19 @@
 		$this->data['scriptlist'][]='scripts/user_registration.js';
 		
 		$this->load->view('user_registration',$this->data);
+                
 	 }
-	 
-	 
+	 function index(){
+             $this->data['query'] = $this->logo->GetInitData();
+             $this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+             $this->data['stylelist'][]='video-js/video-js.css';
+             $this->data['stylelist'][]='css/style.css';
+             $this->data['scriptlist'][]='scripts/user_registration.js';
+             $this->data['scriptlist'][]='video-js/video.js';
+             $this->data['title'] = 'Registration';
+             $this->load->view('register',$this->data);
+         }
+                 
 	function chkUserName($name=false){
 		if(isset($name) && ($name!='')){
 			$is_username_exist=$this->user->check_username_exists($name);
@@ -122,7 +132,7 @@
 						$this->load->view('user_registration',$this->data);
                      }else{
 							// echo 'I m Not in error';
-							redirect('home', 'refresh');
+							redirect('clientadmin/clientdashboard', 'refresh');
 					}
 	 }
 	 //this function is associated with insertion of the user data in the database
@@ -175,7 +185,7 @@
 			}else if($result=='allready_signup'){
 				// echo 'allready_signup_error_eeeeeeeeeee';
 				$this->data['error_message']='You allready signup using this link<br/>Click below link for login';
-				$this->data['error_redirect']=base_url().'login/clientlogin';
+				$this->data['error_redirect']=base_url().'login';
 				$this->load->view('error_view.php',$this->data);
 				return false;
 				die();
@@ -185,7 +195,6 @@
 					$this->client->send_followup_email($wholedata);
 				}
 				$this->session->unset_userdata('affuserid');
-				
 				// $t=$this->session->all_userdata();
 				// echo '<pre>';
 				// print_r($t);

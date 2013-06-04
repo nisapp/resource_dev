@@ -3,13 +3,20 @@
 // });
 	
 function username_check(){ 
-		
+		// $('#tick').fadeIn();
 	var username = $('#login_username').val();
 	var base_url = $('#baseurl').val();
 	var is_avail_flag = $('#is_avail').val();
 	// alert(base_url);
 	if(username == "" || username.length < 5){
 		$('#login_username').css('border', '3px red solid');
+                $('#tick').hide();
+                $('#cross').hide();
+                $('#login_username').css({
+                    'border':'2px solid #48697e;',
+                    'background':'#fff',
+                    'color':'#000',
+                });	
 		// $('#tick').hide();
 	}else{
 

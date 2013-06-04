@@ -17,7 +17,18 @@ $curPageName=$view_name;
     <script src="<?php echo base_url(); ?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>css/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
     <script src="<?php echo base_url(); ?>scripts/marketing.js" type="text/javascript"></script>
+    <?php if(isset($scripts)): 
+        foreach($scripts as $script): ?>
+    <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
+    <?php endforeach;
+    endif; ?>
+    <?php if(isset($styles)): 
+        foreach($styles as $style): ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
+    <?php endforeach;
+    endif; ?>
 
+	
 	<!--<script>
 var jq172 = jQuery.noConflict();
 </script>-->
@@ -44,6 +55,7 @@ var jq172 = jQuery.noConflict();
 <script type="text/javascript">
 	setTimeout(function() {
 		$('.infomessage').fadeOut('fast');
+		$('.errormessage').fadeOut('fast');
 	} , 1750);
 
 </script>
@@ -101,11 +113,12 @@ var jq172 = jQuery.noConflict();
     
     <div class="sidebar-nav">
         <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
-        <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='listing' || $curPageName=='dashboard' || $curPageName=='welcome_list' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' ){ echo 'in'; } ?>">
+        <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='listing' || $curPageName=='dashboard' || $curPageName=='empower_video' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' || $curPageName=='gvo_video' || $curPageName=='pure_leverage_video' || $curPageName=='next_video' ){ echo 'in'; } ?>">
             
 	    <li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/videos">Login Videos</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/videos/welcome_video">Welcome Videos</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/videos">Manage Video</a></li>
+            <!--<li><a href="<?php echo base_url(); ?>admin/videos">Login Videos</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/videos/welcome_video">Welcome Videos</a></li>-->
             <li><a href="<?php echo base_url(); ?>admin/logos">Manage Logo</a></li>
             
         </ul>
@@ -115,12 +128,25 @@ var jq172 = jQuery.noConflict();
 		<ul id="client-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clients_listing')){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/clients">View Clients</a></li>
         </ul>
+		<a href="#program-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Program Menu<i class="icon-chevron-up"></i></a>
+        
+		<ul id="program-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clients_listing')){ echo 'in'; } ?>">
+            <li><a href="<?php echo base_url(); ?>admin/programs">All Programs</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/programs/add">New Programs</a></li>
+        </ul>
 
 		<a href="#marketing-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Marketing Programs<span class="label label-info">+2</span></a>
         
 		<ul id="marketing-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='add' || $curPageName=='marketing')){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/marketing/add">Add New Program</a></li>
             <li><a href="<?php echo base_url(); ?>admin/marketing">View All Programs</a></li>
+        </ul>
+		<a href="#training-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Training<span class="label label-info">+2</span></a>
+        
+		<ul id="training-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='add' || $curPageName=='marketing')){ echo 'in'; } ?>">
+            <li><a href="<?php echo base_url(); ?>admin/training/add">Add New Training</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/training">View All Training</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/training/categories">Categories</a></li>
         </ul>
 
 

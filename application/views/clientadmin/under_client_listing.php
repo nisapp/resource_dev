@@ -15,7 +15,7 @@
 
   <div style="display:none" id="infomessage"><div style="margin-bottom: 10px;">Are you sure to delete?</div><a href="" id="del_yes"><div class="yes">Yes</div></a><div class="no" onclick="no_del();">No</div></div>
     
-	<script src="<?php echo base_url(); ?>scripts/clienlisting.js" type="text/javascript"></script>
+	<script src="<?php echo base_url(); ?>scripts/clientlisting.js" type="text/javascript"></script>
     <!-- promoteArea -->
 <div class="promoteArea">
 	<table id="rounded-corner" class="list" align="center">

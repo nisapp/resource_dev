@@ -8,7 +8,7 @@ class Promotesite extends CI_Controller {
 		// check for validate user login
 		$session_login_client=$this->session->userdata('client_login');
 		if (!($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user')) {
-			redirect('login/clientlogin', 'refresh');
+			redirect('login', 'refresh');
 		}
 		$this->load->model('client','',TRUE);
 		$this->load->helper(array('form'));
@@ -28,7 +28,7 @@ class Promotesite extends CI_Controller {
 		else
 		{
 			//If no session, redirect to login page
-			redirect('login/clientlogin', 'refresh');
+			redirect('login', 'refresh');
 		}
 	}
 
@@ -90,4 +90,4 @@ class Promotesite extends CI_Controller {
 	
 }
 	 
-	?>
+?>

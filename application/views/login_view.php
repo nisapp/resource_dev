@@ -1,6 +1,6 @@
 <title>Videos</title>
 		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style1.css" />
 		<script src="<?php echo base_url(); ?>scripts/cufon-yui.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>scripts/ChunkFive_400.font.js" type="text/javascript"></script>
 		<script type="text/javascript">
@@ -63,7 +63,7 @@
 						</div>-->
 					<?php //echo form_close(); 
 					 $classesandactive = array('class' => 'login active');
-					echo form_open('login/verifylogin',$classesandactive);  ?>
+					echo form_open('login/admin_login',$classesandactive);  ?>
 					<!--<form class="login active" action="verifylogin" method="post" >-->
 						<h3>Login</h3>
 						<div>
@@ -81,7 +81,7 @@
 						</div>
 						<div class="bottom">
 							<!--<div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>-->
-							<input type="submit" value="Login"></input>
+							<input name="admin_login" type="submit" value="Login"></input>
 							<!--<a href="register.html" rel="register" class="linkform">You don't have an account yet? Register here</a>-->
 							<div class="clear"></div>
 						</div>

@@ -91,7 +91,7 @@ body, table, input, textarea, select, li, button{
 	color:#444;
 	}	
 body{
-	background: url("../images/background_1.png") no-repeat scroll center top transparent;
+    background: url("<?php echo base_url(); ?>images/background_1.png") no-repeat scroll center top transparent;
     overflow-x: hidden;
 	font-size:12px;
 	/* background:#c4f0f1;		 */
@@ -212,11 +212,11 @@ body{
 </head>
 <body>
 
-<h1>Client Login here</h1>
-<form id="login" method="post" action="<?php echo base_url();?>login/verifyclientlogin"> 
+<h1>Login here</h1>
+<form id="login" method="post" action="<?php echo base_url();?>login"> 
 
     <h1>Log in to your <strong>resourcebay.com</strong> account!</h1>
-    <p class="register">Not a member? <a href="<?php echo base_url(); ?>">Register here!</a></p>
+    <p class="register">Not a member? <a href="<?php echo base_url(); ?>register">Register here!</a></p>
 	
 	<font style="font-size:12px;color:red;text-align:center;">
 		<?php echo form_error('password'); ?>
@@ -235,7 +235,7 @@ body{
     <!--<p class="forgot"><a href="#">Forgot your password?</a></p>-->
     			
     <div class="submit">
-        <button type="submit">Log in</button>   
+        <button name="client_login" type="submit">Log in</button>   
         
         <!--<label>
         	<input type="checkbox" name="remember" id="login_remember" value="yes" />

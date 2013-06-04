@@ -9,7 +9,7 @@
 		// check for validate user login
 		$session_login_client=$this->session->userdata('client_login');
 		if (!($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user')) {
-			redirect('login/clientlogin', 'refresh');
+			redirect('login', 'refresh');
 		}
 		$this->load->model('client','',TRUE);
 		$this->load->library('form_validation');
@@ -27,7 +27,7 @@
 		else
 		{
 			//If no session, redirect to login page
-			redirect('login/clientlogin', 'refresh');
+			redirect('login', 'refresh');
 		}
 	}
 	 
@@ -64,6 +64,10 @@
 		$this->form_validation->set_rules('txtLname', 'last name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtPhone', 'phone number', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtEmail', 'email','trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('txt_gvo_user', 'GVO Username', 'trim|xss_clean');
+		$this->form_validation->set_rules('txt_lev_user', 'Pure Leverage Username', 'trim|xss_clean');
+		$this->form_validation->set_rules('txt_emp_user', 'Empower Network Username', 'trim|xss_clean');
+		
 		// $this->form_validation->set_rules('txtEmail', 'Email','trim|required|valid_email|xss_clean|callback_send_afflate_link');
 		if($this->form_validation->run() == FALSE)
 		{
@@ -98,7 +102,7 @@
 		session_start();
 		$this->session->unset_userdata('client_login');
 		session_destroy();
-		redirect('login/clientlogin', 'refresh');
+		redirect('login', 'refresh');
 	 }
 	 
 	}
