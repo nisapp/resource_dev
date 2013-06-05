@@ -31,6 +31,15 @@
 		}
 	}
 	 
+	function contactsupport(){
+		$statusupdate = $this->client->send_contact_support_data();  
+		if($statusupdate==1){
+			echo 1;
+		}else{
+			echo 0;
+		}	
+	}
+	
 	function setpassword(){
 		$this->form_validation->set_rules('txtCurrent', 'Current Password', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtNewpwd', 'New Password', 'trim|required|xss_clean');

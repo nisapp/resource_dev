@@ -34,11 +34,8 @@
 	
 </style>
 
-<div id="tabs">
-	<a href="<?php echo base_url(); ?>clientadmin/setting">Edit Profile</a>
-	<a href="<?php echo base_url(); ?>clientadmin/email">Welcome Email Rules</a>
-	<a href="<?php echo base_url(); ?>clientadmin/email/femail">Follow-up Email Rules</a>
-</div>
+<?php $this->load->view('clientadmin/components/submenu'); ?>
+
 <!-- promoteArea -->
 <div class="promoteArea">
 

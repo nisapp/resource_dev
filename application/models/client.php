@@ -395,8 +395,42 @@
 			// echo $this->db->last_query(); 
 			// die();
 			return $result;
-		}
+		} 
 		/*===============End of Code for follow up email rule ====================*/
+		function send_contact_support_data(){
+			$config['protocol'] = 'mail';
+			$config['wordwrap'] = FALSE;
+			$config['mailtype'] = 'html';
+			$config['charset'] = 'utf-8';
+			$config['crlf'] = "\r\n";
+			$config['newline'] = "\r\n";
+			$this->email->initialize($config);
+				
+			$login_client=$this->get_current_login_client_detail();
+			$msg=$this->input->post('msg');
+			$email=$this->input->post('email');
+			$sender_name=$login_client['first_name'].' '.$login_client['last_name'];
+			$this->email->from($email,$sender_name);
+			$this->email->to(CONTACT_SUPPORT_EMAIL);
+			$this->email->subject('Message from your site');
+			$message = "
+                    <p>Dear Administrator</p><p>{$sender_name}  put some query about youe site. below his information sent by him.</p>";
+			$message.= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+			$message.= "<tr style='background: #eee;'><td colspan='2' align='center'><strong>Information of person</strong> </td></tr>";
+			$message.= "<tr><td><strong>Name:</strong> </td><td>{$sender_name}</td></tr>";
+			$message.= "<tr><td><strong>Email:</strong> </td><td>{$email}</td></tr>";
+			$message.= "<tr><td><strong>Message:</strong> </td><td>{$msg}</td></tr>";
+			$message.= "</table>";		
+			$this->email->message($message);
+			$result=$this->email->send();
+			if($result==true){
+				return 1;
+			}else{
+				return 0;
+			}
+					
+		}
+				
 		function save_program_affliate_id($progid){
 			$login_client=$this->get_current_login_client_detail();
 			$user_id=$login_client['id'];

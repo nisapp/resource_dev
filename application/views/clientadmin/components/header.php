@@ -25,6 +25,33 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 		</script>
     </head>
 <body>
+<!-- Code of contact support pop-up hidden inline form -->
+
+<script src="<?php echo base_url()?>scripts/fancybox/jquery.fancybox.js?v=2.0.6" type="text/javascript"></script>
+<script src="<?php echo base_url()?>scripts/popup/popup.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>scripts/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/popup/popup.css">
+				
+<div id="inline">
+	<form id="contact" name="contact" action="#" method="post">
+		<fieldset id="support">
+		<legend id="support">Please complete the following form</legend>
+
+		<label for="email"><span class="required">*</span> Email</label>
+		<input name="email" type="email" id="email" class="txt" />
+
+		<br />
+		<label for="comments"><span class="required">*</span> Your comments</label>
+		<textarea name="msg" id="msg"></textarea>
+		
+		<button id="send" class="button">Send E-mail</button>
+		</fieldset>
+	</form>
+</div>
+<input type="hidden" id="baseurl_head" value="<?php echo base_url();?>">
+
+<!-- End of Code of contact support pop-up hidden inline form -->
+
 <div id="wrapper">
 	<div class="siteHeaderBg">
         <div class="wrapperOuter">
@@ -46,7 +73,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 										<li><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></li>
 										<li><a href="<?php echo base_url()?>clientadmin/setting">Edit Profile</a></li>
 										<li><a href="<?php echo base_url()?>clientadmin/clientdashboard/logout">Logout</a></li>
-										<li><a class="last" href="#">Contact Support</a></li>
+										<li><a  class="last modalbox" href="#inline">Contact Support</a></li>
 									</ul>
 								 </nav>
 							</div>
@@ -91,12 +118,9 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Dashboard</a></li>
 							<li><a href="#" >Commissions</a></li>
 							<li><a href="<?php echo base_url(); ?>clientadmin/training">Marketing Videos</a></li>
-							<li><a href="<?php echo base_url(); ?>clientadmin/programs">How To Videos</a></li>
-							<li><a href="<?php echo base_url(); ?>clientadmin/promotesite" >Promote Web</a></li>
-							<li><a href="#">Tools</a></li>
-							<li>
-								<a class="last" href="<?php echo base_url(); ?>clientadmin/promotesite/downclient">Downline</a>
-							</li>
+							<li><a class="last" href="<?php echo base_url(); ?>clientadmin/programs">How To Videos</a></li>
+							
+							
 						</ul>
 					</nav>
 					

@@ -17,7 +17,10 @@
     
 	<script src="<?php echo base_url(); ?>scripts/clientlisting.js" type="text/javascript"></script>
     <!-- promoteArea -->
-<div class="promoteArea">
+
+	<?php $this->load->view('clientadmin/components/submenu'); ?>
+
+	<div class="promoteArea">
 	<table id="rounded-corner" class="list" align="center">
 		<thead>
 				<th scope="col" colspan="7" style='background:url(<?php echo base_url();?>images/btnBg.png) repeat-x left top;text-align:center;color:#fff;font-weight: bold;font-size: 19px;text-transform: uppercase;'>Downline Client</th>

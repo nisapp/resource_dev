@@ -2,6 +2,10 @@
 			<div class="infomessage"><?php echo "Invitation send Successfully"?> </div>
 <?php } ?>
 <!-- promoteArea -->
+
+<?php $this->load->view('clientadmin/components/submenu'); ?>
+
+	
 <div class="promoteArea">
 <form method="post" action="<?php echo base_url()?>clientadmin/promotesite/invite" novalidate>
 	<table id="rounded-corner" align="center" style="back">

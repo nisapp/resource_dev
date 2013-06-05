@@ -94,13 +94,23 @@ img#video_bg{
 }
 img.step_done{
 	height: 80%;
+    margin: -24px 11% 0 -35%;
+    position: relative;
+    width: 25%;
+    z-index: 1;
+	display:none;
+}
+
+/* img.step_done{
+	height: 80%;
     margin: -14% 7% -1% -31%;
     position: relative;
     width: 25%;
 	z-index: 1;
 	display:none;
 }
-span.number {
+ */
+ span.number {
     background: none repeat scroll 0 0 #78A0B1; 
    /*  background:url("<?php echo base_url(); ?>/images/check.png"); */
     border-radius: 10px 10px 10px 10px;

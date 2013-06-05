@@ -9,11 +9,11 @@
 		public function send_signup_mail($email){		 
 			$this->email->from(ADMIN_EMAIL,ADMIN_NAME);
 			$this->email->to($email);
-		$firstname = $this->input->post('login_firstname');
-		$lastname = $this->input->post('login_lastname');
-		$username = $this->input->post('login_username');
-		$loginphone = $this->input->post('login_phone');
-		$password = $this->input->post('login_password');
+			$firstname = $this->input->post('login_firstname');
+			$lastname = $this->input->post('login_lastname');
+			$username = $this->input->post('login_username');
+			$loginphone = $this->input->post('login_phone');
+			$password = $this->input->post('login_password');
                 $login_link = base_url()."";
                 $message = "
                     <p>Dear $firstname $lastname.</p>
