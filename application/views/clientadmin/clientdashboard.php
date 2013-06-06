@@ -33,7 +33,7 @@
 	
 	
 		
-	function set_my_video(obj,video_name,video_title,showid){ 
+	/* function set_my_video(obj,video_name,video_title,showid){ 
 		$(obj).find('.step_done').show();
 		$(obj).find('span.number').css({
 											'color':'#386886',
@@ -59,8 +59,33 @@
 				width: 580,
 				image: baseurl+'uploads/images/preview.jpg',
 			}).play();
-		}
-	   	
+		} */
+	function set_my_video(obj,id,showid){ 
+		// alert(showid);
+		$(obj).find('.step_done').show();
+		$(obj).find('span.number').css({
+											'color':'#386886',
+											'background-color':'#FFFFFF',
+										});
+		$(".idArea").hide();
+		$('#'+showid).show();
+		var baseurl = $("#baseurl").val();
+		$('.video_tabs').removeClass('active');
+		$(obj).addClass('active');
+		var previewfile = document.getElementById("txtVideo_"+id).value;
+		var video_title = document.getElementById("txtTitle_"+id).value;
+		// alert(previewfile);
+		$("div.video_title").text(video_title);
+		jwplayer("videopreview").setup({
+				file: baseurl+'uploads/videos/'+previewfile,
+				height: 325,
+				width: 580,
+				image: baseurl+'uploads/images/preview.jpg',
+		}).play();
+		
+	} 
+	
+   	
 	$(document).ready(function() { 
 		var baseurl = $("#baseurl").val();
 		
@@ -129,22 +154,58 @@ img.step_done{
 	<?php 
 		$video_data=array();
 		foreach($query->result() as $singlevideo ){	
-			// echo '<br/>'.$video_type=$singlevideo->type;
 			$video_data[$singlevideo->type]=$singlevideo;
-			
 		} 
+		
 		// echo '<pre>';
 		// print_r($video_data);
 		// echo '</pre>';
 		// echo $video_data['welcome_video']->description;
+
+		/* foreach($video_data as $key=>$val){
+				// echo '<br/>'.$key->tab_title;
+			echo '<br/>'.$video_data[$key]->tab_title;
+		} */	
 	?>
+	
 <form name="frmVideo" method="post" >		
 <div class="video_title">Welcome User</div>	
 
 	<div class="webleft">
 			<div class="leftnav2">
 				<ul>
-					<li>
+					<?php 
+						$count=0;
+						foreach($video_data as $key=>$val)
+						{ 	
+							$is_valid=1;
+							switch($key){
+								case 'gvo_video':
+												$strShow_id='gvo';	break;
+								case 'emp_video':
+												$strShow_id='emp';	break;
+								case 'pure_leverage_video':
+												$strShow_id='pure';	break;
+								case 'next_video':
+												$strShow_id='what';	break;
+								default:
+										$is_valid=0;
+							}
+							if(!$is_valid){ continue; }
+					?>
+							<li>
+								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php echo $video_data[$key]->Id; ?>,'<?php echo $strShow_id; ?>' );">
+									<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
+									<span class="number"><?php echo ++$count; ?></span><?php echo $video_data[$key]->tab_title; ?> 
+								</a>
+							</li>
+							
+							<input type="hidden" id="txtVideo_<?php echo $video_data[$key]->Id; ?>"  name="txtVideo_<?php echo $video_data[$key]->Id; ?>" value="<?php echo $video_data[$key]->file_name_in_folder; ?>">
+							<input type="hidden" id="txtTitle_<?php echo $video_data[$key]->Id; ?>"  name="txtTitle_<?php echo $video_data[$key]->Id; ?>" value="<?php echo $video_data[$key]->file_name; ?>">
+					
+					
+					<?php } ?>
+					<!--<li>
 						<a href="#" class="video_tabs" onclick="set_my_video(this,document.frmVideo.txtGvo.value,document.frmVideo.txtGvoTitle.value,'gvo');">
 							<img src="<?php echo base_url();?>images/check.png" class="step_done" />		
 							<span class="number">1</span>GVO Hosting<br/> Setup
@@ -170,7 +231,8 @@ img.step_done{
 							<img src="<?php echo base_url();?>images/check.png" class="step_done" />
 							<span class="number">4</span>	What's<br/> Next?
 						</a>
-					</li>
+					</li>-->
+					
 				</ul>
 			</div>
 	</div>
@@ -189,6 +251,7 @@ img.step_done{
 		<input type="hidden" id="txtPureTitle"  name="txtPureTitle" value="<?php echo $video_data['pure_leverage_video']->file_name; ?>">
 		<input type="hidden" id="txtNext"  name="txtNext" value="<?php echo $video_data['next_video']->file_name_in_folder; ?>">
 		<input type="hidden" id="txtNextTitle"  name="txtNextTitle" value="<?php echo $video_data['next_video']->file_name; ?>">
+		
 		<img src="<?php echo base_url();?>images/webBg2.png" id="video_bg">
 		<div class="video_preveiw" style="">
 					<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>

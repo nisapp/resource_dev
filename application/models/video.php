@@ -73,12 +73,17 @@
 			$description = $this->input->post('txtarea_vdescription');
 			$strdate=date("Y-m-d");
 			$video_in_folder = $this->input->post('hidd_video');
+			$video_in_folder = $this->input->post('hidd_video');$tab_title = $this->input->post('txtNavigation');
+			$position = $this->input->post('txtposition');
+			
 			$datatoupdate = array(
 								'file_name'=>$video_title,
 								'description'=>$description,
 								'is_show'=>'Y',
 								'type'=>'next_video',
 								'added_date'=>$strdate,
+								'position'=>$position,
+								'tab_title'=>$tab_title,
 								'file_name_in_folder'=>$video_name
 							);
 			
@@ -131,13 +136,17 @@
 			$video_title = $this->input->post('txt_vname');
 			$description = $this->input->post('txtarea_vdescription');
 			$strdate=date("Y-m-d");
-			$video_in_folder = $this->input->post('hidd_video');
+			$video_in_folder = $this->input->post('hidd_video');$tab_title = $this->input->post('txtNavigation');
+			$position = $this->input->post('txtposition');
+					
 			$datatoupdate = array(
 								'file_name'=>$video_title,
 								'description'=>$description,
 								'is_show'=>'Y',
 								'type'=>'pure_leverage_video',
 								'added_date'=>$strdate,
+								'position'=>$position,
+								'tab_title'=>$tab_title,
 								'file_name_in_folder'=>$video_name
 							);
 			
@@ -203,12 +212,16 @@
 			$description = $this->input->post('txtarea_vdescription');
 			$strdate=date("Y-m-d");
 			$video_in_folder = $this->input->post('hidd_video');
+			$tab_title = $this->input->post('txtNavigation');
+			$position = $this->input->post('txtposition');
 			$datatoupdate = array(
 								'file_name'=>$video_title,
 								'description'=>$description,
 								'is_show'=>'Y',
 								'type'=>'emp_video',
 								'added_date'=>$strdate,
+								'position'=>$position,
+								'tab_title'=>$tab_title,
 								'file_name_in_folder'=>$video_name
 							);
 			
@@ -274,12 +287,16 @@
 			$description = $this->input->post('txtarea_vdescription');
 			$strdate=date("Y-m-d");
 			$video_in_folder = $this->input->post('hidd_video');
+			$tab_title = $this->input->post('txtNavigation');
+			$position = $this->input->post('txtposition');
 			$datatoupdate = array(
 								'file_name'=>$video_title,
 								'description'=>$description,
 								'is_show'=>'Y',
 								'type'=>'gvo_video',
 								'added_date'=>$strdate,
+								'position'=>$position,
+								'tab_title'=>$tab_title,
 								'file_name_in_folder'=>$video_name
 							);
 			
@@ -397,11 +414,13 @@
 				$this->db->select('v.*');
 				$this->db->from('tblfiles as v');
 				$array = array('type !=' => 'logo');
+				$this->db->order_by("position", "asc");
 				$this->db->where($array);
 				if($videoid){
 					$this->db->where('Id',$videoid);
 				}
 				$query = $this->db->get();
+				// echo $this->db->last_query(); 
 				return $query;
 		}
 	

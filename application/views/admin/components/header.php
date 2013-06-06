@@ -1,5 +1,6 @@
 <?php
 $curPageName=$view_name;
+
 ?>
   <head>
     <meta charset="utf-8">
@@ -115,11 +116,9 @@ var jq172 = jQuery.noConflict();
         <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
         <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='listing' || $curPageName=='dashboard' || $curPageName=='empower_video' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' || $curPageName=='gvo_video' || $curPageName=='pure_leverage_video' || $curPageName=='next_video' ){ echo 'in'; } ?>">
             
-	    <li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/videos">Manage Video</a></li>
-            <!--<li><a href="<?php echo base_url(); ?>admin/videos">Login Videos</a></li>
-            <li><a href="<?php echo base_url(); ?>admin/videos/welcome_video">Welcome Videos</a></li>-->
-            <li><a href="<?php echo base_url(); ?>admin/logos">Manage Logo</a></li>
+            <li><a href="<?php echo base_url(); ?>admin/videos">Manage Welcome Video</a></li>
+			<li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a></li>
+            <!--<li><a href="<?php echo base_url(); ?>admin/logos">Manage Logo</a></li>-->
             
         </ul>
 	
@@ -128,22 +127,22 @@ var jq172 = jQuery.noConflict();
 		<ul id="client-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clients_listing')){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/clients">View Clients</a></li>
         </ul>
-		<a href="#program-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Program Menu<i class="icon-chevron-up"></i></a>
+		<!--<a href="#program-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Program Menu<i class="icon-chevron-up"></i></a>
         
-		<ul id="program-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='clients_listing')){ echo 'in'; } ?>">
+		<ul id="program-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='programs') { echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/programs">All Programs</a></li>
             <li><a href="<?php echo base_url(); ?>admin/programs/add">New Programs</a></li>
         </ul>
-
+		-->
 		<a href="#marketing-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Marketing Programs<span class="label label-info">+2</span></a>
         
-		<ul id="marketing-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='add' || $curPageName=='marketing')){ echo 'in'; } ?>">
+		<ul id="marketing-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='marketing'){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/marketing/add">Add New Program</a></li>
             <li><a href="<?php echo base_url(); ?>admin/marketing">View All Programs</a></li>
         </ul>
-		<a href="#training-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Training<span class="label label-info">+2</span></a>
+		<a href="#training-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Training<span class="label label-info">+3</span></a>
         
-		<ul id="training-menu" class="nav nav-list collapse <?php if(isset($curPageName) && ($curPageName=='add' || $curPageName=='marketing')){ echo 'in'; } ?>">
+		<ul id="training-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='training'){ echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/training/add">Add New Training</a></li>
             <li><a href="<?php echo base_url(); ?>admin/training">View All Training</a></li>
             <li><a href="<?php echo base_url(); ?>admin/training/categories">Categories</a></li>

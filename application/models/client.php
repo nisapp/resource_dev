@@ -8,6 +8,17 @@
 			$this->load->library('email');
 		}
 		
+		function get_sponser_by_id($id = false){
+			$this->db->select('c.*');
+			$this->db->from('users as c');
+			
+			$this->db->where('role','user');
+			if($id){
+				$this->db->where('user_track_id',$id);
+			}
+			$query = $this->db->get();
+			return $query;
+		}
 		function GetClientData($id = false)
 		{		
 			$this->db->select('c.*');

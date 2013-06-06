@@ -52,13 +52,26 @@
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home" style="width:50%;float: left;">
 		
-        <label>GVO Video Name: </label>
+		
+		<label>Navigation Tab Title: </label>
+        <input type="text" name="txtNavigation" class="input-xlarge val_dis_enb" value="<?php echo $videodataarray->tab_title; ?>" /> 
+		
+		<label>Navigation Position: </label>
+        <select name="txtposition">
+			<option value="0">default</option>
+			<?php for($i=1;$i<5;$i++){ ?>
+				<option value="<?php echo $i; ?>"  <?php if($i==$videodataarray->position){ echo 'selected'; } ?> ><?php echo $i; ?> </option>
+			<?php } ?>
+		</select>
+		
+		
+        <label>Video Title: </label>
         <input type="text" name="txt_vname" class="input-xlarge val_dis_enb" value="<?php echo $videodataarray->file_name; ?>" /> 
-        <label>GVO Video Description:</label>
+        <label>Video Description:</label>
         <textarea  rows="3" name="txtarea_vdescription" class="input-xlarge val_dis_enb"><?php echo $videodataarray->description ; ?></textarea>
          
 		
-		<label>Upload GVO video </label>
+		<label>Upload video: </label>
 		<input id="file_upload" name="file_upload" type="file" >
 
 		<input type="hidden" id="baseurl" value="<?php echo base_url();?>" />
