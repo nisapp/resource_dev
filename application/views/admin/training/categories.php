@@ -62,9 +62,11 @@ foreach($query->result() as $category ):
           <td>
 			<!--<a href="<?php //echo base_url();?>admin/videos/updatevideo/<?php //echo $marketing->id; ?>" >
    <i class="icon-pencil"></i></a>-->
-              <i onclick="delpro(this.id);" id="<?php //echo $marketing->id; ?>" class="icon-remove" style="cursor:pointer"></i>
+              <i onclick="delpro(this.id);" id="<?php echo $category->id; ?>" class="icon-remove" style="cursor:pointer"></i>
               <a href="<?php echo base_url();?>admin/training/delete_category/<?php echo $category->id; ?>" ></a>
 		<a href="<?php echo base_url();?>admin/training/editcategory/<?php echo $category->id; ?>" >Edit</a> 
+                <input type="hidden" name="current_action" id="current_action" value="admin/training/delete_category/">
+                <input type="hidden" name="baseurl" id="baseurl" value="<?php echo base_url(); ?>">
           </td>
         </tr>
 <?php endforeach; ?>  

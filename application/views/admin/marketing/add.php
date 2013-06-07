@@ -98,7 +98,7 @@
 	</div>
 	<div class="field">
 		<label for="description">Description</label> 
-                <textarea id="description" cols="80" name="description"></textarea>
+                <textarea id="description" class="ckeditor" cols="80" name="description"></textarea>
 	</div>
 
 	<input type="submit" class="btn" value="Add"/>

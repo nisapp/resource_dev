@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	//session_start(); //we need to call PHP's session object to access it through CI
-	class Training extends CI_Controller {
+	class Howto extends CI_Controller {
 	 
 	 function __construct()
 	 {
@@ -14,7 +14,6 @@
 			$strMenus=$this->menu_model->getMenuData_array();
 			$this->session->set_userdata('menu_data_in_session', $strMenus);
 		}
-		
 		$this->load->model('training_model','',TRUE);
 		$this->load->model('client','',TRUE);
 		$this->load->library('form_validation');
@@ -27,25 +26,16 @@
 	 
 	 function index()
 	 {
-		if($this->session->userdata('client_login'))
-		{
-			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
-			$this->data['metatitle'] = 'EAP Training';
-			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
-			 $this->data['query']=$this->training_model->getCategories();
-             
-			$this->data['subview']=  'clientadmin/training_view';
-			$this->load->view('clientadmin/_layout_main', $this->data);
-		}
-		else
-		{
-			//If no session, redirect to login page
-			redirect('login', 'refresh');
-		}
+             $this->data['account_detail'] = $this->client->get_current_login_client_detail();
+             $this->data['metatitle'] = 'EAP Training';
+             $this->data['scriptlist'][]='jwplayer/jwplayer.js';
+             $this->data['query']=$this->training_model->getCurrentCategories(3);
+             $this->data['subview']=  'clientadmin/howto_view';
+             $this->load->view('clientadmin/_layout_main', $this->data);
 	 }
 	   function showdata($category){
 			// echo 'i mmmmmmm';
-			echo $html=$this->training_model->get_traing_data_by_category($category);
+			echo $html=$this->training_model->get_traing_data_by_category($category,3);
 		}
 	
 }

@@ -5,12 +5,16 @@ class Programs extends CI_Controller {
 	 function __construct()
 	 {
 	  	 parent::__construct();
-
+		$this->load->model('menu_model','',TRUE);
 		// check for validate user login
 		$session_login_client=$this->session->userdata('client_login');
 		if (!($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user')) {
 			redirect('/', 'refresh');
+		}else{
+			$strMenus=$this->menu_model->getMenuData_array();
+			$this->session->set_userdata('menu_data_in_session', $strMenus);
 		}
+		
 		$this->load->model('programs_model','',TRUE);
 		/**----------Code un-necessary should be deleted===----------------------------*/
 		$this->load->model('client','',TRUE);

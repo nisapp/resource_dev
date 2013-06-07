@@ -41,16 +41,16 @@ img.procees_img{
 </style>
 <script>
 	function load_train_data(cat_id){
-		// alert(cat_id);
 		$('.cat_tabs').removeClass('active');
 		$('#ctab_'+cat_id).addClass('active');
+		// alert(cat_id);
 		var base_url=$("#baseurl").val();
 		var dataString = 'cat_id=' +cat_id;  
 		var process_image='<img src="'+base_url+'images/loader.gif" class="procees_img" alt="wait...">';
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/training/showdata/"+cat_id,  
+		  url: base_url+"clientadmin/howto/showdata/"+cat_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
@@ -97,6 +97,8 @@ img.procees_img{
 		var firstCategory = $("#firstCategory").val();
 		load_train_data(firstCategory);
 	});
+	
+	
 	//jQuery(document).on('click', '.jwdisplayIcon', function(event) { jwplayer( 'videopreview' ).pause(); })
 	
 </script>
@@ -112,9 +114,9 @@ img.procees_img{
 			</div>
 	</div>
 	<div class="webright">
-		<?php 
-			$first_cat = $query->row();
-		?>
+			<?php 
+				$first_cat = $query->row();
+			?>
 
 			<input type="hidden" id="firstCategory" value="<?php echo $first_cat->id;?>">
 			<input type="hidden" id="baseurl" value="<?php echo base_url();?>">

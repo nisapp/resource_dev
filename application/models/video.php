@@ -338,6 +338,7 @@
 		
 			$video_title = $this->input->post('txt_vname');
 			$description = $this->input->post('txtarea_vdescription');
+			$nav_title = $this->input->post('txtNavigation');
 			$strdate=date("Y-m-d");
 			$video_in_folder = $this->input->post('hidd_video');
 			$datatoupdate = array(
@@ -346,6 +347,7 @@
 								'is_show'=>'Y',
 								'type'=>'login_video',
 								'added_date'=>$strdate,
+								'tab_title'=>$nav_title,
 								'file_name_in_folder'=>$video_name
 							);
 			

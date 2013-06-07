@@ -52,6 +52,10 @@
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home" style="width:50%;float: left;">
 		
+		<label>Title: </label>
+        <input type="text" name="txtNavigation" required class="input-xlarge val_dis_enb" value="<?php echo $videodataarray->tab_title; ?>" /> 
+		
+		
         <label>Login Video Name: </label>
         <input type="text" name="txt_vname" class="input-xlarge val_dis_enb" value="<?php echo $videodataarray->file_name; ?>" /> 
         <label>Login Video Description:</label>

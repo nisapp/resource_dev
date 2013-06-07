@@ -68,10 +68,18 @@ echo validation_errors();
 		<input id="link" value="" name="link" size="50" type="text" class="medium" />
 	</div>
 	<div class="field">
-		<label for="link">Category</label> 
+		<label for="category">Category</label> 
                 <select id="category" name="category" class="medium" >
                     <?php foreach ($categories->result() as $category):?>
                     <option value="<?php echo $category->id; ?>"><?php echo $category->category_name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+	</div>
+	<div class="field">
+		<label for="type">Type</label> 
+                <select id="type" name="type" class="medium" >
+                    <?php foreach ($types->result() as $type):?>
+                    <option value="<?php echo $type->id; ?>"><?php echo $type->type_name; ?></option>
                     <?php endforeach; ?>
                 </select>
 	</div>

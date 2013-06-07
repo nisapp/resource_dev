@@ -37,7 +37,8 @@
              $this->data['stylelist'][]='video-js/video-js.css';
              $this->data['stylelist'][]='css/style.css';
              $this->data['scriptlist'][]='scripts/user_registration.js';
-             $this->data['scriptlist'][]='video-js/video.js';
+             $this->data['scriptlist'][]='jwplayer/jwplayer.js';
+             $this->data['scriptlist'][]='scripts/program_video.js';
              $this->data['title'] = 'Registration';
              $this->load->view('register',$this->data);
          }

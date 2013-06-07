@@ -98,7 +98,7 @@ $marketing = $query->result();
 </div>
 <div class="field">
 	<label for="description">Description</label> 
-	<textarea id="description" cols="80" name="description"><?php echo $marketing[0]->description; ?></textarea>
+	<textarea id="description" class="ckeditor" cols="80" name="description"><?php echo $marketing[0]->description; ?></textarea>
 </div>
 
 <input type="submit" class="btn" value="Edit">

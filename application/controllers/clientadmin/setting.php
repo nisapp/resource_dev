@@ -7,10 +7,15 @@
 	  	 parent::__construct();
 
 		// check for validate user login
+		$this->load->model('menu_model','',TRUE);
 		$session_login_client=$this->session->userdata('client_login');
 		if (!($session_login_client['login_state'] == 'active' && $session_login_client['role'] == 'user')) {
 			redirect('login', 'refresh');
+		}else{
+			$strMenus=$this->menu_model->getMenuData_array();
+			$this->session->set_userdata('menu_data_in_session', $strMenus);
 		}
+		
 		$this->load->model('client','',TRUE);
 		$this->load->library('form_validation');
 	 }

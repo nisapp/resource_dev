@@ -1,6 +1,5 @@
 <?php
 $curPageName=$view_name;
-
 ?>
   <head>
     <meta charset="utf-8">
@@ -114,9 +113,10 @@ var jq172 = jQuery.noConflict();
     
     <div class="sidebar-nav">
         <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
-        <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='listing' || $curPageName=='dashboard' || $curPageName=='empower_video' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' || $curPageName=='gvo_video' || $curPageName=='pure_leverage_video' || $curPageName=='next_video' ){ echo 'in'; } ?>">
+        <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='listing' || $curPageName=='dashboard' || $curPageName=='empower_video' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' || $curPageName=='gvo_video' || $curPageName=='pure_leverage_video' || $curPageName=='next_video' || $curPageName=='menu_listing'|| $curPageName=='menu_edit_view' ){ echo 'in'; } ?>">
             
             <li><a href="<?php echo base_url(); ?>admin/videos">Manage Welcome Video</a></li>
+			<li><a href="<?php echo base_url(); ?>admin/menu">Menu Mangement</a></li>
 			<li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a></li>
             <!--<li><a href="<?php echo base_url(); ?>admin/logos">Manage Logo</a></li>-->
             

@@ -1,133 +1,54 @@
 <?php
-
-class Training_model extends CI_Model{
+class Menu_model extends CI_Model{
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
     }
-    function getTrainingData($id = 0){
-        $this->db->select('t.id, t.title, t.link,tc.id as cid, 
-            tc.category_name as category, tt.id as tid, tt.type_name as t_type');
-        $this->db->from('training as t');
-        $this->db->join('training_category as tc',"t.training_category = tc.id");
-        $this->db->join('training_type as tt',"t.training_type = tt.id");
-        if($id!=0){
-            $this->db->where('t.id',$id);
-        }
-        $this->db->order_by('t.id', "asc"); 
+    public function getMenuData_array(){
+		$this->db->select('*');
+        $this->db->from('tblmenu as m');
+		$this->db->where('m.menu_type','main_menu');
+		$this->db->order_by("position", "asc");
         $query = $this->db->get();
-        return $query;
-    }
-    function getTrainingAllImages($id){
-        $this->db->select('*');
-        $this->db->from("training_images");
-        $this->db->where('training_id',$id);
-        $query = $this->db->get();
-        return $query;
-    }
-    function get_traing_data_by_category($cid,$tid=1){
-		$this->db->select('t.id AS id, 
-            t.link AS link, 
-            t.title AS title, 
-            tv.training_video AS video, 
-            tt.training_text AS t_text');
-        $this->db->from('training AS t');
-        $this->db->join('training_video AS tv','t.id=tv.training_id','LEFT');
-        $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
-        $this->db->where('t.training_category',$cid);
-        $this->db->where('t.training_type',$tid);
-        $query = $this->db->get();
-		// echo $this->db->last_query();
-		$trn_html='';		
-		$base_url=base_url();
-		foreach($query->result() as $training ){ 
-			$trn_html.="
-				<div class='main_tab' >
-					<div class='m_t_tab-close tab_close tab_child_1' onclick='show_div(this,{$training->id});'>{$training->title}
-						<img  src='{$base_url}images/transparent.gif' class='open_close open_tab' width='36' height='29'>
-					</div>
-					<div class='show-tab-content tab_child_2' style='display: none;'>
-						<p>
-							{$training->t_text}
-						</p>
-						<input type='hidden' id='id_videopreview_{$training->id}' value='{$training->video}'>
-									
-						<div class='video_preveiw' style=''>
-									<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
-									<div id='videopreview_{$training->id}'>Loading the player...</div>
-						</div>
-					
-						
-					</div>
-				</div>
-					";	
+		foreach($query->result() as $menu ){
+			$menu_array[]=$menu;
 		}
-		return $trn_html;
+		return $menu_array;
+		// echo '<pre>';
+		// print_r($menu_array);
+		// echo '</pre>';
+		// echo $menu_array[0]->menu_title;
 	}
-	
-    function getTrainingFullData($id){
-        $this->db->select('t.id AS id, 
-            t.link AS link, 
-            t.title AS title, 
-            tv.training_video AS video, 
-            tt.training_text AS t_text,tc.id as cid, 
-            tc.category_name as category, ttp.id as tid, ttp.type_name as t_type');
-        $this->db->from('training AS t');
-        $this->db->join('training_category as tc',"t.training_category = tc.id");
-        $this->db->join('training_type as ttp',"t.training_type = ttp.id");
-        $this->db->join('training_video AS tv','t.id=tv.training_id','LEFT');
-        $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
-        $this->db->where('t.id',$id);
-        $this->db->order_by('t.id', "asc"); 
+    
+	public function getMenuData($id=false){
+        $this->db->select('*');
+        $this->db->from('tblmenu as m');
+		$this->db->where('m.menu_type','main_menu');
+		if(isset($id) && ($id!=false)){
+			$this->db->where('m.id',$id);
+		}
         $query = $this->db->get();
+		// echo $this->db->last_query(); 
         return $query;
     }
-    function addTraining(){
-        $data=array(
-            'link'=>$this->input->post('link'),
-            'title'=>$this->input->post('title'),
-            'training_category'=>$this->input->post('category'),
-            'training_type'=>$this->input->post('type')
+	function updateMenu($id){
+		$data = array(
+            'menu_title'=> $this->input->post('txtTitle'),
+            'position'=> $this->input->post('txtPosition'),
         );
-        $this->db->insert('training',$data);
-        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
-    }
-    function addVideo($id){
-        $config['upload_path'] = './uploads/training/video/';
-        $config['allowed_types'] = 'avi|flv|wmv|mp4|mp3';
-        $config['max_size'] = '10000';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-        $this->load->library('upload', $config);
-        $source = $this->input->post('source');
-        if($source==="youtube"){
-            $video=$this->input->post('video_youtube');
-        }
-        elseif($source==="upload"){
-            if($this->upload->do_upload('video')){
-                $info=$this->upload->data();
-                $video=$info['file_name'];
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return FALSE;
-        }
-        $data = array('training_video'=>$video,'training_id'=>$id);
-        $this->db->insert('training_video',$data);
-        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
-    }
-    function addText($id){
-        $data = array(
-            'training_id'=>$id,
-            'training_text'=>  $this->input->post('training_text')
-        );
-        $this->db->insert('training_text',$data);
-        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
-    }
+		$this->db->where('id',$id);
+		$res=$this->db->update('tblmenu',$data);
+        // echo ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+		if($res){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+    
+/*=======================================================================================*/	
+  
     function editText($id){
         $data = array(
             'training_text'=> $this->input->post('training_text')
@@ -204,7 +125,6 @@ class Training_model extends CI_Model{
         if($id!==0){
             $this->db->where('id',$id);
         }
-        $this->db->order_by('id', "asc"); 
         $query = $this->db->get();
         return $query;
     }
@@ -214,9 +134,7 @@ class Training_model extends CI_Model{
         $this->db->join('training_category as tc',"t.training_category=tc.id");
         $this->db->where('training_type',$tid);
         $this->db->group_by('training_category');
-        $this->db->order_by('tc.id', "asc"); 
         $query = $this->db->get();
-		// echo $this->db->last_query(); 
         return $query;
     }
     function getTypes($id=0){
@@ -246,7 +164,6 @@ class Training_model extends CI_Model{
     function deleteCategory($id){
         $this->db->where('id',$id);
         $this->db->delete('training_category');
-        // echo $this->db->last_query();
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     function deleteTraining($id){
@@ -255,7 +172,8 @@ class Training_model extends CI_Model{
         $this->db->join('training_video as tv','t.id=tv.training_id','LEFT');
         $this->db->where('t.id',$id);
         $query = $this->db->get();
-        if($query->num_rows>0&&!empty($query->row_data)){
+        var_dump($query);
+        if($query->num_rows>0){
         foreach($query->result() as $row){
             if(empty($row))continue;
             if(file_exists('./uploads/training/video/'.$row->video)){
@@ -267,10 +185,12 @@ class Training_model extends CI_Model{
         $this->db->from('training as t');
         $this->db->join('training_images as ti','t.id=ti.training_image','LEFT');
         $this->db->where('t.id',$id);
+        var_dump($query1);
         $query1 = $this->db->get();
         echo $this->db->last_query();
-        if($query1->num_rows>0&&!empty($query1->row_data)){
+        if($query1->num_rows>0){
         foreach($query1->result() as $row1){
+            var_dump($row1);
             if(file_exists('./uploads/training/images/'.$row->images)){
                 unlink('./uploads/training/images/'.$row->images);
             }

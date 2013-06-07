@@ -68,14 +68,47 @@ echo validation_errors();
 		<label for="link">Link</label> 
 		<input id="link" value="<?php echo $training->link; ?>" name="link" size="50" type="text" class="medium" />
 	</div>
+	<div class="field">
+		<label for="category">Category</label> 
+                <select id="category" name="category" class="medium" >
+                    <?php foreach ($categories->result() as $category):?>
+                    <option value="<?php echo $category->id; ?>" <?php if($training->cid==$category->id) echo 'selected'?> >
+                        <?php echo $category->category_name; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+	</div>
+	<div class="field">
+		<label for="type">Type</label> 
+                <select id="type" name="type" class="medium" >
+                    <?php foreach ($types->result() as $type):?>
+                    <option value="<?php echo $type->id; ?>" <?php if($training->tid==$type->id) echo 'selected'?> >
+                        <?php echo $type->type_name; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+	</div>
 
 	<input id="edit_training" name="edit_training" type="submit" class="btn" value="Save"/>
 <?php echo form_close();
-if(!empty($training->video)):
-    if(preg_match("/youtube\.com/", $training->video)):
+if(!empty($training->video)):?>
+        <div class="video_preveiw" style="">
+            <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
+            <div id="videopreview">Loading the player...</div>
+        </div>
+        <?php if(preg_match("/youtube\.com/", $training->video)): ?>
+        <input type="hidden" id="baseurl" value="">
+        <input type="hidden" id="video_file_path" value="">
+        <?php else: ?>
+        <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+        <input type="hidden" id="video_file_path" value="uploads/training/video/">
+        <?php endif; ?>
+        <input type="hidden" id="id_videopreview" value="<?php echo $training->video; ?>">
+    <?php 
+    /*if(preg_match("/youtube\.com/", $training->video)):
         $video_str = substr($training->video,-11);
     ?>
-        <iframe width="560" height="315" 
+        <!--<iframe width="560" height="315" 
                 src="http://www.youtube.com/embed/<?php echo $video_str; ?>" 
                 frameborder="0" allowfullscreen>
         </iframe>
@@ -86,9 +119,9 @@ if(!empty($training->video)):
             <source src="<?php echo base_url(); ?>uploads/training/video/<?php echo $training->video; ?>" type='video/mp4' />
         </video>
     <?php
-    endif;
+    endif;//*/
 ?>
-        <a href="<?php echo base_url(); ?>admin/training/editvideo/<?php echo $training->id; ?>">Change Video File </a>
+        <a href="<?php echo base_url(); ?>admin/training/editvideo/<?php echo $training->id;  ?>">Change Video File </a>
         <?php else: 
 $addvideo = array(
     'id'=>'add_video',

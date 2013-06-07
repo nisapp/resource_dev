@@ -13,10 +13,14 @@
         endif; ?>
 <style>  
 .video_preveiw{
-	margin: 38px 3px 2px 115px;
+	margin: 28px 3px 2px 91px;
 	position: absolute;
 	text-align: center;
 	/* width: 50%; */
+}
+#videopreview{
+    width: 717px !important;
+    height: 403px !important;
 }
 .get_started{
     font-family: "Myriad Pro";
@@ -91,6 +95,8 @@ background: none !important;
 								break;
 			case 'login_video':
 								$login_video=$info->file_name_in_folder;
+								$title_text=$info->tab_title;
+								
 								break;
 		}
 	}
@@ -117,14 +123,26 @@ background: none !important;
             <div id="container">
             	 <div class="profitsContainer">
                         <div id="video_viewer">
-                                <video id="register_page_vieo" class="video-js vjs-default-skin"
+                                <!--<video id="register_page_vieo" class="video-js vjs-default-skin"
                                        controls preload="auto" width="600" height="400" autoplay
                                        >
-                                    <source src="<?php echo base_url(); ?>uploads/videos/<?php echo $login_video; ?>" type='video/mp4' />
-                                </video>
+                                    <source src="<?php //echo base_url(); ?>uploads/videos/<?php //echo $login_video; ?>" type='video/mp4' />
+                                </video>-->
+        <div class="video_preveiw" style="">
+            <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
+            <div id="videopreview">Loading the player...</div>
+        </div>
+        <?php if(preg_match("/youtube\.com/", $login_video)): ?>
+        <input type="hidden" id="baseurl" value="">
+        <input type="hidden" id="video_file_path" value="">
+        <?php else: ?>
+        <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+        <input type="hidden" id="video_file_path" value="uploads/videos/">
+        <?php endif; ?>
+        <input type="hidden" id="id_videopreview" value="<?php echo $login_video; ?>">
                                 <img src="<?php echo base_url(); ?>images/webBg2.png" id="videobg"/>
                         </div>
-                     <p class="get_started">Get Started Right Now!</p>
+                     <p class="get_started"><?php if(isset($title_text) && ($title_text!='')){ echo $title_text; }else{ echo 'Get Started Right Now!'; } ?> </p>
                         <div class="formArea">
                             <form action="<?php echo base_url();?>register/verifysignup" method="post" >
                                 <div class="input_line">

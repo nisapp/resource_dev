@@ -22,6 +22,7 @@ class Training extends CI_Controller {
         }
         public function add(){
             $this->data['categories']=  $this->training_model->getCategories();
+            $this->data['types']=  $this->training_model->getTypes();
             if($this->input->post('add_training')!==FALSE){
                 $this->form_validation->set_rules('title', 'Title', 'required');
                 $this->form_validation->set_rules('link', 'Link', 'required');
@@ -47,6 +48,8 @@ class Training extends CI_Controller {
         public function edit($id){
             $this->data['styles'][]='css/store_programs.css';
             //$this->data['styles'][]='css/style.css';
+            $this->data['categories']=  $this->training_model->getCategories();
+            $this->data['types']=  $this->training_model->getTypes();
             $this->data['scripts'][]='jwplayer/jwplayer.js';
             $this->data['scripts'][]='scripts/program_video.js';
             $this->data['scripts'][]='scripts/user_registration.js';
@@ -203,7 +206,7 @@ class Training extends CI_Controller {
         }
         function delete_training($id){
             $this->training_model->deleteTraining($id);
-            redirect("admin/training");
+            //redirect("admin/training");
         }
     
 }

@@ -1,14 +1,24 @@
 <?php 
 $session_data = $this->session->userdata('client_login');
+$session_menu = $this->session->userdata('menu_data_in_session');
 // echo '<pre>';
-// print_r($session_data);
+// print_r($session_menu);
 // echo '</pre>';
+// foreach($session_menu as $key=>$value){
+	// echo '<br/>'.$session_menu[$key]->menu_url;		
+	// echo $key;		
+// } 
 // $data['fullname']=$session_data['fullname'];
 if (array_key_exists('sponser_full_name', $session_data)) {
     $sponser=$session_data['sponser_full_name'];
 }else{
     $sponser='No Sponser';
 }
+// $this->load->model('menu_model','', TRUE);
+// $menuqry=$this->menu_model->getMenuData();
+// foreach($menuqry->result() as $menu ){
+	// echo '<br/>'.$menu->title;
+// }
 
 ?>
 <html>
@@ -115,10 +125,21 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 					
 					<nav class="maniNav">
 						<ul>
-							<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Dashboard</a></li>
+							<?php
+								foreach($session_menu as $key=>$value){
+									// echo $session_menu[$key]->menu_title;	
+								?>	
+									<li><a href="<?php echo base_url().$session_menu[$key]->menu_url; ?>"><?php echo  $session_menu[$key]->menu_title; ?></a></li>
+								<?php
+									//echo "<li><a href='".base_url()."'{$session_menu[$key]->menu_url}'>{$session_menu[$key]->menu_title}</a></li>";									
+								} 
+							?>
+							<!--<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Dashboard</a></li>
 							<li><a href="#" >Commissions</a></li>
 							<li><a href="<?php echo base_url(); ?>clientadmin/training">Marketing Videos</a></li>
-							<li><a class="last" href="<?php echo base_url(); ?>clientadmin/programs">How To Videos</a></li>
+							<li>
+								<a class="last" href="<?php echo base_url(); ?>clientadmin/programs">How To Videos</a>
+							</li>-->
 							
 							
 						</ul>

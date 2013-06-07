@@ -50,7 +50,7 @@ img.procees_img{
 		$("div#ma").html(process_image);
 		$.ajax({  
 		  type: "POST",  
-		  url: base_url+"clientadmin/training/showdata/"+cat_id,  
+		  url: base_url+"clientadmin/commisions/showdata/"+cat_id,  
 		  data: dataString,  
 		  success: function(msg) {  
 				// alert(msg);
@@ -97,24 +97,24 @@ img.procees_img{
 		var firstCategory = $("#firstCategory").val();
 		load_train_data(firstCategory);
 	});
+	
 	//jQuery(document).on('click', '.jwdisplayIcon', function(event) { jwplayer( 'videopreview' ).pause(); })
 	
 </script>
-
 	<div class="webleft">
 			<div class="leftnav">
 				<ul>
 					<?php foreach($query->result() as $category ){ ?>
-						<li onclick="load_train_data(<?php echo $category->id; ?>);"><a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a></li>
+						<li onclick="load_train_data(<?php echo $category->id; ?>);" ><a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a></li>
 					<?php } ?>
 					<!--<li><a href="#" class="active">System Training-2</a></li>-->
 				</ul>
 			</div>
 	</div>
 	<div class="webright">
-		<?php 
-			$first_cat = $query->row();
-		?>
+			<?php 
+				$first_cat = $query->row();
+			?>
 
 			<input type="hidden" id="firstCategory" value="<?php echo $first_cat->id;?>">
 			<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
