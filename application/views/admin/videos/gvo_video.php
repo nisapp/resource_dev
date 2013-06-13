@@ -34,17 +34,7 @@
 	//form_open('admin/videos/change_gvo_video/'.$videodataarray->Id); 
 ?>
  <form enctype="multipart/form-data" method="post" action="<?php echo base_url();?>admin/videos/change_gvo_video/<?php echo $videodataarray->Id;?>">
-<div class="btn-toolbar">
 
-
-<input class="btn btn-primary val_dis_enb" type="submit" name="update_video" value="Update" />
- 
-
-<a href="<?php echo base_url();?>admin/videos" class="btn">Cancel</a>
-	
-  <div class="btn-group">
-  </div>
-</div>
 <div class="well">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab">Details</a></li>
@@ -72,6 +62,14 @@
 
 		<input type="hidden" id="baseurl" value="<?php echo base_url();?>" />
 		<input type="hidden" id="hidd_video" name="hidd_video" value="<?php echo $videodataarray->file_name_in_folder; ?>" />
+		
+		<div class="btn-toolbar">
+			<input class="btn btn-primary val_dis_enb" type="submit" name="update_video" value="Update" />
+			<a href="<?php echo base_url();?>admin/videos" class="btn">Cancel</a>
+			<div class="btn-group">
+			</div>
+		</div>
+
       </div>
 	  
 		<!--<div class="video_preveiw" style="width:50%;float: left;" >

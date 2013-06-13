@@ -44,6 +44,8 @@ img.procees_img{
 		// alert(cat_id);
 		$('.cat_tabs').removeClass('active');
 		$('#ctab_'+cat_id).addClass('active');
+		var title=$('#title_'+cat_id).val();
+		$("div.video_title").text(title);
 		var base_url=$("#baseurl").val();
 		var dataString = 'cat_id=' +cat_id;  
 		var process_image='<img src="'+base_url+'images/loader.gif" class="procees_img" alt="wait...">';
@@ -100,12 +102,15 @@ img.procees_img{
 	//jQuery(document).on('click', '.jwdisplayIcon', function(event) { jwplayer( 'videopreview' ).pause(); })
 	
 </script>
-
+<div class="video_title">Welcome User</div>	
 	<div class="webleft">
 			<div class="leftnav">
 				<ul>
 					<?php foreach($query->result() as $category ){ ?>
-						<li onclick="load_train_data(<?php echo $category->id; ?>);"><a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" href="#"><?php echo $category->category_name; ?></a></li>
+						<li onclick="load_train_data(<?php echo $category->id; ?>);">
+							<a id="ctab_<?php echo $category->id; ?>" class="cat_tabs" value="<?php echo $category->category_name; ?>" href="#" ><?php echo $category->category_name; ?></a>
+							<input type="hidden" id="title_<?php echo $category->id; ?>" value="<?php echo $category->category_name; ?>" >
+						</li>
 					<?php } ?>
 					<!--<li><a href="#" class="active">System Training-2</a></li>-->
 				</ul>

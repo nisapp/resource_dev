@@ -75,7 +75,7 @@
 			$video_in_folder = $this->input->post('hidd_video');
 			$video_in_folder = $this->input->post('hidd_video');$tab_title = $this->input->post('txtNavigation');
 			$position = $this->input->post('txtposition');
-			
+			$button_url = $this->input->post('txtButton_url');
 			$datatoupdate = array(
 								'file_name'=>$video_title,
 								'description'=>$description,
@@ -84,6 +84,7 @@
 								'added_date'=>$strdate,
 								'position'=>$position,
 								'tab_title'=>$tab_title,
+								'custom_link'=>$button_url,
 								'file_name_in_folder'=>$video_name
 							);
 			

@@ -206,8 +206,10 @@ class Training_model extends CI_Model{
         }
         $this->db->order_by('id', "asc"); 
         $query = $this->db->get();
+		// echo $this->db->last_query(); 
         return $query;
     }
+	
     function getCurrentCategories($tid=1){
         $this->db->select('tc.*');
         $this->db->from('training as t');
@@ -219,6 +221,7 @@ class Training_model extends CI_Model{
 		// echo $this->db->last_query(); 
         return $query;
     }
+	
     function getTypes($id=0){
         $this->db->select('*');
         $this->db->from('training_type');
@@ -244,10 +247,25 @@ class Training_model extends CI_Model{
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     function deleteCategory($id){
+        $this->db->select('id');
+        $this->db->from('training');
+        $this->db->where('training_category',$id);
+        $query = $this->db->get();
+        foreach($query->result() as $row){
+            if($this->trainingExists($row->id)){
+                $this->deleteTraining($row->id);
+            }
+        }
         $this->db->where('id',$id);
         $this->db->delete('training_category');
-        // echo $this->db->last_query();
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+    }
+    function trainingExists($id){
+        $this->db->select('id');
+        $this->db->from('training');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        return($query->num_rows>0);
     }
     function deleteTraining($id){
         $this->db->select('tv.training_video as video');
@@ -255,9 +273,9 @@ class Training_model extends CI_Model{
         $this->db->join('training_video as tv','t.id=tv.training_id','LEFT');
         $this->db->where('t.id',$id);
         $query = $this->db->get();
-        if($query->num_rows>0&&!empty($query->row_data)){
+        if($query->num_rows>0){
         foreach($query->result() as $row){
-            if(empty($row))continue;
+            if(empty($row->video))continue;
             if(file_exists('./uploads/training/video/'.$row->video)){
                 unlink('./uploads/training/video/'.$row->video);
             }
@@ -265,14 +283,14 @@ class Training_model extends CI_Model{
         }
         $this->db->select('ti.training_image as images');
         $this->db->from('training as t');
-        $this->db->join('training_images as ti','t.id=ti.training_image','LEFT');
+        $this->db->join('training_images as ti','t.id=ti.training_id','LEFT');
         $this->db->where('t.id',$id);
         $query1 = $this->db->get();
-        echo $this->db->last_query();
-        if($query1->num_rows>0&&!empty($query1->row_data)){
+        if($query1->num_rows>0){
         foreach($query1->result() as $row1){
-            if(file_exists('./uploads/training/images/'.$row->images)){
-                unlink('./uploads/training/images/'.$row->images);
+            if(empty($row1->images))continue;
+            if(file_exists('./uploads/training/images/'.$row1->images)){
+                unlink('./uploads/training/images/'.$row1->images);
             }
         }
         }

@@ -90,6 +90,9 @@
 		var baseurl = $("#baseurl").val();
 		
 		var previewfile = $("#txtWelcome").val();
+		var video_title = $("#txtWelcomeTitle").val();
+		// alert(previewfile);
+		$("div.video_title").text(video_title);
 		// alert(previewfile);
 		if(previewfile=="")
 		{
@@ -160,7 +163,7 @@ img.step_done{
 		// echo '<pre>';
 		// print_r($video_data);
 		// echo '</pre>';
-		// echo $video_data['welcome_video']->description;
+		// echo $video_data['next_video']->custom_link;
 
 		/* foreach($video_data as $key=>$val){
 				// echo '<br/>'.$key->tab_title;
@@ -398,7 +401,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 		</div>
 		
 		<div class="idArea" id="what">
-			 <input type="button" class="claimbtn" value="Click Here To Go To The Next Step" />
+			 <a href="<?php echo $video_data['next_video']->custom_link; ?>" ><input type="button" class="claimbtn" value="Click Here To Go To The Next Step" style="cursor:pointer;" /></a>
 		</div>
 			
 		<!--/**********************************************************/-->	

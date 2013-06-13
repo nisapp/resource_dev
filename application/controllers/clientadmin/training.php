@@ -32,7 +32,8 @@
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'EAP Training';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
-			 $this->data['query']=$this->training_model->getCategories();
+			 // $this->data['query']=$this->training_model->getCategories();
+			 $this->data['query']=$this->training_model->getCurrentCategories(1);
              
 			$this->data['subview']=  'clientadmin/training_view';
 			$this->load->view('clientadmin/_layout_main', $this->data);

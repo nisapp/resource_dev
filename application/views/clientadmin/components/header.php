@@ -2,23 +2,18 @@
 $session_data = $this->session->userdata('client_login');
 $session_menu = $this->session->userdata('menu_data_in_session');
 // echo '<pre>';
-// print_r($session_menu);
+// print_r($session_data);
 // echo '</pre>';
 // foreach($session_menu as $key=>$value){
 	// echo '<br/>'.$session_menu[$key]->menu_url;		
 	// echo $key;		
 // } 
-// $data['fullname']=$session_data['fullname'];
+// $data['fullname']=$session_data['user_track_id'];
 if (array_key_exists('sponser_full_name', $session_data)) {
     $sponser=$session_data['sponser_full_name'];
 }else{
     $sponser='No Sponser';
 }
-// $this->load->model('menu_model','', TRUE);
-// $menuqry=$this->menu_model->getMenuData();
-// foreach($menuqry->result() as $menu ){
-	// echo '<br/>'.$menu->title;
-// }
 
 ?>
 <html>
@@ -31,7 +26,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 			setTimeout(function() { 
 				$('.infomessage').fadeOut('fast');
 			} , 1750);
-
+			
 		</script>
     </head>
 <body>
@@ -76,8 +71,11 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 							<!-- header right -->
 							<div class="siteHeaderRight">
 								<div class="sponsor">
-									Your Sponsor :  <a href="#"><?php echo $sponser; ?></a>
+									<span id="sponsor">Your Sponsor :  <a href="#"><?php echo $sponser; ?></a></span>
+									<br/>
+									<span class="downline">Your Affliate Id : <?php echo $session_data['user_track_id'];?></span>
 								 </div>
+								
 								 <nav class="headertop">
 									<ul>
 										<li><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></li>
@@ -126,19 +124,31 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 					<nav class="maniNav">
 						<ul>
 							<?php
+								$total=count($session_menu);
+								$menu_count=0;
+								$current_url=uri_string();
+
 								foreach($session_menu as $key=>$value){
-									// echo $session_menu[$key]->menu_title;	
+									++$menu_count;
+									
+									/****** Code start to show Active menu*******/
+										if($session_menu[$key]->menu_url==$current_url){
+											$class='class="active"';
+										}else{
+											$class='class=""';	
+										}
+									/****** End of Code to show Active menu*******/
+									
 								?>	
-									<li><a href="<?php echo base_url().$session_menu[$key]->menu_url; ?>"><?php echo  $session_menu[$key]->menu_title; ?></a></li>
+									<li><a <?php echo $class; ?> id="menu_<?php echo $key; ?>" <?php if($menu_count==$total){ echo 'class="last"'; } ?> href="<?php echo base_url().$session_menu[$key]->menu_url; ?>"><?php echo  $session_menu[$key]->menu_title; ?></a></li>
 								<?php
-									//echo "<li><a href='".base_url()."'{$session_menu[$key]->menu_url}'>{$session_menu[$key]->menu_title}</a></li>";									
 								} 
 							?>
 							<!--<li><a href="<?php echo base_url(); ?>clientadmin/clientdashboard">Dashboard</a></li>
 							<li><a href="#" >Commissions</a></li>
 							<li><a href="<?php echo base_url(); ?>clientadmin/training">Marketing Videos</a></li>
 							<li>
-								<a class="last" href="<?php echo base_url(); ?>clientadmin/programs">How To Videos</a>
+								<a class="last" href="<?php echo base_url(); ?>clientadmin/programs">p</a>
 							</li>-->
 							
 							

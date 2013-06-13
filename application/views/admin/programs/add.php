@@ -1,103 +1,121 @@
-<?php if (isset($status) && $status=="success"){?>
-			<div class="infomessage"><?php echo "Video has been added Successfully"?> </div>
-<?php }else if (isset($status) && $status=="failure"){ ?>
-			<div class="infomessage"><?php echo "Some thing went wrong please try again. . . "?> </div>
-<?php }else if (isset($status) && $status=="deletesuccess"){ ?>
-			<div class="infomessage"><?php echo "Marketing deleted successfully"?> </div>
-<?php }else if (isset($status) && $status=="deletefailure"){ ?>
-			<div class="infomessage"><?php echo "Opps !! Error occur while deleting marketing !!"?> </div>
+<?php if (isset($status) && $status=="updatesuccess"){?>
+			<div class="infomessage"><?php echo "GVO video has been Uploaded Successfully"?> </div>
+<?php }else if (isset($status) && $status=="updatefailure"){?>
+			<div class="errormessage"><?php echo "Opps ! Some error occur !!"?> </div>
 <?php } ?>
-	
-<div style="display:none" id="infomessage">
-	<div style="margin-bottom: 10px;">Are you sure to delete?</div>
-	<a href="" id="del_yes">
-		<div class="yes">
-			Yes
-		</div>
-	</a>
-	<div class="no" onclick="no_del();">
-		No
-	</div>
-</div>
-    
-<script src="<?php echo base_url(); ?>scripts/marketing.js" type="text/javascript"></script>
-<style>
-    #upload , #youtube{
-        cursor: pointer;
-        text-decoration: underline;
-    }
-    .selected_src{
-        text-decoration: none !important;
-        cursor: default !important;
-    }
-    #youtube_link{
-        display: none;
-    }
-</style>
+
     <div class="content">
-        
         <div class="header">
-            
-            <h1 class="page-title">Add Program</h1>
+            <h1 class="page-title">
+					Add Programs
+			</h1>
         </div>
         
 		<ul class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a> <span class="divider">/</span></li>
-            <li class="active"><a href="<?php echo base_url(); ?>admin/programs">Programs</a> <span class="divider">/</span> Add Programs</li>
-        </ul>
+			<li><a href="admin/dashboard">Home</a> <span class="divider">/</span></li>
+			<li><a href="#">Programs</a> <span class="divider">/</span></li>
+			<li class="active">Add programs</li>
+		</ul>
 
         <div class="container-fluid">
             <div class="row-fluid">
-                    
-<div class="btn-toolbar">
-    <!--<a href="<?php echo base_url();?>admin/videos/addvideo" ><button class="btn btn-primary" id="btn_addnewproduct"><i class="icon-plus"></i>Edit Login Video</button></a>-->
-  <div class="btn-group">
-  </div>
-</div>
+<form enctype="multipart/form-data" method="post" name="frmProgram" id="frmProgram"  action="<?php echo base_url();?>admin/programs/add/">
+
 <div class="well">
-<?php
-//$marketing = $query->result();
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">Details</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="home" style="width:50%;float: left;">
+		
+        <label>Left Navigation Title: </label>
+        <input type="text" required name="txtNavigation" class="input-xlarge val_dis_enb" value="" /> 
+		
+		<label>Navigation Position: </label>
+        <select name="txtposition">
+			<option value="0">default</option>
+			<?php for($i=1;$i<6;$i++){ ?>
+				<option value="<?php echo $i; ?>" ><?php echo $i; ?> </option>
+			<?php } ?>
+		</select>
+		
+        <label>Video Title: </label>
+        <input type="text" name="txtVideo_Title" class="input-xlarge val_dis_enb" value="" /> 
+		
+		
+		<label>Upload video: </label>
+		<input id="file_upload_video" required name="file_upload_video" type="file" >
+      </div>
+	<div class="tab-pane active in" id="home" style="width:50%;float: left;">
+			<label>Program Title: </label>
+			<input type="text" required name="txtProgram_Title"  id="txtProgram_Title" class="input-xlarge val_dis_enb" value="" />
 
-//echo '<pre>';
-	//var_dump($marketing[0]);
-?>
-<?php 
-//Video adding form.
- echo form_open_multipart('admin/programs/add');?>
-	<div class="field">
-            <label for="video">Video</label>
-            <!--<input id="video" value="" name="video" size="50" type="text" class="medium" />-->
-            <select id="video" name="video">
-                <?php var_dump($videos); foreach($videos as $row): ?>
-                <option value="<?php echo $row->Id; ?>"><?php echo $row->file_name; ?></option>
-                <?php endforeach; ?>
-            </select>
-	</div>
-
-    <div class="field">
-		<label for="logo">Logo</label> 
-		<input id="logo" value="" name="logo" size="50" type="file" class="medium" />
+			<label>Signup Link: </label>
+			<input  name="txtSignup_Link" id="txtSignup_Link" type="text"  class="input-xlarge val_dis_enb">
+			
+			<label>Upload Program Logo: </label>
+			<input id="file_upload_logo" name="file_upload_logo" type="file" >
+	
+		</div>
+		
+		
+		<!--<div class="video_preveiw" style="width:50%;float: left;" >
+				<script type="text/javascript" src="<?php echo base_url(); ?>jwplayer/jwplayer.js"></script>
+				<script type="text/javascript" src="<?php echo base_url(); ?>scripts/previewplayer.js"></script>
+				<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
+				<div id="videopreview">Loading the player...</div>
+		</div>-->
+	  
+  </div>
+	<div class="btn-toolbar">
+		<input onclick="return validate();"  class="btn btn-primary val_dis_enb" type="submit" name="submit_program" value="Add" />
+		<a href="<?php echo base_url();?>admin/programs" class="btn">Cancel</a>
+		<div class="btn-group">
+		</div>
 	</div>
 	
-
-	<div class="field">
-		<label for="link">Link</label> 
-		<input id="link" value="" name="link" size="50" type="text" class="medium" />
-	</div>
-	<div class="field">
-		<label for="title">Title</label> 
-		<input id="title" value="" name="title" size="50" type="text" class="medium" />
-	</div>
-	<div class="field">
-		<label for="affiliate_id">Default affiliate ID</label> 
-                <input id="affiliate_id" value="" name="affiliate_id" size="50" type="text" class="medium" />
-	</div>
-
-	<input id="submit_program" name="submit_program" type="submit" class="btn" value="Add"/>
-</form>
-
-
-    
-	<input type="hidden" name="numrs" id="numrs" value="<?php //echo $totalrecords ;?>">
-	<input type="hidden" name="baseurl" id="baseurl" value="<?php echo base_url(); ?>">
+  </form>
 </div>
+<script>
+function validate(){
+	// alert("video validation here");
+	var errors=0;
+	var message='';
+	if(document.frmProgram.file_upload_logo.value != "")
+	{
+		strFileName=document.frmProgram.file_upload_logo.value;
+		position=strFileName.lastIndexOf(".")+ 1;
+		extension=strFileName.substring(position,strFileName.length);
+		extension=extension.toLowerCase();
+		
+		if(extension.toLowerCase() != "gif" && extension.toLowerCase() != "jpg" && extension.toLowerCase() != "png")
+		{
+			errors++;
+			message+= "["+errors+"] Select Only JPG Or GIF Or PNG Images ! \n";
+			if (errors == 1)
+			document.frmProgram.file_upload_logo.focus();
+		}
+	}
+	if(document.frmProgram.file_upload_video.value != "")
+	{
+		strFileName=document.frmProgram.file_upload_video.value;
+		position=strFileName.lastIndexOf(".")+ 1;
+		extension=strFileName.substring(position,strFileName.length);
+		extension=extension.toLowerCase();
+		
+		if(extension.toLowerCase() != "mp4" && extension.toLowerCase() != "flv" && extension.toLowerCase() != "avi")
+		{
+			errors++;
+			message+= "["+errors+"] Select Only MP4 Or FLV Or AVI Video File ! \n";
+			if (errors == 1)
+			document.frmProgram.file_upload_video.focus();
+		}
+	}
+	if (errors > 0)
+	{
+		alert("Data Not Valid: \n\n" + message);
+		return false;
+	}
+	return true;
+}
+</script>

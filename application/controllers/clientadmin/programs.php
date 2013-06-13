@@ -33,6 +33,7 @@ class Programs extends CI_Controller {
 			$this->data['metatitle'] = 'Programs Sign-Up ';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
 			$this->data['query'] = $this->programs_model->getProgram();
+			$this->data['video_query'] = $this->video->GetAllVideoData();
 			// echo $this->db->last_query(); 
 			// $this->data['query'] = $this->video->GetAllVideoData();
 			
@@ -49,7 +50,7 @@ class Programs extends CI_Controller {
 	 function save($id){
 			// $this->data['client_full_data']=$this->client->get_current_login_client_detail();
 			// $d=$this->client->get_current_login_client_detail();
-			$statusupdate = $this->client->save_program_affliate_id($id);  
+			$statusupdate = $this->client->save_program_user_name($id);  
 			if($statusupdate){
 				echo 1;
 			}else{
