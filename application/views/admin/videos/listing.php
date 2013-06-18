@@ -62,28 +62,32 @@ $video_type='';
 $change_url='';
  foreach($query->result() as $singlevideo ){
 	$video_type=$singlevideo->type;
+	$is_show=1;
 	switch($video_type){
-		case 'login_video':$video_type='Login Video';
-							$change_url=base_url().'admin/videos/change_login_video';
-							break;
-		case 'welcome_video':$video_type='Welcome Video';
+			case 'login_video':	$video_type='Login Video';
+								$change_url=base_url().'admin/videos/change_login_video';
+								break;
+		case 'welcome_video':	$video_type='Welcome Video';
 								$change_url=base_url().'admin/videos/change_welcome_video';
 								break;
-		case 'gvo_video':$video_type='Gvo Video';
+		case 'gvo_video':		$video_type='Gvo Video';
+								$is_show=0;
 								$change_url=base_url().'admin/videos/change_gvo_video';
 								break;
-		case 'emp_video':$video_type='Empower Video';
+		case 'emp_video':		$video_type='Empower Video';
+								$is_show=0;
 								$change_url=base_url().'admin/videos/change_emp_video';
 								break;
 		case 'pure_leverage_video':$video_type='Pure Leverage Video';
-								$change_url=base_url().'admin/videos/change_pure_lev';
-								break;
-		case 'next_video':$video_type='What Next Video';
+									$is_show=0;
+									$change_url=base_url().'admin/videos/change_pure_lev';
+									break;
+		case 'next_video':		$video_type='What Next Video';
 								$change_url=base_url().'admin/videos/change_next_video';
 								break;
 							
 	}
-
+	if($is_show){
 ?> 
 	
 		<tr>
@@ -99,7 +103,7 @@ $change_url='';
 			  
           </td>
         </tr>
-<?php  ++$i; } ?>  
+<?php  ++$i; } } ?>  
       </tbody>
     </table>
 	<input type="hidden" name="numrs" id="numrs" value="<?php //echo $totalrecords ;?>">

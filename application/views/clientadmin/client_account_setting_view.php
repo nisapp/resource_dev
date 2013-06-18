@@ -5,7 +5,7 @@
 <?php } ?>
 
 <?php $this->load->view('clientadmin/components/submenu'); ?>
-
+			
 
 
 <!-- promoteArea -->
@@ -50,7 +50,18 @@
 			<tr>
 				<td class="field_title" colspan="2">&nbsp;</td>
 			</tr>
+			<?php 
+				foreach($program_detail->result() as $prog){
+					// echo '<pre>';
+					// print_r($prog);
+					// echo '</pre>';
+			?>
 			<tr>
+				<td class="field_title"><?php echo $prog->program_title; ?> :</td>
+				<td class="field_data"><?php echo $prog->user_name; ?></td>
+			</tr>
+			<?php } ?>
+			<!--<tr>
 				<td class="field_title">GVO Username :</td>
 				<td class="field_data"><?php echo $account_detail['gvo_user_name'];?></td>
 			</tr>
@@ -61,11 +72,10 @@
 			<tr>
 				<td class="field_title">Empower Network Username :</td>
 				<td class="field_data"><?php echo $account_detail['emp_netwrok_user_name'];?></td>
-			</tr>
-			
-			
-			
+			</tr>-->
+						
 	  </tbody>
 	</table>
+	
  </div>
 <!-- /promoteArea -->

@@ -120,6 +120,7 @@ img.procees_img{
 	</div>
 	<div class="webright">
 			<?php 
+                         if($query->num_rows>0):
 				$first_cat = $query->row();
 			?>
 
@@ -153,7 +154,7 @@ img.procees_img{
 			</div>-->
 		<?php //} ?>
 		</div>
-		
+		<?php endif; ?>
 				
 	</div>
 </div>

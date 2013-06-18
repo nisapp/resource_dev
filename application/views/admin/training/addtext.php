@@ -60,9 +60,30 @@
 //Video adding form.
 echo validation_errors(); 
  echo form_open("admin/training/$action/$trainingid");?>
+<!--<script type="text/javascript" src="<?php //echo base_url();?>tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+    //file_browser_callback: "fileBrowserCallback",
+    //selector: "#training_text",
+    theme: "modern",
+plugins: [ 
+"advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+"searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+"table contextmenu directionality emoticons paste textcolor filemanager" //
+],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor emoticons",
+    image_advtab: true,
+    
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ],
+});
+</script>-->
     <textarea id="training_text" class="ckeditor" name="training_text" rows="10" cols="50" >
         <?php if(!empty($training->t_text)){echo $training->t_text;} ?>
-    </textarea>
+    </textarea><!--class="ckeditor" -->
     <input id="add_text" name="add_text" type="submit" class="btn" value="<?php echo $button; ?>"/>
 <?php form_close(); ?>
 </div>

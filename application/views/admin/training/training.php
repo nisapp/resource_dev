@@ -28,8 +28,7 @@
  
 
 
-<a class="btn" href="<?php echo base_url(); ?>admin/training/add">Add</a>
- 
+
 <div class="btn-toolbar">
     <!--<a href="<?php //echo base_url();?>admin/videos/addvideo" >
     <button class="btn btn-primary" id="btn_addnewproduct">
@@ -39,15 +38,22 @@
 </div>
 
 <div class="well">
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#mt').dataTable( {
+                "sPaginationType": "full_numbers"
+            } );
+        } );
+    </script>
     <table class="table" id="mt">
       <thead>
         <tr>
-          <th>#</th>
+          <th id="header_first_element">#</th>
           <th>Title</th>
           <th>Link</th>
           <th>Category</th>
           <th>Type</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -58,13 +64,15 @@
 		//var_dump($query->result());exit;
 $i=0;
 foreach($query->result() as $training ):
-
+    //var_dump($training);
 ?> <tr>
-          <td><?php echo $i+=1; ?></td>
+    <input type="hidden" value="<?php echo $training->id; ?>">
+          <td class='first_element'><?php echo $i+=1; ?></td>
           <td><?php echo $training->title;?></td>
           <td><?php echo $training->link; ?></td>
           <td><?php echo $training->category; ?></td>
           <td><?php echo $training->t_type; ?></td>
+          <td><?php echo $training->t_status; ?></td>
           <td>
 			<!--<a href="<?php //echo base_url();?>admin/videos/updatevideo/<?php //echo $marketing->id; ?>" >
    <i class="icon-pencil"></i></a>-->
@@ -80,3 +88,11 @@ foreach($query->result() as $training ):
       </tbody>
     </table>
 </div>
+<a class="btn" href="<?php echo base_url(); ?>admin/training/add">Add</a>
+<div class="btn" id='delete_selection' >Delete Selection</div>
+<a class="btn" href="<?php echo base_url(); ?>admin/training/download" target="_blank">Download</a>
+ <?php $attrib=array('id'=>'seldcted_rows_form');
+ echo form_open("admin/training/delete_group",$attrib);?>
+ <input type="hidden" id="selected_rows" name="selected_rows" value="">
+ <?php echo form_close(); ?>
+

@@ -14,6 +14,34 @@
         display: none;
     }
 </style>
+<script>
+$(document).ready(function(){
+    $('#upload').click(function(){
+        if($("#source").val()==='upload'){
+            return false;
+        }
+        else{
+            $("#source").val('upload');
+            $("#youtube").removeClass('selected_src');
+            $(this).addClass('selected_src');
+            $("#youtube_link").hide();
+            $("#video_upload").show();
+        }
+    });
+    $("#youtube").click(function(){
+        if($("#source").val()==='youtube'){
+            return false;
+        }
+        else{
+            $("#source").val('youtube');
+            $("#upload").removeClass('selected_src');
+            $(this).addClass('selected_src');
+            $("#video_upload").hide();
+            $("#youtube_link").show();
+        }
+    });
+});
+</script>
    <div class="content">
         
         <div class="header">
@@ -51,11 +79,29 @@
         <label>Video Title: </label>
         <input type="text" name="txtVideo_Title" class="input-xlarge val_dis_enb" value="<?php echo $prog->video_title; ?>" /> 
 		
+		<div id="video_source">
+			<a id="youtube" style="cursor:pointer;" class="selected_src">Youtube Link</a> |  <a id="upload" style="cursor:pointer;"  >Upload</a>  &nbsp;&nbsp;&nbsp;
+			<a href="<?php echo base_url();?>admin/programs/preview/<?php echo $prog->id; ?>" style="cursor:pointer;background:#414959;padding:4px;color:#FFF;">Preview</a>
+		</div>
 		
-		<label>Upload video: </label>
-		<input id="file_upload_video" name="file_upload_video" type="file" >
+		<div id="video_upload" class="field" style="display:none;">
+			<label for="video">Video</label> 
+			<input id="file_upload_video" name="file_upload_video" size="50" type="file" class="medium" />
+		</div>
+
+		<div id="youtube_link" class="field"  style="display:block;">
+			<label for="video">Video</label> 
+			<input id="video_youtube" placeholder="Youtube video link"; value="<?php if(preg_match("/youtube\.com/", $prog->video_name_in_folder)){ echo $prog->video_name_in_folder; } ?>" name="video_youtube" size="50" type="text" class="medium" />
+		</div>
+	
+		<input id="source" value="youtube" name="source" type="hidden"/>
 		<input id="txtOldVideo" value="<?php echo $prog->video_name_in_folder; ?>" name="txtOldVideo" type="hidden" >
-		<a href="<?php echo base_url();?>admin/programs/preview/<?php echo $prog->id; ?>" style="cursor:pointer;background:#414959;padding:4px;color:#FFF;">Preview</a>
+		<!----<label>Video: </label>
+		<input id="file_upload_video" name="file_upload_video" type="file" >
+		
+		
+		<input id="txtOldVideo" value="<?php echo $prog->video_name_in_folder; ?>" name="txtOldVideo" type="hidden" >
+		<a href="<?php echo base_url();?>admin/programs/preview/<?php echo $prog->id; ?>" style="cursor:pointer;background:#414959;padding:4px;color:#FFF;">Preview</a>-->
       </div>
 	<div class="tab-pane active in" id="home" style="width:50%;float: left;">
 			<label>Program Title: </label>

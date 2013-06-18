@@ -32,6 +32,13 @@
   </div>
 </div>
 <div class="well">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#mt').dataTable( {
+                "sPaginationType": "full_numbers"
+            } );
+        } );
+    </script>
 
     <table class="table" id="mt">
       <thead>
@@ -73,3 +80,4 @@ foreach($query->result() as $client ){
 	<input type="hidden" name="numrs" id="numrs" value="<?php //echo $totalrecords ;?>">
 	<input type="hidden" name="baseurl" id="baseurl" value="<?php echo base_url(); ?>">
 </div>
+                <a class="btn" href="<?php echo base_url(); ?>admin/clients/download" target="_blank">Download</a>

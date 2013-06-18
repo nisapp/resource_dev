@@ -3,7 +3,7 @@
 <?php }else if (isset($status) && $status=="failure"){?>
 			<div class="infomessage"><?php echo "Opps ! some error occur !!"?> </div>
 <?php } ?>
-<script src="<?php echo base_url(); ?>scripts/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>ckeditor/ckeditor.js" type="text/javascript"></script>
 <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>/css/menu.css">-->
 
 <style type="text/css">

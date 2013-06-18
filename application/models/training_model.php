@@ -8,10 +8,11 @@ class Training_model extends CI_Model{
     }
     function getTrainingData($id = 0){
         $this->db->select('t.id, t.title, t.link,tc.id as cid, 
-            tc.category_name as category, tt.id as tid, tt.type_name as t_type');
+            tc.category_name as category, tt.id as tid, tt.type_name as t_type, ts.status as t_status');
         $this->db->from('training as t');
         $this->db->join('training_category as tc',"t.training_category = tc.id");
         $this->db->join('training_type as tt',"t.training_type = tt.id");
+        $this->db->join('training_status as ts',"t.status = ts.id");
         if($id!=0){
             $this->db->where('t.id',$id);
         }
@@ -37,6 +38,7 @@ class Training_model extends CI_Model{
         $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
         $this->db->where('t.training_category',$cid);
         $this->db->where('t.training_type',$tid);
+        $this->db->where('t.status',2);
         $query = $this->db->get();
 		// echo $this->db->last_query();
 		$trn_html='';		
@@ -72,12 +74,14 @@ class Training_model extends CI_Model{
             t.title AS title, 
             tv.training_video AS video, 
             tt.training_text AS t_text,tc.id as cid, 
-            tc.category_name as category, ttp.id as tid, ttp.type_name as t_type');
+            tc.category_name as category, ttp.id as tid, ttp.type_name as t_type,
+            ts.id AS sid, ts.status AS t_status');
         $this->db->from('training AS t');
         $this->db->join('training_category as tc',"t.training_category = tc.id");
         $this->db->join('training_type as ttp',"t.training_type = ttp.id");
         $this->db->join('training_video AS tv','t.id=tv.training_id','LEFT');
         $this->db->join('training_text AS tt','t.id=tt.training_id','LEFT');
+        $this->db->join('training_status AS ts','t.status=ts.id');
         $this->db->where('t.id',$id);
         $this->db->order_by('t.id', "asc"); 
         $query = $this->db->get();
@@ -93,6 +97,24 @@ class Training_model extends CI_Model{
         $this->db->insert('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+    function addNewTraining(){
+        $query=  $this->getCategories();
+        $first_category=$query->first_row();
+        $query = $this->getTypes();
+        $first_type= $query->first_row();
+        $query = $this->getStatus();
+        $first_status=$query->first_row();
+        $data=array(
+            'link'=>"New Link",
+            'title'=>"New Title",
+            'training_category'=>$first_category->id,
+            'training_type'=>$first_type->id,
+            'status'=>$first_status->id
+        );
+        $this->db->insert('training',$data);
+        return ($this->db->affected_rows() > 0) ? $this->db->insert_id() : FALSE;
+    }
+	
     function addVideo($id){
         $config['upload_path'] = './uploads/training/video/';
         $config['allowed_types'] = 'avi|flv|wmv|mp4|mp3';
@@ -129,17 +151,26 @@ class Training_model extends CI_Model{
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
     function editText($id){
+        $this->db->select('id');
+        $this->db->from('training_text');
+        $this->db->where('training_id',$id);
+        $query = $this->db->get();
+        if($query->num_rows>0){
         $data = array(
             'training_text'=> $this->input->post('training_text')
         );
         $this->db->where('training_id',$id);
         $this->db->update('training_text',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+        }
+        else{
+            return $this->addText($id);
+        }
     }
     function editVideo($id){
         $config['upload_path'] = './uploads/training/video/';
         $config['allowed_types'] = 'avi|flv|wmv|mp4|mp3';
-        $config['max_size'] = '10000';
+        $config['max_size'] = '102400';
         $config['max_width'] = '1024';
         $config['max_height'] = '768';
         $this->load->library('upload', $config);
@@ -159,10 +190,21 @@ class Training_model extends CI_Model{
         else{
             return FALSE;
         }
+        $this->db->select('id');
+        $this->db->from('training_video');
+        $this->db->where('training_id',$id);
+        $query = $this->db->get();
+        if($query->num_rows!==0){
         $data = array('training_video'=>$video);
         $this->db->where('training_id',$id);
         $this->db->update('training_video',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+        }
+        else{
+        $data = array('training_video'=>$video,'training_id'=>$id);
+        $this->db->insert('training_video',$data);
+        return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+        }
     }
     function addImages($id) {
         //echo 'function started.';
@@ -206,22 +248,19 @@ class Training_model extends CI_Model{
         }
         $this->db->order_by('id', "asc"); 
         $query = $this->db->get();
-		// echo $this->db->last_query(); 
         return $query;
     }
-	
     function getCurrentCategories($tid=1){
         $this->db->select('tc.*');
         $this->db->from('training as t');
         $this->db->join('training_category as tc',"t.training_category=tc.id");
         $this->db->where('training_type',$tid);
+        $this->db->where('t.status',2);
         $this->db->group_by('training_category');
         $this->db->order_by('tc.id', "asc"); 
         $query = $this->db->get();
-		// echo $this->db->last_query(); 
         return $query;
     }
-	
     function getTypes($id=0){
         $this->db->select('*');
         $this->db->from('training_type');
@@ -230,6 +269,15 @@ class Training_model extends CI_Model{
         }
         $query = $this->db->get();
         return $query;
+    }
+    function getStatus($id=0){
+        $this->db->select('*');
+        $this->db->from('training_status');
+        if($id!==0){
+            $this->db->where('id',$id);
+        }
+        $query = $this->db->get();
+        return $query;        
     }
     function addCategory(){
         $data=array(
@@ -303,10 +351,41 @@ class Training_model extends CI_Model{
             'title'=>$this->input->post('title'),
             'link'=>$this->input->post('link'),
             'training_category'=>$this->input->post('category'),
-            'training_type'=>$this->input->post('type')
+            'training_type'=>$this->input->post('type'),
+            'status'=>$this->input->post('status')
         );
         $this->db->where('id',$id);
         $this->db->update('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+    function delete_video($id){
+        $this->db->where('training_id',$id);
+        $this->db->delete('training_video');
+    }
+
+    function array2csv($array) {
+        if (empty($array)) {
+            return null;
+        }
+        ob_start();
+        $df = fopen("php://output", 'w');
+        fputcsv($df, array_keys(reset($array)));
+        foreach ($array as $row) {
+            fputcsv($df, $row);
+        }
+        fclose($df);
+        return ob_get_clean();
+    }
+
+    function download_send_headers($filename) {
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment;filename={$filename}");
+        header("Content-Transfer-Encoding: binary");
+    }
+
 }

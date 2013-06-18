@@ -5,6 +5,8 @@
 <title>Login to Our Website</title>
 <meta name="description" content="" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/landing.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css"/>
 <script>
 	
 jQuery(function($){
@@ -91,7 +93,7 @@ body, table, input, textarea, select, li, button{
 	color:#444;
 	}	
 body{
-    background: url("<?php echo base_url(); ?>images/background_1.png") no-repeat scroll center top transparent;
+    background: url("<?php echo base_url(); ?>images/bg-arrow.png") no-repeat scroll center bottom #c7e1f2;
     overflow-x: hidden;
 	font-size:12px;
 	/* background:#c4f0f1;		 */
@@ -211,11 +213,19 @@ body{
 
 </head>
 <body>
+    <div id ="header">
+        <div class="wrapperMain">
+            <!--header-->
+            <?php $this->load->view('global/header.php'); ?>
+            <!--/header-->
+        </div>
+    </div>
+
 
 <h1>Login here</h1>
 <form id="login" method="post" action="<?php echo base_url();?>login"> 
 
-    <h1>Log in to your <strong>resourcebay.com</strong> account!</h1>
+    <h1>Log in to your <strong>easyaccessprofits.com</strong> account!</h1>
     <p class="register">Not a member? <a href="<?php echo base_url(); ?>register">Register here!</a></p>
 	
 	<font style="font-size:12px;color:red;text-align:center;">

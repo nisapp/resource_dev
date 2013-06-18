@@ -59,9 +59,22 @@
         <label>Video Description:</label>
         <textarea  rows="3" name="txtarea_vdescription" class="input-xlarge val_dis_enb"><?php echo $videodataarray->description ; ?></textarea>
          
-		
-		<label>Upload video: </label>
-		<input id="file_upload" name="file_upload" type="file" >
+	<div id="video_source">
+        <a id="youtube" style="cursor:pointer;" class="selected_src">Youtube Link</a> |  <a id="upload" style="cursor:pointer;" >Upload</a> 
+        <input id="source" value="youtube" name="source" type="hidden"/>
+    </div>
+	
+	<div id="video_upload" class="field" style="display:none;">
+		<label for="video">Welcome video</label> 
+		<input id="file_upload" name="file_upload" size="50" type="file" class="medium" />
+	</div>
+
+	<div id="youtube_link" class="field">
+		<label for="video">Welcome video</label> 
+		<input id="video_youtube" placeholder="Youtube video link"; value="<?php if(preg_match("/youtube\.com/", $videodataarray->file_name_in_folder)){ echo $videodataarray->file_name_in_folder; } ?>" name="video_youtube" size="50" type="text" class="medium" />
+	</div>
+		<!--<label>Upload video: </label>
+		<input id="file_upload" name="file_upload" type="file" >-->
 
 		<input type="hidden" id="baseurl" value="<?php echo base_url();?>" />
 		<input type="hidden" id="hidd_video" name="hidd_video" value="<?php echo $videodataarray->file_name_in_folder; ?>" />

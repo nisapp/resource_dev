@@ -19,6 +19,7 @@
 			$query = $this->db->get();
 			return $query;
 		}
+		
 		function GetClientData($id = false)
 		{		
 			$this->db->select('c.*');
@@ -54,6 +55,8 @@
 		}
 		
 		
+		
+		
 		function get_current_login_client_detail(){
 			$t=$this->session->userdata('client_login');
 			$this -> db -> select('*');
@@ -62,6 +65,7 @@
 			$this -> db -> where('id', $t['id']);
 			$this -> db -> where('user_track_id', $t['user_track_id']);
 			$query = $this->db->get();
+			// echo $this->db->last_query(); 
 			if($query->num_rows == 1) {
 				return $query->row_array();			
 			}else{
@@ -134,7 +138,7 @@
 									'leverage_user_name'=>$gvoid
 								);
 			$this->db->where('id', $login_client['id']);
-			$this->db->where('user_track_id', $login_client['user_track_id']);
+			$this->db->where('user_track_id',$login_client['user_track_id']);
 			$this->db->trans_start();
 			$status = $this->db->update('users', $datatoupdate);
 			$this->db->trans_complete();
@@ -214,18 +218,29 @@
 			$lname = $this->input->post('txtLname');
 			$phone = $this->input->post('txtPhone');
 			$email = $this->input->post('txtEmail');
-			$gvo_name = $this->input->post('txt_gvo_user');
-			$leverage_name = $this->input->post('txt_lev_user');
-			$empower_name = $this->input->post('txt_emp_user');
+			
+			$programs_ids = $this->input->post('txtProgram');
+			
+			// echo '<pre>';
+			// print_r($programs_ids);
+			// echo '</pre>';
+			if(isset($programs_ids)){
+				foreach($programs_ids as $pval){
+					$user_name=$this->input->post("txtUser_{$pval}");
+					// call function for saving user name
+					// here I call fuction for update programs meta
+					$this->change_program_user_name($pval,$user_name);
+				}	
+			}
+			// $gvo_name = $this->input->post('txt_gvo_user');
+			// $leverage_name = $this->input->post('txt_lev_user');
+			// $empower_name = $this->input->post('txt_emp_user');
 			
 			$datatoupdate = array(
 								'first_name'=>$fname,
 								'last_name'=>$lname,
 								'phone_number'=>$phone,
 								'user_email'=>$email,
-								'gvo_user_name'=>$gvo_name,
-								'leverage_user_name'=>$leverage_name,
-								'emp_netwrok_user_name'=>$empower_name
 							);
 			
 			$this->db->where('id', $session_login_client['id']);
@@ -442,6 +457,37 @@
 					
 		}
 				
+		function change_program_user_name($program_id,$user_name){
+			$login_client=$this->get_current_login_client_detail();
+			$user_id=$login_client['id'];
+			$data = array(
+                        'userid'=>$user_id,
+                        'programid'=>$program_id,
+                        'user_name'=>$user_name
+						);
+			// check for duplicate
+			$this->db->select('m.*');
+			$this->db->from('programs_meta as m');
+			$this->db->where('userid',$user_id);
+			$this->db->where('programid',$program_id);
+			$query = $this->db->get();
+			$is_record_exist=$query->num_rows;
+			$this->db->trans_start();
+			if(isset($is_record_exist) && $is_record_exist=='0'){ 
+				$result=$this->db->insert('programs_meta',$data);
+			}else{
+				$this->db->where('userid',$user_id);
+				$this->db->where('programid',$program_id);
+				$result = $this->db->update('programs_meta', $data); 
+			}
+			$this->db->trans_complete();
+			if($result){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
 		function save_program_user_name($progid){
 			$login_client=$this->get_current_login_client_detail();
 			$user_id=$login_client['id'];

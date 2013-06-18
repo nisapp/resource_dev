@@ -46,6 +46,29 @@ class Promotesite extends CI_Controller {
 		$this->data['subview']=  'clientadmin/under_client_listing';
 		$this->load->view('clientadmin/_layout_main.php', $this->data);
 	}
+        function download_downline(){
+            $query = $this->client->GetUnderClient();
+            if($query->num_rows===0){
+                redirect('clientadmin/promotesite/downclient');
+                return;
+            }
+            $datalist=array();
+            $i=0;
+            foreach ($query->result_array()as $row){
+                $temp_row = array(
+                    'N'=>++$i,
+                    'First Name'=>$row['first_name'],
+                    'Last Name'=>$row['last_name'],
+                    'Email'=>$row['user_email'],
+                    'Phone'=>$row['phone_number'],
+                    'Signup Date'=>$row['signup_date'],
+                );//*/
+                $datalist[]=$temp_row;
+            }            
+            $this->load->model('training_model','',TRUE);
+            $this->training_model->download_send_headers("User_downline_export_" . date("Y-m-d") . ".csv");
+            echo $this->training_model->array2csv($datalist);
+        }
 
 	/******* End of Code to show undersignup client **********/
 	

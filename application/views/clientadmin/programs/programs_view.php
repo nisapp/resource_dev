@@ -207,6 +207,10 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 						$count=0;
 						foreach($query->result() as $programs )
 						{ 
+						// echo '<pre>';
+						// print_r($programs);
+						// echo '</pre>';die();
+
 					?>
 							<li>
 								<a href="#" class="video_tabs" onclick="set_my_video(this,<?php echo $programs->id;?>);">
@@ -236,7 +240,7 @@ legend { text-align: left;	font-size: 1.1em; background-color: #095D92; color: #
 												<img src='".base_url()."uploads/logo/{$programs->logo}' style='height: 100px;margin-top:-21px;width:134px;' class='img_signup' />
 											</TD>
 												<TD class='id_control'>
-														<input  required  value='' class='biginput' type='text' placeholder='Enter {$programs->program_title} Username' name='txtdata_{$programs->id} 'id='txtdata_{$programs->id}' >
+														<input  required  value='".$programs->user_name."'  class='biginput' type='text' placeholder='Enter {$programs->program_title} Username' name='txtdata_{$programs->id}'  id='txtdata_{$programs->id}' >
 													<input type='button' value='Save {$programs->program_title} Username'  name='btnGvo' class='claimbtn2' onclick='save_id({$programs->id})'>
 												</TD>
 											</TR>

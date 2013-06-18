@@ -128,7 +128,7 @@
 					// echo '</pre>';
 					// die("hhhhhhhhhhhhh");
 					if($client_sessionarray['role'] == "user"){
-						redirect('clientadmin/clientdashboard', 'refresh');
+						redirect('clientadmin/programs', 'refresh');
 					}
 					else
 					{

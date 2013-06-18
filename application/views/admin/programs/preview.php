@@ -10,7 +10,24 @@
 </style>
 <script src="<?php echo base_url(); ?>jwplayer/jwplayer.js" type="text/javascript"></script>
 <script>
-$(document).ready(function() { 
+/* $(document).ready(function(){
+    var baseurl = $("#baseurl").val();
+    var file_path = $("#video_file_path").val();
+	
+var previewfile = $("#txtWelcome").val();alert(previewfile);
+if(previewfile=="")
+{
+	previewfile = "20051210-w50s.flv";
+}
+jwplayer("videopreview").setup({
+        file: baseurl+file_path+previewfile,
+		height: 325,
+		width: 580,
+		image: baseurl+'uploads/images/preview.jpg',
+    }).play();
+}) 
+ */
+ $(document).ready(function() { 
 		var baseurl = $("#baseurl").val();
 		var previewfile = $("#txtWelcome").val();
 		if(previewfile=="")
@@ -24,7 +41,7 @@ $(document).ready(function() {
 				image: baseurl+'uploads/images/preview.jpg',
 			}).play();
 		
-	})
+	})  
 </script>
 <div class="content">
 	<div class="header">
@@ -76,7 +93,12 @@ $(document).ready(function() {
             </div>
 </div>
 <input type="hidden" id="txtWelcome"  name="txtWelcome" value="<?php echo $row->video_name_in_folder; ?>">
-<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
-
+<?php if(preg_match("/youtube\.com/", $row->video_name_in_folder)){ ?>
+			<input type="hidden" id="baseurl" value="">
+			<input type="hidden" id="video_file_path" value="">
+        <?php }else{ ?>
+			<input type="hidden" id="video_file_path" value="uploads/video/">	
+			<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
+	<?php } ?>
 
             

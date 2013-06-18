@@ -7,6 +7,7 @@
 		parent::__construct();
 		$this->load->model('user','',TRUE);
 		$this->load->model('client','',TRUE);
+                $this->load->model('training_model','',TRUE);
 		$this->load->helper(array('url', 'form'));
 		// check for validate user login
 		$session_login_user=$this->session->userdata('logged_in');
@@ -22,6 +23,8 @@
 
 	function index()
 	{
+		$this->data['styles'][]='datatable/css/jquery.dataTables.css';
+		$this->data['scripts'][]='datatable/js/jquery.dataTables.min.js';
 		$this->data['query'] = $this->client->GetClientData();
 		$this->data['subview']=  'admin/clients/clients_listing';
 		$this->load->view('admin/_layout_main.php', $this->data);
@@ -40,7 +43,28 @@
 		$this->index();
 		
 	}
-	
+	function download(){
+            $this->load->model('training_model',TRUE);
+            $query=$this->client->GetClientData();
+            if($query->num_rows===0){
+                redirect("admin/clients");
+                return;
+            }
+            $datalist=array();
+            $i=0;
+            foreach ($query->result_array()as $row){
+                $temp_row = array(
+                    'N'=>++$i,
+                    'First Name'=>$row['first_name'],
+                    'Last Name'=>$row['last_name'],
+                    'Email'=>$row['user_email'],
+                    'Phone'=>$row['phone_number'],
+                );
+                $datalist[]=$temp_row;
+            }
+            $this->training_model->download_send_headers("client_data_export_" . date("Y-m-d") . ".csv");
+            echo $this->training_model->array2csv($datalist);
+        }
 	 
 }
 	 

@@ -23,6 +23,12 @@
     #youtube_link{
         display: none;
     }
+    #videopreview{
+        width: 420px !important;
+    }
+    #video_preveiw{
+        margin-bottom: 20px;
+    }
 </style>
     <div class="content">
         
@@ -58,40 +64,16 @@
 }
 $training = $trainingdata->first_row();
 //Video adding form.
-echo validation_errors(); 
- echo form_open("admin/training/edit/$training->id");?>
-	<div class="field">
-		<label for="title">Title</label> 
-		<input id="title" value="<?php echo $training->title; ?>" name="title" size="50" type="text" class="medium" />
-	</div>
-	<div class="field">
-		<label for="link">Link</label> 
-		<input id="link" value="<?php echo $training->link; ?>" name="link" size="50" type="text" class="medium" />
-	</div>
-	<div class="field">
-		<label for="category">Category</label> 
-                <select id="category" name="category" class="medium" >
-                    <?php foreach ($categories->result() as $category):?>
-                    <option value="<?php echo $category->id; ?>" <?php if($training->cid==$category->id) echo 'selected'?> >
-                        <?php echo $category->category_name; ?>
-                    </option>
-                    <?php endforeach; ?>
-                </select>
-	</div>
-	<div class="field">
-		<label for="type">Type</label> 
-                <select id="type" name="type" class="medium" >
-                    <?php foreach ($types->result() as $type):?>
-                    <option value="<?php echo $type->id; ?>" <?php if($training->tid==$type->id) echo 'selected'?> >
-                        <?php echo $type->type_name; ?>
-                    </option>
-                    <?php endforeach; ?>
-                </select>
-	</div>
+//echo validation_errors(); 
+ //echo form_open("admin/training/edit/$training->id");
+ ?>
+    <div id="form_info_part">
+        <div id="left_form_part">
+<?php $button = "Add";
+if(!empty($training->video)):
+    $button = "Update"
 
-	<input id="edit_training" name="edit_training" type="submit" class="btn" value="Save"/>
-<?php echo form_close();
-if(!empty($training->video)):?>
+?>
         <div class="video_preveiw" style="">
             <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
             <div id="videopreview">Loading the player...</div>
@@ -104,35 +86,87 @@ if(!empty($training->video)):?>
         <input type="hidden" id="video_file_path" value="uploads/training/video/">
         <?php endif; ?>
         <input type="hidden" id="id_videopreview" value="<?php echo $training->video; ?>">
-    <?php 
-    /*if(preg_match("/youtube\.com/", $training->video)):
-        $video_str = substr($training->video,-11);
-    ?>
-        <!--<iframe width="560" height="315" 
-                src="http://www.youtube.com/embed/<?php echo $video_str; ?>" 
-                frameborder="0" allowfullscreen>
-        </iframe>
-    <?php
-    else: ?>
-        <video id="register_page_vieo" class="video-js vjs-default-skin"
-               controls preload="auto" width="480" height="360">
-            <source src="<?php echo base_url(); ?>uploads/training/video/<?php echo $training->video; ?>" type='video/mp4' />
-        </video>
-    <?php
-    endif;//*/
-?>
-        <a href="<?php echo base_url(); ?>admin/training/editvideo/<?php echo $training->id;  ?>">Change Video File </a>
-        <?php else: 
-$addvideo = array(
-    'id'=>'add_video',
-    'name'=>'add_video',
-    'class'=>'btn',
-    'value'=>'Add Video'
-);
-echo form_open("admin/training/addvideo/$training->id");
-echo form_submit($addvideo);
-echo form_close();
-        endif;
+        <?php endif; 
+ echo form_open_multipart("admin/training/editvideo/$training->id");?>
+    <div id="video_source">
+        <a id="upload" class="selected_src">Upload</a> | <a id="youtube">Youtube Link</a>
+        <input id="source" value="upload" name="source" type="text"/>
+    </div>
+	<div id="video_upload" class="field">
+		<label for="video">Video</label> 
+		<input id="video" value="" name="video" size="50" type="file" class="medium" />
+	</div>
+
+	<div id="youtube_link" class="field">
+		<label for="video">Video</label> 
+		<input id="video_youtube" value="" name="video_youtube" size="50" type="text" class="medium" />
+	</div>
+
+	<input id="add_video" name="add_video" type="submit" class="btn" value="<?php echo $button; ?>"/>
+        <a href="<?php echo base_url(); ?>admin/training/delete_video/<?php echo $training->id; ?>" class="btn">Delete</a>
+<?php   echo form_close(); 
+
+         ?>
+            
+        </div>
+        <div id="text_area">
+        <?php
+        echo validation_errors(); 
+        echo form_open("admin/training/edit/$training->id");        
+        ?>
+            <div id="input_fields">
+                <div class="field">
+                    <label for="title">Title</label> 
+                    <input id="title" value="<?php echo $training->title; ?>" name="title" size="50" type="text" class="medium" />
+                </div>
+                <div class="field">
+                    <label for="link">Link</label> 
+                    <input id="link" value="<?php echo $training->link; ?>" name="link" size="50" type="text" class="medium" />
+                </div>
+                <div class="field">
+                    <label for="category">Category</label> 
+                    <select id="category" name="category" class="medium" >
+                        <?php foreach ($categories->result() as $category): ?>
+                            <option value="<?php echo $category->id; ?>" <?php if ($training->cid == $category->id) echo 'selected' ?> >
+                                <?php echo $category->category_name; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="type">Type</label> 
+                    <select id="type" name="type" class="medium" >
+                        <?php foreach ($types->result() as $type): ?>
+                            <option value="<?php echo $type->id; ?>" <?php if ($training->tid == $type->id) echo 'selected' ?> >
+                                <?php echo $type->type_name; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="status">Status</label> 
+                    <select id="status" name="status" class="medium" >
+                        <?php foreach ($statuses->result() as $status): ?>
+                            <option value="<?php echo $status->id; ?>" <?php if ($training->sid == $status->id) echo 'selected' ?> >
+                                <?php echo $status->status; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <textarea id="training_text" class="ckeditor" name="training_text" rows="10" cols="50" >
+                <?php if (!empty($training->t_text)) {
+                    echo $training->t_text;
+                } ?>
+            </textarea><!--class="ckeditor" -->
+        <input id="edit_training" name="edit_training" type="submit" class="btn" value="Save"/>
+        <?php echo form_close(); ?>
+        </div>
+    </div>
+
+	
+
+ <?php       /*
         if(!empty($training->t_text)):
 ?>
         <div>
@@ -155,21 +189,7 @@ $addtext = array(
 echo form_open("admin/training/addtext/$training->id");
 echo form_submit($addtext);
 echo form_close();
-endif;
-if($trainingimages->num_rows>0):
-    foreach ($trainingimages->result() as $image): ?>
-        <img src="<?php echo base_url();?>uploads/training/images/<?php echo $image->training_image; ?>" height="100"/>
-    <?php endforeach;
-endif; 
-$addimages = array(
-    'id'=>'add_images',
-    'name'=>'add_tr_images',
-    'class'=>'btn',
-    'value'=>'Add Images'
-);
-echo form_open("admin/training/addimages/$training->id");
-echo form_submit($addimages);
-echo form_close();
+endif; //*/
 ?>
 
 </div>

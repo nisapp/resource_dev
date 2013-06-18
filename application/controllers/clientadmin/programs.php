@@ -16,10 +16,8 @@ class Programs extends CI_Controller {
 		}
 		
 		$this->load->model('programs_model','',TRUE);
-		/**----------Code un-necessary should be deleted===----------------------------*/
 		$this->load->model('client','',TRUE);
 		$this->load->model('video','',TRUE);
-		/**----------Code un-necessary should be deleted===----------------------------*/
 	 
 	 }
 	 
@@ -32,11 +30,10 @@ class Programs extends CI_Controller {
 			$this->data['client_full_data']=$this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'Programs Sign-Up ';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
-			$this->data['query'] = $this->programs_model->getProgram();
+			$this->data['query'] = $this->programs_model->getProgram_for_clentdashboard();
 			$this->data['video_query'] = $this->video->GetAllVideoData();
 			// echo $this->db->last_query(); 
 			// $this->data['query'] = $this->video->GetAllVideoData();
-			
 			$this->data['subview']=  'clientadmin/programs/programs_view';
 			$this->load->view('clientadmin/_layout_main.php', $this->data);
 		}
@@ -56,10 +53,10 @@ class Programs extends CI_Controller {
 			}else{
 				echo 0;
 			}	
-				// echo '<pre>';
-				// print_r($d);
-				// echo '</pre>';
-				// die();
+			// echo '<pre>';
+			// print_r($d);
+			// echo '</pre>';
+			// die();
 			// echo $id;
 	 }
 	 

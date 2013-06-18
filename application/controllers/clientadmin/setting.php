@@ -17,6 +17,7 @@
 		}
 		
 		$this->load->model('client','',TRUE);
+		$this->load->model('programs_model','',TRUE);
 		$this->load->library('form_validation');
 	 }
 	 
@@ -25,6 +26,8 @@
 		if($this->session->userdata('client_login'))
 		{
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
+			$this->data['program_detail'] = $this->programs_model->getProgram_for_clentdashboard();
+			
 			$this->data['metatitle'] = 'Account Setting';
 			$this->data['subview']=  'clientadmin/client_account_setting_view';
 			$this->load->view('clientadmin/_layout_main', $this->data);
@@ -78,11 +81,10 @@
 		$this->form_validation->set_rules('txtLname', 'last name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtPhone', 'phone number', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txtEmail', 'email','trim|required|valid_email|xss_clean');
-		$this->form_validation->set_rules('txt_gvo_user', 'GVO Username', 'trim|xss_clean');
-		$this->form_validation->set_rules('txt_lev_user', 'Pure Leverage Username', 'trim|xss_clean');
-		$this->form_validation->set_rules('txt_emp_user', 'Empower Network Username', 'trim|xss_clean');
+		// $this->form_validation->set_rules('txt_gvo_user', 'GVO Username', 'trim|xss_clean');
+		// $this->form_validation->set_rules('txt_lev_user', 'Pure Leverage Username', 'trim|xss_clean');
+		// $this->form_validation->set_rules('txt_emp_user', 'Empower Network Username', 'trim|xss_clean');
 		
-		// $this->form_validation->set_rules('txtEmail', 'Email','trim|required|valid_email|xss_clean|callback_send_afflate_link');
 		if($this->form_validation->run() == FALSE)
 		{
 			//redirected when validation failed.
@@ -107,6 +109,7 @@
 	
 	function editdetail(){
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
+			$this->data['program_detail'] = $this->programs_model->getProgram_for_clentdashboard();
 			$this->data['subview']=  'clientadmin/edit_account_setting_view';
 			$this->load->view('clientadmin/_layout_main.php', $this->data);
 	}

@@ -59,7 +59,18 @@
 			<tr>
 				<td class="field_title" colspan="2">&nbsp;</td>
 			</tr>
-			<tr>
+			<?php 
+				foreach($program_detail->result() as $prog){ 
+			?>
+				<tr>
+					<td class="field_title"><?php echo $prog->program_title; ?> Username:</td>
+					<td class="field_data">
+						<input type="hidden" name="txtProgram[]" class="ac_input" maxlength="30"  value="<?php echo $prog->id; ?>" >
+						<input type="text" name="txtUser_<?php echo $prog->id; ?>" class="ac_input" maxlength="30"  value="<?php echo $prog->user_name; ?>" >
+					</td>
+				</tr>
+			<?php } ?>
+			<!--<tr>
 				<td class="field_title">GVO Username:</td>
 				<td class="field_data">
 					<input type="text" name="txt_gvo_user" class="ac_input" maxlength="30"  value="<?php echo $account_detail['gvo_user_name'];?>" >
@@ -85,7 +96,7 @@
 									<?php echo form_error('txt_emp_user'); ?>
 					</font>
 				</td>
-			</tr>
+			</tr>-->
 			<tr>
 				<td colspan="2" align="center">
 					<input type="submit" class="btn" value="update" >

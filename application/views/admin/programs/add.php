@@ -3,7 +3,34 @@
 <?php }else if (isset($status) && $status=="updatefailure"){?>
 			<div class="errormessage"><?php echo "Opps ! Some error occur !!"?> </div>
 <?php } ?>
-
+<script>
+$(document).ready(function(){
+    $('#upload').click(function(){
+        if($("#source").val()==='upload'){
+            return false;
+        }
+        else{
+            $("#source").val('upload');
+            $("#youtube").removeClass('selected_src');
+            $(this).addClass('selected_src');
+            $("#youtube_link").hide();
+            $("#video_upload").show();
+        }
+    });
+    $("#youtube").click(function(){
+        if($("#source").val()==='youtube'){
+            return false;
+        }
+        else{
+            $("#source").val('youtube');
+            $("#upload").removeClass('selected_src');
+            $(this).addClass('selected_src');
+            $("#video_upload").hide();
+            $("#youtube_link").show();
+        }
+    });
+});
+</script>
     <div class="content">
         <div class="header">
             <h1 class="page-title">
@@ -42,10 +69,24 @@
         <label>Video Title: </label>
         <input type="text" name="txtVideo_Title" class="input-xlarge val_dis_enb" value="" /> 
 		
-		
-		<label>Upload video: </label>
-		<input id="file_upload_video" required name="file_upload_video" type="file" >
-      </div>
+	<div id="video_source">
+        <a id="youtube" style="cursor:pointer;" class="selected_src">Youtube Link</a> |  <a id="upload" style="cursor:pointer;" >Upload</a> 
+        <input id="source" value="youtube" name="source" type="hidden"/>
+    </div>
+	
+	<div id="video_upload" class="field" style="display:none;">
+		<label for="video">Video</label> 
+		<input id="file_upload_video" name="file_upload_video" size="50" type="file" class="medium" />
+	</div>
+
+	<div id="youtube_link" class="field">
+		<label for="video">Video</label> 
+		<input id="video_youtube" placeholder="Youtube video link"; name="video_youtube" size="50" type="text" class="medium" />
+	</div>
+	
+		<!--<label>Video: </label>
+		<input id="file_upload_video" required name="file_upload_video" type="file" >-->
+	</div>
 	<div class="tab-pane active in" id="home" style="width:50%;float: left;">
 			<label>Program Title: </label>
 			<input type="text" required name="txtProgram_Title"  id="txtProgram_Title" class="input-xlarge val_dis_enb" value="" />
@@ -54,7 +95,7 @@
 			<input  name="txtSignup_Link" id="txtSignup_Link" type="text"  class="input-xlarge val_dis_enb">
 			
 			<label>Upload Program Logo: </label>
-			<input id="file_upload_logo" name="file_upload_logo" type="file" >
+			<input id="video_upload" name="file_upload_logo" type="file" >
 	
 		</div>
 		

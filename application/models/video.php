@@ -35,12 +35,15 @@
 		}
 		
 		function UpdateNextVideo($updatevideoid){
-			if (isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != '') {
-				// echo '<pre>';
-				// print_r($_FILES);
-				// echo '</pre>';die();
+		// $data11=$_POST;
+		// echo '<pre>';
+		// print_r($data11);
+		// echo '</pre>';
+		
+			$upload_source=$this->input->post('source');
+			if((isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != '') &&(isset($upload_source) && $upload_source=='upload')) {
+				
 				unset($config);
-				// $date = date("ymd");
 				$configVideo['upload_path'] = './uploads/videos/';
 				$configVideo['max_size'] = '102400';
 				$configVideo['allowed_types'] = 'avi|flv|wmv|mp3|mp4';
@@ -64,11 +67,12 @@
 					// die();
 					// echo "Successfully Uploaded"; die();
 				}
+			}elseif(isset($upload_source) && $upload_source=='youtube'){
+				$video_name=$this->input->post('video_youtube');
 			}else{
 				$video_name=$this->input->post('hidd_video');
-				// echo 'nnnnnnnnnnnn';
 			}
-		
+
 			$video_title = $this->input->post('txt_vname');
 			$description = $this->input->post('txtarea_vdescription');
 			$strdate=date("Y-m-d");
@@ -312,7 +316,13 @@
 		}
 		
 		function UpdateVideoData($updatevideoid){
-			if (isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != '') {
+		
+		// $data11=$_POST;
+		// echo '<pre>';
+		// print_r($data11);
+		// echo '</pre>';
+			$upload_source=$this->input->post('source');
+			if((isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != '') &&(isset($upload_source) && $upload_source=='upload')) {
 				unset($config);
 				$configVideo['upload_path'] = './uploads/videos/';
 				$configVideo['max_size'] = '102400';
@@ -333,6 +343,8 @@
 					$video_name=$videoDetails['file_name'];
 					// echo "Successfully Uploaded"; die();
 				}
+			}elseif(isset($upload_source) && $upload_source=='youtube'){
+				$video_name=$this->input->post('video_youtube');
 			}else{
 				$video_name=$this->input->post('hidd_video');
 			}
@@ -362,7 +374,14 @@
 		}
 		
 		function UpdateWelcomeVideoData($updatevideoid){
-			if (isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != '') {
+		
+		// $data11=$_POST;
+		// echo '<pre>';
+		// print_r($data11);
+		// echo '</pre>';
+		
+			$upload_source=$this->input->post('source');
+			if ((isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name'] != '') &&(isset($upload_source) && $upload_source=='upload')) {
 				unset($config);
 				$configVideo['upload_path'] = './uploads/videos/';
 				$configVideo['max_size'] = '102400';
@@ -383,6 +402,8 @@
 					$video_name=$videoDetails['file_name'];
 					// echo "Successfully Uploaded"; die();
 				}
+			}elseif(isset($upload_source) && $upload_source=='youtube'){
+				$video_name=$this->input->post('video_youtube');
 			}else{
 				$video_name=$this->input->post('hidd_video');
 			}

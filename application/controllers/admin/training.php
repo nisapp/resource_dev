@@ -14,13 +14,18 @@ class Training extends CI_Controller {
 		}
 	}
         public function index(){
-            //$this->data['stylelist'][]='';
-            //$this->data['scriptlist'][]='';
+            $this->data['styles'][]='css/training.css';
+            $this->data['styles'][]='datatable/css/jquery.dataTables.css';
+            $this->data['scripts'][]='scripts/training.js';
+            $this->data['scripts'][]='datatable/js/jquery.dataTables.min.js';
             $this->data['query']=  $this->training_model->getTrainingData();
             $this->data['subview']=  'admin/training/training';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         public function add(){
+            $new_id = $this->training_model->addNewTraining();
+            redirect("admin/training/edit/$new_id");
+            /*
             $this->data['categories']=  $this->training_model->getCategories();
             $this->data['types']=  $this->training_model->getTypes();
             if($this->input->post('add_training')!==FALSE){
@@ -43,14 +48,18 @@ class Training extends CI_Controller {
             else{
 				$this->data['subview']=  'admin/training/add';
 				$this->load->view('admin/_layout_main.php', $this->data);
-            }
+            }//*/
         }
         public function edit($id){
+            //header("X-XSS-Protection: 0");
             $this->data['styles'][]='css/store_programs.css';
+            $this->data['styles'][]='css/edit_training.css';
             //$this->data['styles'][]='css/style.css';
             $this->data['categories']=  $this->training_model->getCategories();
             $this->data['types']=  $this->training_model->getTypes();
+            $this->data['statuses'] = $this->training_model->getStatus();
             $this->data['scripts'][]='jwplayer/jwplayer.js';
+            $this->data['scripts'][]='ckeditor/ckeditor.js';
             $this->data['scripts'][]='scripts/program_video.js';
             $this->data['scripts'][]='scripts/user_registration.js';
             $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
@@ -59,16 +68,22 @@ class Training extends CI_Controller {
                 redirect("admin/training");
             }
             if($this->input->post('edit_training')){
+                $this->training_model->editText($id);
                 if($this->training_model->editTraining($id)){
                     redirect("admin/training");
                 }
             }
+            elseif($this->input->post('training_text')){
+                //echo $this->input->post('training_text');
+                $this->training_model->editText($id);
+            }
+            $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
             $this->data['subview']='admin/training/edit';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         public function addvideo($id){
-            $this->data['button']='Add Video';
-            $this->data['action']='addvideo';
+            //$this->data['button']='Add Video';
+            //$this->data['action']='addvideo';
             $this->data['trainingdata']=$this->training_model->getTrainingData($id);
             if($this->data['trainingdata']->num_rows===0){
                 redirect("admin/training");
@@ -78,9 +93,11 @@ class Training extends CI_Controller {
                     redirect("admin/training/edit/$id");
                 }
             }
+            redirect("admin/training/edit/$id");
+            /*
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addvideo';
-            $this->load->view('admin/_layout_main.php', $this->data);
+            $this->load->view('admin/_layout_main.php', $this->data);//*/
         }
         public function addtext($id){
             $this->data['action']='addtext';
@@ -153,14 +170,14 @@ class Training extends CI_Controller {
                     $this->training_model->editText($id);
                 }
             }
-            $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
+            $this->data['trainingdat4a']=$this->training_model->getTrainingFullData($id);
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addtext';
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         function editvideo($id){
-            $this->data['button']='Change Video';
-            $this->data['action']='editvideo';
+            //$this->data['button']='Change Video';
+            //$this->data['action']='editvideo';
             $this->data['trainingdata']=$this->training_model->getTrainingData($id);
             if($this->data['trainingdata']->num_rows===0){
                 redirect("admin/training");
@@ -170,9 +187,11 @@ class Training extends CI_Controller {
                     redirect("admin/training/edit/$id");
                 }
             }
+            redirect("admin/training/edit/$id");
+            /*
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addvideo';
-            $this->load->view('admin/_layout_main.php', $this->data);
+            $this->load->view('admin/_layout_main.php', $this->data);//*/
         }
         function categories(){
             $this->data['query']=$this->training_model->getCategories();
@@ -204,9 +223,56 @@ class Training extends CI_Controller {
             $this->training_model->deleteCategory($id);
             redirect("admin/training/categories");
         }
+        function delete_group(){
+            //redirect("admin/training");return;
+            if($this->input->post('selected_rows')){
+                $trainingstring = $this->input->post('selected_rows');
+                //echo $trainingstring."<br>";
+                if(preg_match("/^[0-9]+(\/[0-9]+)*/i", $trainingstring)){
+                    $trainings = explode('/', $trainingstring);
+                    foreach ($trainings as $training){
+                        //echo $training."<br>";
+                        $this->training_model->deleteTraining($training);
+                    }
+                    redirect("admin/training");
+                }
+                else{
+                    redirect("admin/training");
+                }
+            }
+            else{
+                redirect("admin/training");
+            }
+        }
         function delete_training($id){
             $this->training_model->deleteTraining($id);
-            //redirect("admin/training");
+            redirect("admin/training");
+        }
+        function delete_video($id){
+            $this->training_model->delete_video($id);
+            redirect("admin/training/edit/$id");
+        }
+        function download(){
+            $query = $this->training_model->getTrainingData();
+            if($query->num_rows===0){
+                redirect("admin/training");
+                return;
+            }
+            $datalist=array();
+            $i=0;
+            foreach($query->result_array() as $row){
+                $temp_row = array(
+                    'N'=>++$i,
+                    'title'=>$row['title'],
+                    'link'=>$row['link'],
+                    'category'=>$row['category'],
+                    'type'=>$row['t_type'],
+                    'status'=>$row['t_status']
+                ); 
+                $datalist[]=$temp_row;
+            }
+            $this->training_model->download_send_headers("data_export_" . date("Y-m-d") . ".csv");
+            echo $this->training_model->array2csv($datalist);
         }
     
 }
