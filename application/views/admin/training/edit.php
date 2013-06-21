@@ -90,7 +90,7 @@ if(!empty($training->video)):
  echo form_open_multipart("admin/training/editvideo/$training->id");?>
     <div id="video_source">
         <a id="upload" class="selected_src">Upload</a> | <a id="youtube">Youtube Link</a>
-        <input id="source" value="upload" name="source" type="text"/>
+        <input id="source" value="upload" name="source" type="hidden"/>
     </div>
 	<div id="video_upload" class="field">
 		<label for="video">Video</label> 

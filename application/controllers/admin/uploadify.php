@@ -16,8 +16,7 @@ class Uploadify extends CI_Controller
     }
  
 	public function logouploader(){
-		// $targetFolder ='/dev/uploads/logo/'; 
-		$targetFolder ='allmoney/uploads/videos';  
+		$targetFolder ='/dev/uploads/logo/'; 
 		// Relative to the root for local must be set if your project folder is changes and also must be change if uploaded on live
 		
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);
@@ -45,7 +44,7 @@ class Uploadify extends CI_Controller
 		}
 	}
 	public function Welcomeuploader(){
-		$targetFolder ='allmoney/uploads/videos'; 
+		$targetFolder ='/dev/uploads/videos'; 
 		// echo $targetFolder =base_url().'/uploads/Videos'; 
 		// Relative to the root for local must be set if your project folder is changes and also must be change if uploaded on live
 		
@@ -76,7 +75,7 @@ class Uploadify extends CI_Controller
 	}
     public function Uploadifyuploader()
     {
-         $targetFolder ='allmoney/uploads/videos'; 
+         $targetFolder ='/dev/uploads/videos'; 
 		 // Relative to the root for local must be set if your project folder is changes and also must be change if uploaded on live
 		
 		$verifyToken = md5('unique_salt' . $_POST['timestamp']);

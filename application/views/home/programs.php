@@ -53,6 +53,18 @@ img#videobg{
 				<!-- container -->
             <!-- container -->
             <div id="container">
+                <nav class="maniNav">
+                    <ul>
+                        <li><a href="<?php echo base_url(); ?>members/clientdashboard">Home</a></li>
+                        <li><a href="#">E.A.P Training</a></li>
+                        <li><a href="<?php echo base_url(); ?>members/promotesite" >Promote Web</a></li>
+                        <li><a href="<?php echo base_url(); ?>home/programs">Programs Joined</a></li>
+                        <li><a href="<?php echo base_url(); ?>members/promotesite/downclient">Tools</a>	</li>
+                        <li><a href="<?php echo base_url(); ?>members/email">Bonuses</a></li>
+                        <li><a class="last" href="<?php echo base_url(); ?>members/email/femail">Contact Support</a></li>
+                    </ul>
+                </nav>
+                
             	 <div class="profitsContainer">
                 <?php if($programdata->num_rows==0): ?>
                 <h2>There are no any program!</h2>
@@ -80,7 +92,7 @@ img#videobg{
 					<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
 					<div id="videopreview">Loading the player...</div>
 				</div>
-								<input type="hidden" id="id_videopreview" value="<?php echo $row->video; ?>">
+				<input type="hidden" id="id_videopreview" value="<?php echo $row->video; ?>">
                                 <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
                                 <input type="hidden" id="video_file_path" value="uploads/temp/">
                                 <input type="hidden" id="is_avail" name="is_avail" value="-1">
@@ -88,22 +100,30 @@ img#videobg{
                                 <img src="<?php echo base_url();?>images/webBg2.png" id="videobg"/>
                         <div class="clear"></div>
                     <div id="add_program">
+                        <?php
+                        $formattrib = array('id'=>'save_affiliate_id');
+                        echo form_open('home/programs/'.$row->id,$formattrib);
+                        if($programstored):
+                            if(empty($row->affiliate_link)){
+                                $value = 'Enter Program Affiliate link';
+                            }
+                            else{
+                                $value = $row->affiliate_link;
+                            }
+                        $input_attrib = array('id'=>'affiliatelink','name'=>'affiliatelink','value'=>$value);
+                        echo form_input($input_attrib);
+                        else: ?>
                         <a id="join_program" href="<?php echo '#';//$row->link . $row->affiliate_link; ?>" 
                            alt="<?php echo $row->link . $row->affiliate_link; ?>" title="<?php echo $row->link . $row->affiliate_link; ?>">
                             <strong>Click URL To Join Program:</strong><?php echo $row->link; ?>
                         </a>
-                        <?php
-                        $formattrib = array('id'=>'save_affiliate_id');
-                        echo form_open('home/programs/'.$row->id,$formattrib);
-                        if($row->affiliateid!==NULL){
-                            $value = $row->affiliateid;
-                        }
-                        else{
-                            $value = 'Enter Program Affiliate ID Here';
-                        }
+                        <?php 
+                        $value = 'Enter Program Affiliate ID Here';
                         $input_attrib = array('id'=>'affiliateid','name'=>'affiliateid','value'=>$value);
                         echo form_input($input_attrib);
-                        echo form_submit('store_submit', '');
+                        endif; 
+                        $submit_name=$programstored?"save_link":"store_submit";
+                        echo form_submit($submit_name, '');
                         echo form_close();
                         ?>
                     </div>

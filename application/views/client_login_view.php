@@ -101,11 +101,15 @@ body{
 	}		
 
 /* // base */
-
+.register {
+width: 500px;
+margin: 2px auto;
+text-align: right;
+}
 /* login form */	
 
 #login{
-	margin:5em auto;
+	margin:5em auto 1em;
 	background:#fff;
 	border:8px solid #eee;
 	width:500px;
@@ -225,8 +229,7 @@ body{
 <h1>Login here</h1>
 <form id="login" method="post" action="<?php echo base_url();?>login"> 
 
-    <h1>Log in to your <strong>easyaccessprofits.com</strong> account!</h1>
-    <p class="register">Not a member? <a href="<?php echo base_url(); ?>register">Register here!</a></p>
+    <h1>Log in to your <strong>EasyAccessProfits.com</strong> account!</h1>
 	
 	<font style="font-size:12px;color:red;text-align:center;">
 		<?php echo form_error('password'); ?>
@@ -256,6 +259,8 @@ body{
     
   
 </form>	
+    <p class="register">No account? <a href="<?php echo base_url(); ?>createaccount">Create your account here!</a></p>
+    <p class="register">Forgot password? <a href="<?php echo base_url(); ?>recovery">Click here to contact support!</a></p>
 
 </body>
 </html>

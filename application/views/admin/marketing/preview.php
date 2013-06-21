@@ -63,15 +63,12 @@
                         </iframe>
                         <?php else: ?>
 			<div id="container">
-				<div id="winner">
-					<div class="video_preveiw" style="width:50%;margin-left: 10px;float: left;" >
-						<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
-						<div id="videopreview">Loading the player...</div>
-					</div>
-				</div>
-				<input type="hidden" id="id_videopreview" value="<?php echo $row->video; ?>">
-                                <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
-                                <input type="hidden" id="video_file_path" value="uploads/temp/">
+                            <div id="winner">
+                                <video id="register_page_vieo" class="video-js vjs-default-skin"
+                                       controls preload="auto" width="480" height="360">
+                                    <source src="<?php echo base_url(); ?>uploads/temp/<?php echo $row->video; ?>" type='video/mp4' />
+                                </video>
+                            </div>
 			</div>
                         <?php endif; ?>
                     </div>

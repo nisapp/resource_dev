@@ -1,8 +1,11 @@
 <?php if (isset($status) && $status=="updatesuccess"){?>
-			<div class="infomessage"><?php echo "Next video has been Uploaded Successfully"?> </div>
+			<div class="infomessage"><?php echo "Next video saved successfully"?> </div>
 <?php }else if (isset($status) && $status=="updatefailure"){?>
 			<div class="errormessage"><?php echo "Opps ! Some error occur !!"?> </div>
-<?php } ?>
+<?php } 
+
+
+?>
 <style>
 	.hidecat{
 		width:270px;
@@ -14,11 +17,19 @@
 		margin-bottom: 9px;
 		padding: 4px 6px;
 	}
+	span.next_menu{
+		background: none repeat scroll 0 0 #3A87AD;
+		color: #FFFFFF;
+		font-size: 20px;
+		font-weight: bold;
+		padding: 6px;
+	}
+	
   </style>
     <div class="content">
         <div class="header">
             <h1 class="page-title">
-					Next Video
+					Next step video for tab <span class="next_menu">" <?php echo $videodataarray->menu_title; ?> "<span>
 			</h1>
         </div>
         
@@ -65,12 +76,12 @@
     </div>
 	
 	<div id="video_upload" class="field" style="display:none;">
-		<label for="video">Welcome video</label> 
+		<label for="video">Next step video</label> 
 		<input id="file_upload" name="file_upload" size="50" type="file" class="medium" />
 	</div>
 
 	<div id="youtube_link" class="field">
-		<label for="video">Welcome video</label> 
+		<label for="video">Next step video</label> 
 		<input id="video_youtube" placeholder="Youtube video link"; value="<?php if(preg_match("/youtube\.com/", $videodataarray->file_name_in_folder)){ echo $videodataarray->file_name_in_folder; } ?>" name="video_youtube" size="50" type="text" class="medium" />
 	</div>
 		<!--<label>Upload video: </label>
@@ -121,21 +132,23 @@
 				<b>Enter Url: &nbsp;</b><input type="text" name="txtButton_url" placeholder='Enter link' class="input-xlarge val_dis_enb" value="<?php echo $videodataarray->custom_link; ?>" />
 			</div>	
 		</fieldset>
+		
+		<label>Status: </label>
+        <select name="txtStatus" required>
+			<option value='Y' <?php if($videodataarray->is_show=='Y') echo 'selected'; ?> >Visible</option>
+			<option value='N'  <?php if($videodataarray->is_show=='N') echo 'selected'; ?> >Hidden</option>
+		</select>
 		</div>
 	
 	
-		<!--<div class="right_side" style="width:50%;float: left;">
-			<h2 id="btn_link" >Set Next Button Link</h2>
-			<label>Enter Url: </label>
-			<input type="text" name="txtButton_url" placeholder='Enter link' class="input-xlarge val_dis_enb" value="" /> 
-		</div>
-		<div class="video_preveiw" style="width:50%;float: left;" >
-				<script type="text/javascript" src="<?php echo base_url(); ?>jwplayer/jwplayer.js"></script>
-				<script type="text/javascript" src="<?php echo base_url(); ?>scripts/previewplayer.js"></script>
-				<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
-				<div id="videopreview">Loading the player...</div>
-		</div>-->
-	  
+		
       </form>
   </div>
 </div>
+<?php 
+
+// echo '<pre>';
+// print_r($videodataarray);
+// echo '</pre>';
+
+?>

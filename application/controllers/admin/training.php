@@ -69,11 +69,12 @@ class Training extends CI_Controller {
             }
             if($this->input->post('edit_training')){
                 $this->training_model->editText($id);
-                if($this->training_model->editTraining($id)){
+                $this->training_model->editTraining($id);
                     redirect("admin/training");
-                }
+                    return;
             }
             elseif($this->input->post('training_text')){
+                echo "only text edited.";
                 //echo $this->input->post('training_text');
                 $this->training_model->editText($id);
             }
@@ -146,6 +147,8 @@ class Training extends CI_Controller {
             $this->load->view('admin/_layout_main.php', $this->data);
         }
         function edittext($id){
+            redirect("admin/training/edit/$id");
+            /*
             $this->data['action']='edittext';
             $this->data['button']='Save Changes';
             $this->data['scripts'][]='ckeditor/ckeditor.js';
@@ -156,11 +159,12 @@ class Training extends CI_Controller {
             }
             else{
                 $tdata = $this->data['trainingdata']->first_row();
-            }
+            }///
             if($this->input->post('add_text')){
                 if($this->training_model->editText($id)){
-                    redirect("admin/training/edit/$id");
-                }//*/
+                    //
+                    return;
+                }///
             }
             elseif($this->input->post('training_text')){
                 if($tdata->t_text===NULL){
@@ -170,10 +174,11 @@ class Training extends CI_Controller {
                     $this->training_model->editText($id);
                 }
             }
-            $this->data['trainingdat4a']=$this->training_model->getTrainingFullData($id);
+            /*
+            $this->data['trainingdata']=$this->training_model->getTrainingFullData($id);
             $this->data['trainingid']=$id;
             $this->data['subview']='admin/training/addtext';
-            $this->load->view('admin/_layout_main.php', $this->data);
+            $this->load->view('admin/_layout_main.php', $this->data);//*/
         }
         function editvideo($id){
             //$this->data['button']='Change Video';

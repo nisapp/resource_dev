@@ -41,23 +41,32 @@ class Training_model extends CI_Model{
         $this->db->where('t.status',2);
         $query = $this->db->get();
 		// echo $this->db->last_query();
-		$trn_html='';		
 		$base_url=base_url();
+		$trn_html='';
+		$check=0;
 		foreach($query->result() as $training ){ 
+			++$check;
+			if($check==1){
+				$trn_html.="
+						<input type='hidden' id='first_video' value='{$training->video}'>
+						<input type='hidden' id='first_video_index' value='{$training->id}'>
+					";
+			}
+	
 			$trn_html.="
 				<div class='main_tab' >
-					<div class='m_t_tab-close tab_close tab_child_1' onclick='show_div(this,{$training->id});'>{$training->title}
+					<div class='m_t_tab-close tab_close' id='tab_cat_{$check}'  onclick='show_div(this,{$training->id});'>{$training->title}
 						<img  src='{$base_url}images/transparent.gif' class='open_close open_tab' width='36' height='29'>
 					</div>
-					<div class='show-tab-content tab_child_2' style='display: none;'>
+					<div class='show-tab-content' id='tab_child_{$check}' style='display:none;' >
 						<p>
 							{$training->t_text}
 						</p>
 						<input type='hidden' id='id_videopreview_{$training->id}' value='{$training->video}'>
-									
+					
 						<div class='video_preveiw' style=''>
 									<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
-									<div id='videopreview_{$training->id}'>Loading the player...</div>
+									<div id='videopreview_{$training->id}'></div>
 						</div>
 					
 						
@@ -65,6 +74,7 @@ class Training_model extends CI_Model{
 				</div>
 					";	
 		}
+		
 		return $trn_html;
 	}
 	
@@ -114,7 +124,6 @@ class Training_model extends CI_Model{
         $this->db->insert('training',$data);
         return ($this->db->affected_rows() > 0) ? $this->db->insert_id() : FALSE;
     }
-	
     function addVideo($id){
         $config['upload_path'] = './uploads/training/video/';
         $config['allowed_types'] = 'avi|flv|wmv|mp4|mp3';
@@ -170,7 +179,7 @@ class Training_model extends CI_Model{
     function editVideo($id){
         $config['upload_path'] = './uploads/training/video/';
         $config['allowed_types'] = 'avi|flv|wmv|mp4|mp3';
-        $config['max_size'] = '102400';
+        $config['max_size'] = '10000';
         $config['max_width'] = '1024';
         $config['max_height'] = '768';
         $this->load->library('upload', $config);
@@ -358,6 +367,7 @@ class Training_model extends CI_Model{
         $this->db->update('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+	
     function delete_video($id){
         $this->db->where('training_id',$id);
         $this->db->delete('training_video');

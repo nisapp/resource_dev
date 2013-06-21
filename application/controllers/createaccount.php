@@ -133,7 +133,7 @@
 						$this->load->view('user_registration',$this->data);
                      }else{
 							// echo 'I m Not in error';
-							redirect('clientadmin/programs', 'refresh');
+							redirect('members/programs', 'refresh');
 					}
 	 }
 	 //this function is associated with insertion of the user data in the database

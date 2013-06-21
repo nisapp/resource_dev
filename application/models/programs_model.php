@@ -87,6 +87,39 @@ class Programs_Model extends CI_Model{
 		}
 	}
 	
+	public function get_next_step_by_menu_id($menu = 0){
+		if($menu==false){
+			$html='<b>No record exist ! </b>';
+		}else{
+			$this->db->select('v.*');
+			$this->db->from('tblfiles as v');
+			
+			$this->db->where('type','next_video');
+			$this->db->where('menu_id',$menu);
+			$this->db->limit('1');
+			$query = $this->db->get();
+			$row=$query->row_array();	
+			// echo '<pre>';
+			// print_r($row);
+			// echo '</pre>';
+
+			$next_url=$row['custom_link'];
+			$base_url=base_url();
+			$html="
+				<img src='{$base_url}images/webBg2.png' id='video_bg'>
+				<div class='video_preveiw' style=''>
+							<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
+							<div id='videopreview'>Loading the player...</div>
+				</div>
+			
+				<div class='idArea' >
+				 <a href='{$next_url}' id='nextbtn_url' style='cursor:pointer;textdecoration:none;' target='_blank'><input type='button' class='nextbtn' value='Click Here To Go To The Next Step' /></a>
+				</div>
+			";
+		}
+		return $html;
+	}
+	
 	public function getProgram_for_clentdashboard($id = 0){
 		/* $this->db->select('p.*');
         $this->db->from('programs as p');

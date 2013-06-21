@@ -10,7 +10,7 @@
 		$this->load->helper(array('url', 'form'));
 		// check for validate user login
 		$session_login_user=$this->session->userdata('logged_in');
-		if(!($session_login_user['login_state'] == 'active' && $session_login_user['role'] == 'admin')) {
+		if (!($session_login_user['login_state'] == 'active' && $session_login_user['role'] == 'admin')) {
 			redirect('login', 'refresh');
 		}
 	 }
@@ -68,6 +68,7 @@
 					$query= $this->video->GetPureLevVideoData($updateid);
 					$queryresult =$query->result();
 					$this->data['videodataarray'] =$queryresult[0];
+				
 					$this->data['subview']=  'admin/videos/pure_leverage_video';
 					$this->load->view('admin/_layout_main.php', $this->data);					
 			}

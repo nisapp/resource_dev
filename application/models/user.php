@@ -142,18 +142,20 @@ Login: 'Teame name'
 				// echo '<pre>';
 				// print_r($wholedata);
 				// echo '</pre>';
-
+				// die();
 				$result = $this->db->insert('users',$wholedata);
 				if($result)
 				{
 					$lastuserid = $this->db->insert_id();
-					$t= substr($wholedata['first_name'],0,1);
-					$first_char= strtolower($t);
-					$track_id = $first_char.$lastuserid.$this->create_track_id($length=4,$use_upper=0,$use_lower=0,$use_number=1,$use_custom="");
+					// $t= substr($wholedata['first_name'],0,1);
+					// $first_char= strtolower($t);
+					// $track_id = $first_char.$lastuserid.$this->create_track_id($length=4,$use_upper=0,$use_lower=0,$use_number=1,$use_custom="");
+					$track_id = $wholedata['user_name'];
 					$datatoupdate = array(
 										'user_track_id'=>$track_id,
 									);
 					$this->db->where('id', $lastuserid);
+					$this->db->where('user_name', $wholedata['user_name']);
 					$this->db->trans_start();
 					$status = $this->db->update('users', $datatoupdate);
 					if($status){

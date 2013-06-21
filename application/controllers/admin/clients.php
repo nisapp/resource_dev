@@ -16,11 +16,6 @@
 		}
 	 }
 	 
-	function newaccount(){
-		$this->data['subview']=  'admin/clients/new_client_account';
-		$this->load->view('admin/_layout_main.php', $this->data);
-	}
-
 	function index()
 	{
 		$this->data['styles'][]='datatable/css/jquery.dataTables.css';

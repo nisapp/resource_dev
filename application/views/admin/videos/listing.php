@@ -49,7 +49,7 @@ else if (isset($status) && $status=="failure"){ ?>
           <th>Navigtion Position</th>
           <th>Video Name</th>
           <th>Description</th>
-          <th>Last modified</th>
+         <!-- <th>Last modified</th>-->
           <th>Video Type</th>
           <th style="width: 26px;">Action</th>
         </tr>
@@ -82,7 +82,7 @@ $change_url='';
 									$is_show=0;
 									$change_url=base_url().'admin/videos/change_pure_lev';
 									break;
-		case 'next_video':		$video_type='What Next Video';
+		case 'next_video':		$video_type='Next Step<br/> '.$singlevideo->menu_title;
 								$change_url=base_url().'admin/videos/change_next_video';
 								break;
 							
@@ -96,7 +96,7 @@ $change_url='';
           <td><?php if($singlevideo->position==0) echo 'Default'; else echo $singlevideo->position; ?></td>
           <td><?php echo $singlevideo->file_name; ?></td>
           <td><?php echo $singlevideo->description; ?></td>
-          <td><?php echo $singlevideo->added_date; ?></td>
+          <!--<td><?php echo $singlevideo->added_date; ?></td>-->
           <td><span class="v_type"><?php echo $video_type; ?><span></td>
           <td>
               <a class="edit_video" href="<?php echo $change_url.'/'.$singlevideo->Id; ?>" >Change</a>

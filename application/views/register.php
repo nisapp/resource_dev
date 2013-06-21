@@ -144,7 +144,7 @@ background: none !important;
                         </div>
                      <p class="get_started"><?php if(isset($title_text) && ($title_text!='')){ echo $title_text; }else{ echo 'Get Started Right Now!'; } ?> </p>
                         <div class="formArea">
-                            <form action="<?php echo base_url();?>register/verifysignup" method="post" >
+                            <form action="<?php echo base_url();?>createaccount/verifysignup" method="post" >
                                 <div class="input_line">
                                 <input class="smallinput"  type="text" name="login_firstname" id="login_firstname" placeholder="First Name*" >
                                 <input class="smallinput" type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" >

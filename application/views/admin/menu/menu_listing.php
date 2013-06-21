@@ -63,14 +63,25 @@ $i=0;
 foreach($query->result() as $menu ){
 ?> 		
 	<tr>
-		  <td><?php echo $i+=1; ?></td>
-		  <td><?php echo $menu->menu_title;?></td>
-		  <td><?php echo base_url().$menu->menu_url; ?></td>
-		  <td><?php echo $menu->position; ?></td>
-		  <td><?php echo $menu->menu_type; ?></td>
-		  <td>
-				<a href="<?php echo base_url();?>admin/menu/edit/<?php echo $menu->id; ?>" >Change</a> 
-		  </td>
+		<td><?php echo $i+=1; ?></td>
+		<td><?php echo $menu->menu_title;?></td>
+		<td>
+			<?php
+				$str_last=explode('/',$menu->menu_url);
+				switch($str_last['1']){
+					case 'programs': $link=base_url().$str_last['0']."/Tab-1"; break;
+					case 'commisions': $link=base_url().$str_last['0']."/Tab-2"; break;
+					case 'training': $link=base_url().$str_last['0']."/Tab-3"; break;
+					case 'howto': $link=base_url().$str_last['0']."/Tab-4"; break;
+				}
+				echo $link; 
+			?>
+		</td>
+		<td><?php echo $menu->position; ?></td>
+		<td><?php echo $menu->menu_type; ?></td>
+		<td>
+			<a href="<?php echo base_url();?>admin/menu/edit/<?php echo $menu->id; ?>" >Change</a> 
+		</td>
 	</tr>
 <?php } ?>  
       </tbody>

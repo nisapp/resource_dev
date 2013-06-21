@@ -1,9 +1,4 @@
 <?php 
-// $t=$this->session->all_userdata();
-// echo '<pre>';
-// print_r($t);
-// echo '</pre>';
-	
  /* echo '<pre>';print_r($query);die();  */
 ?><html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Money Formula</title>
@@ -44,6 +39,7 @@
 				<input type="hidden" id="id_videopreview" value="<?php echo $query->file_name_in_folder;?>">
 				<input type="hidden" id="baseurl" value="<?php echo base_url();?>">
 			</div>
+                    
 			<div id="signup_form">
 				<div id="step1">	
 					<div class="step">
@@ -71,7 +67,7 @@
 	<footer>
 		<center>
 			<a href="javascript:void(0);" style="text-decoration:none;">
-			<div>Copyright © resourcebay.com 2013</div>
+			<div>Copyright Â© resourcebay.com 2013</div>
 			Privacy Policy | Earnings Disclaimer | Terms of Service | Contact
 			</a>
 		</center>

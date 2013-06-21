@@ -22,15 +22,15 @@
 		}
 		
 		function GetNextVideoData($videoid = false){
-			$this->db->select('v.*');
+			$this->db->select('v.*,m.menu_title');
 			$this->db->from('tblfiles as v');
-			
-			$this->db->where('type','next_video');
+			$this->db->join('tblmenu as m', 'v.menu_id = m.id', 'left');
+			$this->db->where('v.type','next_video');
 			if($videoid){
-				$this->db->where('Id',$videoid);
+				$this->db->where('v.Id',$videoid);
 			}
-			$this->db->limit('1');
 			$query = $this->db->get();
+			// echo $this->db->last_query(); 
 			return $query;
 		}
 		
@@ -80,6 +80,7 @@
 			$video_in_folder = $this->input->post('hidd_video');$tab_title = $this->input->post('txtNavigation');
 			$position = $this->input->post('txtposition');
 			$button_url = $this->input->post('txtButton_url');
+			$visibility = $this->input->post('txtStatus');
 			$datatoupdate = array(
 								'file_name'=>$video_title,
 								'description'=>$description,
@@ -88,6 +89,7 @@
 								'added_date'=>$strdate,
 								'position'=>$position,
 								'tab_title'=>$tab_title,
+								'is_show'=>$visibility,
 								'custom_link'=>$button_url,
 								'file_name_in_folder'=>$video_name
 							);
@@ -435,6 +437,15 @@
 		/********************End of 28 may Work************************************************/
 		function GetAllVideoData($videoid=false)
 		{		
+			$this->db->select('v.*,m.menu_title');
+			$this->db->from('tblfiles as v');
+			$this->db->join('tblmenu as m', 'v.menu_id = m.id', 'left');
+			if($videoid){
+				$this->db->where('v.Id',$videoid);
+			}
+			$query = $this->db->get();
+			// echo $this->db->last_query(); 
+			/* 
 				$this->db->select('v.*');
 				$this->db->from('tblfiles as v');
 				$array = array('type !=' => 'logo');
@@ -444,7 +455,7 @@
 					$this->db->where('Id',$videoid);
 				}
 				$query = $this->db->get();
-				// echo $this->db->last_query(); 
+				// echo $this->db->last_query();  */
 				return $query;
 		}
 	

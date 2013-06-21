@@ -85,9 +85,9 @@ var jq172 = jQuery.noConflict();
         <div class="navbar-inner">
                 <ul class="nav pull-right">
                     
-                    <!--<li><a href="<?php echo base_url()?>clientadmin/setting" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>-->
+                    <!--<li><a href="<?php echo base_url()?>members/setting" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>-->
                     <li id="fat-menu" class="dropdown">
-                        <a href="<?php echo base_url()?>clientadmin/clientdashboard/logout" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="<?php echo base_url()?>admin/dashboard/logout" role="button" class="dropdown-toggle" data-toggle="dropdown">
                              My Account
                         </a>
 						<ul class="dropdown-menu">
@@ -113,7 +113,7 @@ var jq172 = jQuery.noConflict();
     
     <div class="sidebar-nav">
         <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
-        <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='dashboard' || $curPageName=='empower_video' || $curPageName=='logolist') || $curPageName=='addlogo' || $curPageName=='addwelvideo' || $curPageName=='addvideo' || $curPageName=='gvo_video' || $curPageName=='pure_leverage_video' || $curPageName=='next_video' || $curPageName=='menu_listing'|| $curPageName=='menu_edit_view' ){ echo 'in'; } ?>">
+        <ul id="dashboard-menu" class="nav nav-list collapse  <?php if(isset($curPageName) && ($curPageName=='dashboard' || $curPageName=='logolist') || $curPageName=='addlogo' ||  $curPageName=='menu_listing'|| $curPageName=='menu_edit_view' ){ echo 'in'; } ?>">
             
 			<li><a href="<?php echo base_url(); ?>admin/menu">Training Menu Management</a></li>
 			<li><a href="<?php echo base_url(); ?>admin/dashboard">Home</a></li>
@@ -128,7 +128,7 @@ var jq172 = jQuery.noConflict();
         </ul>
 		<a href="#program-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Program Menu<i class="icon-chevron-up"></i></a>
         
-		<ul id="program-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='programs' || ($curPageName=='listing')) { echo 'in'; } ?>">
+		<ul id="program-menu" class="nav nav-list collapse <?php if($this->uri->segment(2)=='programs' || $this->uri->segment(2)=='videos' || ($curPageName=='listing')) { echo 'in'; } ?>">
             <li><a href="<?php echo base_url(); ?>admin/videos">Manage Welcome Video</a></li>
             <li><a href="<?php echo base_url(); ?>admin/programs">All Programs</a></li>
             <li><a href="<?php echo base_url(); ?>admin/programs/add">New Programs</a></li>

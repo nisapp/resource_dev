@@ -13,8 +13,15 @@
 				<script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
 	<?php 	}
         endif; ?>
+                                <style>
+                                    body{
+                                        /*background: url("<?php //echo base_url(); ?>images/bg-arrow.png") bottom center no-repeat;*/
+                                        background-color: #c7e1f2;
+                                    }
+                                </style>                                
 </head>
 <body>
+    <?php if(!isset($islanding)&&!isset($isgo)): ?>
 <div id="header">
 <!--<center><img src="<?php echo base_url();?>images/header.png" width="960" height="91"/></center></div>-->
 				<div class="wrapperMain">
@@ -22,9 +29,12 @@
 					<?php $this->load->view('global/header.php'); ?>
 					<!--/header-->
 				</div>
+    </div>
+    <?php endif; ?>
 <div id="wrapper">
 
-<img src="<?php echo base_url();?>images/steps-button.png" width="960" height="100" />
+<img src="<?php echo base_url(); ?>images/steps-button.png" width="960" height="100" />
+
 
 <div id="text-holder-top"></div>
 <div id="text-holder-side">
@@ -39,17 +49,11 @@
            	 <div class="textField">
             <div id="form">
 			<input type="text" title="Email" alt="Email" class="textBox" name="email" value="Enter Your Email Here" onfocus="if(this.value=='Enter Your Email Here'){this.value=''};" onblur="if(this.value==''){this.value='Enter Your Email Here'};"></div>
-                              
-                
-                                
-                   
-                
-                
                 <div class="btnBox">
                     <input type="submit" name="submit" class="submit" value="" onclick="areYouReallySure=true;">
                 </div>
             </div>
-            <input type="hidden" name="webform_id" value="457754" />
+		  <input type="hidden" name="webform_id" value="457754" />
            
            	 	 </form>
 <script type="text/javascript" src="http://app.getresponse.com/view_webform.js?wid=457754&mg_param1=1"></script>
@@ -63,7 +67,7 @@
  
 </div>
 
-    <?php $this->load->view('global/footerlinks.php'); ?>
+    <?php if(!isset($islanding)&&!isset($isgo)) $this->load->view('global/footerlinks.php'); ?>
 
 </body>
 </html>

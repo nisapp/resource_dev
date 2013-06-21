@@ -5,6 +5,7 @@ class Menu_model extends CI_Model{
         // Call the Model constructor
         parent::__construct();
     }
+   
     public function getMenuData_array(){
 		$this->db->select('*');
         $this->db->from('tblmenu as m');
