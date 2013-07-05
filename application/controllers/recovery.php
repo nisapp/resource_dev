@@ -25,8 +25,8 @@ class Recovery extends CI_Controller {
                 //$this->data['isgo']=true;
 		$this->data['title']='Password recovery';
 		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
-		$this->data['stylelist'][]='css/jsplayer_custom.css';
+		// $this->data['stylelist'][]='css/landing.css';
+		// $this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
                 $error="";
                 $msg="";
@@ -67,11 +67,11 @@ class Recovery extends CI_Controller {
                 }//*/
 		$this->load->view('recovery/recovery_view',$this->data);
 	 }
-         public function reset($recoveryid) {
+	 public function reset($recoveryid) {
         $this->data['title'] = 'Password recovery';
         $this->data['stylelist'][] = 'css/style.css';
-        $this->data['stylelist'][] = 'css/landing.css';
-        $this->data['stylelist'][] = 'css/jsplayer_custom.css';
+        // $this->data['stylelist'][] = 'css/landing.css';
+        // $this->data['stylelist'][] = 'css/jsplayer_custom.css';
         $this->data['scriptlist'][] = 'scripts/jquery-1.7.2.min.js';
         $this->data['recoveryid']=$recoveryid;
         $error = "";

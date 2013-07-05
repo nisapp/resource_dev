@@ -4,9 +4,9 @@
 	text-align: center;
 	width: 50%;
 }
-#videopreview_wrapper{
-	height: 412px !important;
-	width: 119% !important;
+#videopreview{
+	min-height: 412px !important;
+	min-width: 750px !important;
 } 
 img#videobg{
 	margin-left: 6%;

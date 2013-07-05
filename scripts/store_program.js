@@ -11,7 +11,6 @@ $(document).ready(function(){
         focus =0;
     });
     $("#save_affiliate_id").submit(function(){
-        alert('submit');
         if($("#save_affiliate_id input[type='text']").val()===''||
                 $("#save_affiliate_id input[type='text']").val()==='Enter Program Affiliate ID Here'){
             alert("Affiliate ID can't be empty!");

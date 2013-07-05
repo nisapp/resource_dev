@@ -5,7 +5,8 @@
 <?php } ?>
 <script src="<?php echo base_url(); ?>scripts/ckeditor/ckeditor.js" type="text/javascript"></script>
 <style type="text/css">
-	fieldset { margin: 0 0 22px 0; border: 1px solid #095D92; padding: 12px 17px; background-color: #DFF3FF; }
+	fieldset { margin: 0 0 22px 0; border: 1px solid #095D92; width: 700px;
+float: right;padding: 12px 17px; background-color: #DFF3FF; }
 	legend { text-align: left !important;font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px;-webkit-padding:4px 8px; }
 	#rounded-corner-email{
 		font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -103,6 +104,6 @@
 		
 		?>
 </form>
- </div>
+ </div></div>
 <!-- /promoteArea -->
     

@@ -36,7 +36,22 @@ jQuery(function($){
 		return valid;
 	});
 	
-})	
+});
+
+$(document).ready(function(){
+    $("#login_username").focus(function(){
+        $("#login_username_lable").hide();
+    });
+    $("#login_password").focus(function(){
+        $("#login_password_lable").hide();
+    });
+    $("#login_username").focusout(function(){
+        if($(this).val()==='')$("#login_username_lable").show();
+    });
+    $("#login_password").focusout(function(){
+        if($(this).val()==='')$("#login_password_lable").show();
+    });
+});
 
 
 
@@ -44,7 +59,7 @@ jQuery(function($){
 <style>
 
 /* HTML elements  */		
-
+/*
 	h1, h2, h3, h4, h5, h6{
 		font-weight:normal;
 		margin:0;
@@ -81,49 +96,49 @@ jQuery(function($){
 	label{display:block;}
 	fieldset{margin:0;padding:0;border:none;}
 	legend{font-weight:bold;}
-	input[type="radio"],input[type="checkbox"], .radio, .checkbox{margin:0 .25em 0 0;}
+	input[type="radio"],input[type="checkbox"], .radio, .checkbox{margin:0 .25em 0 0;}*/
 
 /* //  HTML elements */	
 
 /* base */
-
+/*
 body, table, input, textarea, select, li, button{
 	font:1em "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	line-height:1.5em;
 	color:#444;
 	}	
 body{
-    background: url("<?php echo base_url(); ?>images/bg-arrow.png") no-repeat scroll center bottom #c7e1f2;
+    background: url("<?php //echo base_url(); ?>images/bg-arrow.png") no-repeat scroll center bottom #c7e1f2;
     overflow-x: hidden;
 	font-size:12px;
-	/* background:#c4f0f1;		 */
-	text-align:center;
+	 background:#c4f0f1;		 */
+	/*text-align:center;
 	}		
 
-/* // base */
+/* // base 
 .register {
 width: 500px;
 margin: 2px auto;
 text-align: right;
 }
-/* login form */	
-
-#login{
-	margin:5em auto 1em;
-	background:#fff;
-	border:8px solid #eee;
-	width:500px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	-moz-box-shadow:0 0 10px #4e707c;
-	-webkit-box-shadow:0 0 10px #4e707c;
-	box-shadow:0 0 10px #4e707c;
-	text-align:left;
-	position:relative;
-	}
-#login a, #login a:visited{color:#0283b2;}
-#login a:hover{color:#111;}
+/* login form 
+*/
+#login {
+margin: 5em auto 1em;
+background: url(<?php echo base_url(); ?>images/new_components/login_form_bg.png) repeat #3c4b5d;
+width: 350px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+-moz-box-shadow: 0 0 10px #4e707c;
+-webkit-box-shadow: 0 0 10px #4e707c;
+box-shadow: 0 0 10px #4e707c;
+text-align: left;
+position: relative;
+overflow: hidden;
+}
+#login a{color:#fff;}
+#login a:hover{color:#0283b2;}
 #login h1{
 	background:#0092c8;
 	color:#fff;
@@ -144,14 +159,13 @@ text-align: right;
 	}
 #login p{margin:.5em 25px;}
 #login div{
-	margin:.5em 25px;
-	background:#eee;
-	padding:4px;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-	text-align:right;
-	position:relative;
+	margin: .5em 25px;
+        background: none;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        text-align: right;
+        position: relative;
 	}	
 #login label{
 	float:left;
@@ -159,30 +173,29 @@ text-align: right;
 	padding-left:10px;
 	}
 #login .field{
-	border:1px solid #ccc;
-	width:280px;
-	font-size:12px;
-	line-height:1em;
-	padding:4px;
-	-moz-box-shadow:inset 0 0 5px #ccc;
-	-webkit-box-shadow:inset 0 0 5px #ccc;
-	box-shadow:inset 0 0 5px #ccc;
+	border: none;
+        width: 292px;
+        height: 24px;
+        font-size: 12px;
+        line-height: 1em;
+        color:white;
+        padding: 4px;
+        -moz-box-shadow: inset 0 0 5px #ccc;
+        margin: 0px;
+        background: url(<?php echo base_url(); ?>images/new_components/login_form_input_bg.png) repeat #3C4B5E;
 	}	
 #login div.submit{background:none;margin:1em 25px;text-align:center;}	
-#login div.submit label{float:none;display:inline;font-size:11px;}	
+#login div.submit label{float:none;display:inline;font-size:12px;}	
 #login button{
-	border:0;
-	padding:0 30px;
-	height:30px;
-	line-height:30px;
-	text-align:center;
-	font-size:12px;
-	color:#fff;
-	text-shadow:#007dab 0 1px 0;
-	background:#0092c8;
-	-moz-border-radius:50px;
-	-webkit-border-radius:50px;
-	border-radius:50px;
+	border: 0px;
+        padding: 0px 71px;
+        height: 40px;
+        width: 142px;
+        margin-left: 35px;
+	background:url(<?php echo base_url(); ?>images/new_components/login_button_bg.png) repeat #3C4B5E;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
 	cursor:pointer;
 	}
 	
@@ -208,59 +221,97 @@ text-align: right;
 	-webkit-box-shadow:0 0 5px #700;
 	box-shadow:0 0 5px #700;
 	}
+        #other_commands li {
+            display: inline;
+            padding: 2px;
+            margin: 0px;
+            /*border-left: 1px solid;*/
+        }
+        #other_commands{
+            margin:10px 5px;
+            float:right;
+        }
+        .logo{
+            width: 180px;
+            float: none;
+        }
+        #login{
+            margin:10px auto;
+        }
+.input_lable {
+position: absolute;
+top: 7px;
+left: 15px;
+color: #c7c7c7;
+}
+#login_page_content{
+width: 100%;
+margin: 80px 0px;
+padding: 20px 0px 76px;
+background: url(<?php echo base_url(); ?>images/new_components/login_form_part_bg.png) repeat #3C4B5E;
+}
 
+/* //  checkbox styles */	
+input[type="checkbox"] {
+    display:none;
+}
 
-/* //  login form */	
+input[type="checkbox"] + label {
+    color:#f2f2f2;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(<?php echo base_url(); ?>images/new_components/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(<?php echo base_url(); ?>images/new_components/check_radio_sheet.png) -19px top no-repeat;
+}
 		
 </style>
 
 
 </head>
 <body>
-    <div id ="header">
-        <div class="wrapperMain">
-            <!--header-->
-            <?php $this->load->view('global/header.php'); ?>
-            <!--/header-->
-        </div>
-    </div>
-
-
-<h1>Login here</h1>
+    <div id="login_page_content">
+	<div class="logo">
+		<h3><a href="<?php echo base_url(); ?>">Logo</a></h3>
+	</div>
 <form id="login" method="post" action="<?php echo base_url();?>login"> 
-
-    <h1>Log in to your <strong>EasyAccessProfits.com</strong> account!</h1>
-	
 	<font style="font-size:12px;color:red;text-align:center;">
 		<?php echo form_error('password'); ?>
 	</font>	
 	
     <div>
-    	<label for="login_username">Username</label> 
+        <span id="login_username_lable" class ="input_lable">Username</span>
     	<input type="text" name="username" id="login_username" class="field required" title="Please provide your username" />
     </div>			
 
     <div>
-    	<label for="login_password">Password</label>
+        <span id="login_password_lable" class ="input_lable">Password</span>
     	<input type="password" name="password" id="login_password" class="field required" title="Password is required" />
     </div>			
     
-    <!--<p class="forgot"><a href="#">Forgot your password?</a></p>-->
-    			
-    <div class="submit">
-        <button name="client_login" type="submit">Log in</button>   
-        
-        <!--<label>
-        	<input type="checkbox" name="remember" id="login_remember" value="yes" />
-            Remember my login on this computer
-        </label>   -->
+    <div class="submit" style="overflow:hidden;">
+        <input type="checkbox" id="remeber_me" name="remeber_me" /><label for="remeber_me"><span></span>Remember me</label>
+        <button style="float:right;" name="client_login" type="submit"></button>   
     </div>
-    
+    <ul id="other_commands">
+        <li><a href="<?php echo base_url(); ?>createaccount">Register</a></li>
+        <li>|</li>
+        <li><a href="<?php echo base_url(); ?>recovery">Lost Your Password</a></li>
+    </ul>
     
   
 </form>	
-    <p class="register">No account? <a href="<?php echo base_url(); ?>createaccount">Create your account here!</a></p>
-    <p class="register">Forgot password? <a href="<?php echo base_url(); ?>recovery">Click here to contact support!</a></p>
-
+    </div>
 </body>
 </html>

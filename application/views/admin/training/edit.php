@@ -74,14 +74,18 @@ if(!empty($training->video)):
     $button = "Update"
 
 ?>
+        <?php if(preg_match("/youtube\.com/", $training->video)): 
+            $video_str = substr($training->video,-11);
+        ?>
+            <iframe width="420" height="315"
+                    src="http://www.youtube.com/embed/<?php echo $video_str; ?>?modestbranding=1" 
+                    frameborder="0" allowfullscreen>
+            </iframe>
+        <?php else: ?>
         <div class="video_preveiw" style="">
             <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
             <div id="videopreview">Loading the player...</div>
         </div>
-        <?php if(preg_match("/youtube\.com/", $training->video)): ?>
-        <input type="hidden" id="baseurl" value="">
-        <input type="hidden" id="video_file_path" value="">
-        <?php else: ?>
         <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
         <input type="hidden" id="video_file_path" value="uploads/training/video/">
         <?php endif; ?>

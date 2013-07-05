@@ -1,43 +1,40 @@
-<div class="siteHeader">
-	<!-- logo -->
-	<div class="logo">
-		<h3><a href="<?php echo base_url(); ?>">Logo</a></h3>
-	</div>
-	<!-- /logo -->
-	<!-- header right -->
-        <?php if(!isset($isgo)): ?>
-	<div class="siteHeaderRight">
-            <?php 
-            $session_data = $this->session->userdata('client_login');
-            if(empty($session_data)):
-            ?>
-	   <!--<form id="login" method="post" action="<?php // echo base_url();?>login"> 
-		   <input type="text" class="memberLogin" value="Member's Login" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;" placeholder="Member's Login" name="username" >
-		   <input type="password" class="memberLogin" value="Password" onfocus="this.value=&#39;&#39;;this.style.color=&#39;#000&#39;;this.onfocus=&#39;&#39;;" placeholder="Password" name="password" >
-		   <input type="submit" class="loginbtn left" value="Login" name="Login" >
-	   </form>-->
-            <?php 
-            else:
-                if (array_key_exists('sponser_full_name', $session_data)) {
-                    $sponser=$session_data['sponser_full_name'];
-                }
-                else{
-                    $sponser='No Sponser';
-                } ?>
-            <div class="sponsor">
-                Your Sponsor :  <a href="#"><?php echo $sponser; ?></a>
-            </div>
-            <nav class="headertop">
-                <div><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></div>
-                <ul>
-                   <li><a href="<?php echo base_url()?>members/setting">Edit Profile</a></li>
-                    <li><a href="<?php echo base_url()?>members/clientdashboard/logout">Logout</a></li>
-                    <li><a  class="last modalbox" href="#inline">Contact Support</a></li>
-                </ul>
-            </nav>
-            <?php endif; ?>
-	</div>
-        <?php endif; ?>
-	<!-- /header right -->
-</div>
- 
+ <head>
+        <title>::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'allMoney';}?>-::</title>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css">
+		<script src="<?php echo base_url()?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<?php if(isset($stylelist)):
+            foreach ($stylelist as $style):?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
+			<?php endforeach;
+        endif; 
+        if(isset($scriptlist)): 
+            foreach ($scriptlist as $script):?>
+        <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
+        <?php endforeach;
+        endif; ?>
+		<script type="text/javascript">
+			setTimeout(function() { 
+				$('.infomessage').fadeOut('fast');
+			} , 1750);
+			
+		</script>
+    </head>
+<body>
+<!-- Code of contact support pop-up hidden inline form -->
+
+<script src="<?php echo base_url()?>scripts/fancybox/jquery.fancybox.js?v=2.0.6" type="text/javascript"></script>
+<script src="<?php echo base_url()?>scripts/popup/popup.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>scripts/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/popup/popup.css">
+		
+
+
+
+
+<div id="wrapper">
+	<div class="siteHeaderBg">
+        <div class="wrapperOuter">
+             <div class="wrapperMain">
+					<!--header-->
+					
+

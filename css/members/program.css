@@ -1,0 +1,147 @@
+.you_tube{
+	height: 418px;
+margin-left: -58px;
+width: 700px;
+border-radius: 16px;
+margin-top: -25px;
+}
+div.tab_title{
+	height: 40px;
+    margin: 6px 0;
+    padding-left: 28px;
+    width: 80%;
+}
+div.tab_title2{
+	height: 40px;
+    margin: 5px 0;
+    padding-left: 28px;
+    width: 80%;
+}
+div.tab_title1{
+	float: left;
+width: 47px;
+	height: 47px;
+	background: white;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+margin-left: -74px;
+position: relative;
+top: 18;
+}
+div.tab_title1:hover
+{float: left;
+width: 47px;
+	height: 47px;
+	background: #ffd001;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+margin-left: -74px;
+}
+div.tab_title1:visited
+{float: left;
+width: 47px;
+	height: 47px;
+	background: #a4d032 !important;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+margin-left: -74px;
+}
+.infomessage{
+	background: none repeat scroll 0 0 #00ADEB;
+    border: 1px solid black;
+    color: #FFFFFF;
+    font-size: 25px;
+    height: 45px;
+    margin-top: -200px;
+    padding-top: 25px;
+    position: fixed;
+    text-align: center;
+    top: 60%;
+    width: 98%;
+    z-index: 100;
+}
+
+.video_preveiw {
+  /*  margin: 51px 5px 4px 82px; */
+   margin: 25px 5px 4px 58px;
+    position: absolute;
+    text-align: center;
+}
+img#video_bg{
+	float:left;
+}
+img.step_done{
+	height: 80%;
+    margin: -38% 7% -2% 2%;
+    position: relative;
+    width: 100%;
+	z-index: 1;
+	display:none;
+}
+span.number {
+   /* background: none repeat scroll 0 0 #78A0B1; 
+     background:url("<?php echo base_url(); ?>/images/check.png"); 
+    border-radius: 10px 10px 10px 10px;*/
+    border: 4px solid #000;
+    border-radius: 50px 50px 50px 50px;
+    color: #000;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    left: 0;
+    padding: 9px 16px;
+    position: relative;
+    top: -2px;
+	
+}
+
+.idArea{
+	float: left;
+	position: relative;
+    width: 76%;
+	height:280px;
+	display:none;
+	font-size:20px;
+	margin-left: 80px;
+	margin-top: 25px;
+}
+.id_control{
+	float: left;
+    padding: 4px 3px 2px 6px;
+    width: 85%;
+}
+.sign_up_acc{
+
+}
+.lable_txt{
+	color: #000000;
+    font-weight: bold;
+    padding: 4px 2px 2px 9px;
+}
+.save_btn{
+	background: url("<?php echo base_url();?>images/btnBg.png") repeat-x scroll left top transparent;
+     border: medium none red;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 7px #696948;
+    color: #78A0B1;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 13px 4px 3px 3px;
+    padding: 6px 0;
+    text-align: center;
+    text-transform: capitalize;
+    width: 40%;
+}
+
+fieldset { margin: 10px 0 22px 0; border: 1px solid #000; border-radius:5px; padding: 12px 17px; background-color: #202936; margin-top:20px; }
+legend { text-align: left;	font-size: 1.1em;  color: #FFFFFF; font-weight: bold; padding: 4px 8px; }
+
+.space
+{
+	width:100%;
+	height:20px;
+	float:left;
+}

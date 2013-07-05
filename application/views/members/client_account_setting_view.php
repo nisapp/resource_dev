@@ -77,5 +77,5 @@
 	  </tbody>
 	</table>
 	
- </div>
-<!-- /promoteArea -->
+ </div></div>
+ 

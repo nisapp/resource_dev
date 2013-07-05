@@ -33,8 +33,10 @@
 			$this->data['account_detail'] = $this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'EAP Training';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+			$this->data['scriptlist'][]='scripts/training_display.js';
 			$this->data['video_query'] = $this->video->GetAllVideoData();
 			$this->data['tab_menu_id'] =3;
+			$this->data['stylelist'][]='css/training_display.css';
 			 // $this->data['query']=$this->training_model->getCategories();
 			 $this->data['query']=$this->training_model->getCurrentCategories(1);
              

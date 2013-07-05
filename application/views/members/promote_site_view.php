@@ -59,4 +59,5 @@
 	</table>
 </form>
  </div>
+ </div>
 <!-- /promoteArea -->

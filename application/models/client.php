@@ -597,7 +597,7 @@
 			$this->email->to($user_detail['user_email']);
 			$mail_temp=$send['message'];
 			$strLink=base_url()."landing/affuser/".$user_detail['affiliate_user_id'];
-			$receiver_name=$user_detail['first_name'].' '.$user_detail['last_name'];
+			$receiver_name=$user_detail['first_name'];
 			// $sender_name=$t2['first_name'].' '.$t2['last_name'];
 			$mail_temp=str_replace("{{receiver_name}}",$receiver_name,$mail_temp); 
 			// $mail_temp=str_replace("{{sender_name}}",$sender_name,$mail_temp); 

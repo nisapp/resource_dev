@@ -69,11 +69,18 @@ class Programs extends CI_Controller{
             redirect('admin/programs');
         }
         if($this->input->post('submit_save')!==FALSE){
-            if($this->programs_model->updProgram($pid)){
+            $update = $this->programs_model->updProgram($pid);
+            if($update===TRUE){
 				$this->data['query'] = $this->programs_model->getProgram();
 				$this->data['status']=  'updatesuccess';
 				$this->data['subview']=  'admin/programs/programs';
 				$this->load->view('admin/_layout_main.php', $this->data);
+            }
+            else{
+                $this->data['message']= $update?$update:"update field.";
+                $this->data['program']=$this->programs_model->getProgram($pid);
+                $this->data['subview']=  'admin/programs/edit';
+                $this->load->view('admin/_layout_main.php', $this->data);
             }
         }else{
 			$this->data['program']=$this->programs_model->getProgram($pid);

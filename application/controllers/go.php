@@ -20,6 +20,10 @@ class Go extends CI_Controller {
 	 	 
 	public function index($id){
 		$affuser_id = $this->uri->segment(2);
+                /*if($this->user->check_username_exists($affuser_id)===0){
+                    redirect('/');
+                    return;
+                }//*/
 		// $this->data['affuserid'] = $this->uri->segment(3);
                 $this->data['isgo']=true;
 		$this->session->set_userdata('affuserid', $affuser_id);
@@ -28,7 +32,9 @@ class Go extends CI_Controller {
 		$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-		$this->load->view('landing_view',$this->data);
+		// $this->load->view('landing_view',$this->data);
+		$i=mt_rand(1,4);
+		$this->load->view("landing_view{$i}",$this->data);
 	 }
 }
 

@@ -3,7 +3,7 @@
 // });
 	
 function username_check(){ 
-		// $('#tick').fadeIn();
+		
 	var username = $('#login_username').val();
 	var base_url = $('#baseurl').val();
 	var is_avail_flag = $('#is_avail').val();
@@ -22,7 +22,7 @@ function username_check(){
 
 		jQuery.ajax({
 		   type: "POST",
-		   url: base_url+"register/chkUserName",
+		   url: base_url+"createaccount/chkUserName",
 		   data: 'username='+ username,
 		   cache: false,
 		   success: function(response){
@@ -63,3 +63,14 @@ function username_check(){
 
 
 }
+$(document).ready(function(){
+    var form_submited = 0;
+    $("#signup_form").submit(function(){
+        if(form_submited===1){
+            return false;
+        }
+        else{
+            form_submited=1;
+        }
+    });
+});

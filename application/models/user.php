@@ -3,7 +3,7 @@
 	{
 		function __construct(){
 			parent::__construct();
-			$this->load->library('email');		
+			$this->load->library('email');
 		}
 		
 		public function send_signup_mail($email){		 
@@ -14,7 +14,7 @@
 			$username = $this->input->post('login_username');
 			$loginphone = $this->input->post('login_phone');
 			$password = $this->input->post('login_password');
-                $login_link = base_url()."";
+                $login_link = base_url()."login";
                 $message = "
                     <p>Dear $firstname $lastname.</p>
                     <p>Thanks for signup&nbsp;and w<span style='font-family:arial,tahoma,verdana,sans-serif'><span style='font-size:small'>elcome to our system! We</span>&nbsp;<span style='font-size:small'>will be here to support you every step of</span>&nbsp;<span style='font-size:small'>the way on your journey to success online.</span><br />
@@ -41,10 +41,10 @@ Once you're inside the system, all you
 need to do is watch the welcome video
 and follow the steps on the left.
 
-Best regards
-Login: 'Teame name'
+Best Regards
+Easy Access Profits
                         ";
-			$this->email->subject('Email Test');
+			$this->email->subject('Welcome to Easy Access Profits');
 			$this->email->message($message1);
 			$this->email->send();
 			//$this->email->print_debugger();
@@ -142,7 +142,7 @@ Login: 'Teame name'
 				// echo '<pre>';
 				// print_r($wholedata);
 				// echo '</pre>';
-				// die();
+
 				$result = $this->db->insert('users',$wholedata);
 				if($result)
 				{
@@ -166,7 +166,7 @@ Login: 'Teame name'
 					$userarray = array(
 						'id' => $lastuserid,
 						'user_name'	=> $wholedata['user_name'],
-						'full_name' =>$wholedata['first_name']." ".$wholedata['last_name'],
+						'full_name' =>$wholedata['first_name'],
 						'role'  => $wholedata['role'],
 						'user_track_id'  => $track_id
 					);
@@ -370,7 +370,15 @@ Login: 'Teame name'
 				return $this->db->trans_status();//giving the status of the transaction 
 		
 		} */
-	 
-	 
+	 public function setCookie($username,$password){
+             setcookie("username",$username, time()+3600*24*7);
+             setcookie("password",$password, time()+3600*24*7);
+             setcookie("remeber_me",$this->input->post("remeber_me"), time()+3600*24*7);
+         }
+	 public function unsetCookie($username,$password){
+             setcookie("username",$username, time()-3);
+             setcookie("password",$password, time()-3);
+             setcookie("remeber_me",$this->input->post("remeber_me"), time()-3);
+         }
 	}
 	?>

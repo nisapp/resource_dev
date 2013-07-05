@@ -8,7 +8,7 @@
 <?php } ?>
 
   <!-- promoteArea -->
-<div class="promoteArea">
+<div class="promoteArea2">
 <form method="post" action="<?php echo base_url()?>members/setting/setpassword">
 	<table id="rounded-corner" align="center">
 		<thead>

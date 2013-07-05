@@ -34,47 +34,45 @@ class Landing extends CI_Controller {
 		$this->data['stylelist'][]='css/landing.css';
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-		
-		$this->load->view('landing_view',$this->data);
+		//$this->load->view('landing_view',$this->data);
+		$i=mt_rand(1,4);
+		$this->load->view("landing_view{$i}",$this->data);
 	 }
 	public function affuser($id=false){
 		$session_login_client=$this->session->userdata('client_login');
 		if (!empty($session_login_client)) {
 			redirect('members/programs', 'refresh');
-                        return;
+						return;
 		}//*/
-                if($this->user->check_for_valid_affliate_id($id)===0){
-                    redirect("landing",'refresh');
-                    return;
-                }
+		if($this->user->check_for_valid_affliate_id($id)===0){
+			redirect("landing",'refresh');
+			return;
+		}
 		redirect("go/$id",'refresh');
 	 }
-         public function termsofservice(){
-		$this->data['title']='Terms Of Service';
-		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
-		$this->data['stylelist'][]='css/jsplayer_custom.css';
-		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-             
-             $this->load->view('termsofservice',$this->data);
-         }
-         public function privacypolicy(){
-		$this->data['title']='Terms Of Service';
-		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
-		$this->data['stylelist'][]='css/jsplayer_custom.css';
-		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-             
-             $this->load->view('privacypolicy',$this->data);             
-         }
-         public function earningdisclaimer(){
-		$this->data['title']='Terms Of Service';
-		$this->data['stylelist'][]='css/style.css';
-		$this->data['stylelist'][]='css/landing.css';
-		$this->data['stylelist'][]='css/jsplayer_custom.css';
-		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-             
-             $this->load->view('earningdisclaimer',$this->data);             
-         }
+		public function termsofservice(){
+			$this->data['title']='Terms Of Service';
+			$this->data['stylelist'][]='css/style.css';
+			//$this->data['stylelist'][]='css/landing.css';
+			// $this->data['stylelist'][]='css/jsplayer_custom.css';
+			$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+			$this->load->view('termsofservice',$this->data);
+		}
+		public function privacypolicy(){
+			$this->data['title']=' Privacy Policy';
+			$this->data['stylelist'][]='css/style.css';
+			// $this->data['stylelist'][]='css/jsplayer_custom.css';
+			$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+			$this->load->view('privacypolicy',$this->data);             
+		}
+		public function earningdisclaimer(){
+			$this->data['title']=' Earnings Disclaimer';
+			$this->data['stylelist'][]='css/style.css';
+			//$this->data['stylelist'][]='css/landing.css';
+			//$this->data['stylelist'][]='css/jsplayer_custom.css';
+			$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+
+			$this->load->view('earningdisclaimer',$this->data);             
+		}
 }
 

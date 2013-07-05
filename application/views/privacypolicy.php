@@ -1,52 +1,110 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title><?php echo $title; ?></title>
-        <?php if(isset($stylelist)):
-			foreach ($stylelist as $style){ ?>
-				<link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
-		<?php }
-			endif; 
+<?php 
+$session_data = $this->session->userdata('client_login');
+$session_menu = $this->session->userdata('menu_data_in_session');
+// echo '<pre>';
+// print_r($session_data);
+// echo '</pre>';
+// foreach($session_menu as $key=>$value){
+	// echo '<br/>'.$session_menu[$key]->menu_url;		
+	// echo $key;		
+// } 
+// $data['fullname']=$session_data['user_track_id'];
+if (array_key_exists('sponser_full_name', $session_data)) {
+    $sponser=$session_data['sponser_full_name'];
+}else{
+    $sponser='No Sponser';
+}
+
+?>
+<html>
+    <head>
+        <title>::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'Easy Access Profits';}?>-::</title>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css">
+		<script src="<?php echo base_url()?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+		<?php if(isset($stylelist)):
+            foreach ($stylelist as $style):?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url().$style; ?>">
+			<?php endforeach;
+        endif; 
         if(isset($scriptlist)): 
-            foreach ($scriptlist as $script){?>
-				<script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
-	<?php 	}
+            foreach ($scriptlist as $script):?>
+        <script src="<?php echo base_url().$script; ?>" type="text/javascript"></script>
+        <?php endforeach;
         endif; ?>
-</head>
+		<script type="text/javascript">
+			setTimeout(function() { 
+				$('.infomessage').fadeOut('fast');
+			} , 1750);
+			
+		</script>
+    </head>
 <body>
-<div id="header">
-<!--<center><img src="<?php echo base_url();?>images/header.png" width="960" height="91"/></center></div>-->
-				<div class="wrapperMain">
-					<!--header-->
-					<?php $this->load->view('global/header.php'); ?>
-					<!--/header-->
-				</div>
+<!-- Code of contact support pop-up hidden inline form -->
+
+<script src="<?php echo base_url()?>scripts/fancybox/jquery.fancybox.js?v=2.0.6" type="text/javascript"></script>
+<script src="<?php echo base_url()?>scripts/popup/popup.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>scripts/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/popup/popup.css">
+				
+<div id="inline">
+	<form id="contact" name="contact" action="#" method="post">
+		<fieldset id="support">
+		<legend id="support">Please complete the following form</legend>
+
+		<label for="email"><span class="required">*</span> Email</label>
+		<input name="email" type="email" id="email" class="txt" />
+
+		<br />
+		<label for="comments"><span class="required">*</span> Your comments</label>
+		<textarea name="msg" id="msg"></textarea>
+		
+		<button id="send" class="button">Send E-mail</button>
+		</fieldset>
+	</form>
 </div>
+<input type="hidden" id="baseurl_head" value="<?php echo base_url();?>">
+
+<!-- End of Code of contact support pop-up hidden inline form -->
+
 <div id="wrapper">
-    <?php $session_menu = $this->session->userdata('menu_data_in_session'); 
-    if(!empty($session_menu)):
-    ?>
-    <nav class="maniNav">
-        <ul>
-            <?php
-            foreach($session_menu as $key=>$value){
-                ?>
-            <li><a href="<?php echo base_url().$session_menu[$key]->menu_url; ?>"><?php echo  $session_menu[$key]->menu_title; ?></a></li>
-                <?php } ?>
-        </ul>
-    </nav>
-        <?php endif; ?>
+	<div class="siteHeaderBg">
+        <div class="wrapperOuter">
+             <div class="wrapperMain">
+					<!--header-->
+						<div class="siteHeader">
+							<!-- logo -->
+							<div class="logo">
+								<h3><a href="<?php if (($session_data['login_state'] == 'active' && $session_data['role'] == 'user')){ echo base_url().'members/programs'; }else{ echo base_url(); } ?>">Logo</a></h3>
+							</div>
+							<!-- /logo -->
+							<!-- header right -->
+							<div class="siteHeaderRight">
+								
+								 <nav class="headertop">
+                                                                     <div class="links"><ul><li><a href="#">Welcome <b><?php echo $session_data['fullname']; ?></b></a></li>
+									
+										<li><a href="<?php echo base_url()?>members/setting">Tools</a></li>
+										<li><a href="<?php echo base_url()?>members/clientdashboard/logout">Logout</a></li>
+										<li><a  class="last modalbox" href="#inline">Contact Support</a></li>
+									</ul></div>
+								 </nav>
+								<div class="sponsor">
+									
+								 </div>
+							</div>
+							<!-- /header right -->
+						</div>
+						<!--/header-->
+			 </div>
+            <!-- container -->
+            <div id="container">
+            	<div class="wrapperMain containermain"><br>
+
+                <h3 align="left" style="margin-left:10px;">Privacy Policy</h3>
+<div id="policybox">
 
 
-<div id="text-holder-top"></div>
-<div id="text-holder-side">
-<p style="text-align:center"><strong><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">www.EasyAcessProfits.com</span></strong><strong><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">&nbsp;</span></strong></p>
-
-<p style="text-align:center"><br />
-<strong><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt"><strong>Privacy Policy</strong></span></strong></p>
-
-<p><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">(&rsquo;I&rsquo; and &lsquo;we&rsquo; refers to&nbsp;<strong>EasyAccessProfits</strong>, owner of this website)<br />
+<p style="margin:10px;"><span style="color:white;  font-family:arial,sans-serif; font-size:10.5pt">(&rsquo;I&rsquo; and &lsquo;we&rsquo; refers to&nbsp;<strong>EasyAccessProfits</strong>, owner of this website)<br />
 <br />
 I am committed to keeping all your personal details safe and secure. My privacy policy strictly protects the security of your personal information and honors your choices for its intended use. We carefully protect your data from loss, misuse, unauthorized access or disclosure, alteration, or destruction.<br />
 <br />
@@ -81,20 +139,43 @@ Your personal information is used for four main purposes and they are as follows
 <!--[if !supportLineBreakNewLine]<br />-->
 <!--[endif]--></span></p>
 
-<p><span style="color:black; font-family:arial,sans-serif; font-size:10.5pt">I will only disclose your personal information, without notice, if required to do so by law or in the good faith belief that such action is necessary to:<br />
+<p style="margin:10px;"><span style="color:white; font-family:arial,sans-serif; font-size:10.5pt">I will only disclose your personal information, without notice, if required to do so by law or in the good faith belief that such action is necessary to:<br />
 <br />
 (a) Conform to the edicts of the law or comply with legal process served on <strong>www.EasyAccessProfits.com</strong><br />
 <br />
 (b) Protect and defend the rights or property of&nbsp;<strong>www. EasyAccessProfits.com;</strong><br />
 <br />
 (c) Act in urgent circumstances to protect the personal safety of users of <strong>www. EasyAccessProfits.com.</strong></span></p>
+                
+                </div>
+
+					</div>
+                    
+                    <hr size="20px" color="#202936" style="margin-top:20px; border-top:1px #58728c solid; border-bottom:1px #58728c solid; ">
+                    <div id="footer">
+<footer class="footer">
+<div class="footer-area">
+	<div class="footerLink">
+    <div class="footerLink-left">
+    <ul>
+			<li><a class="last" href="#">Copyright Easy Access Profits 2013</a></li>
+		</ul>
+    </div>
+		<div class="footerLink-right">
+        <ul>
+			<li><a href="<?php echo base_url(); ?>landing/termsofservice">Terms of Service</a></li>
+			<li><a href="<?php echo base_url(); ?>landing/privacypolicy">Privacy Policy</a></li>
+			<li><a href="<?php echo base_url(); ?>landing/earningdisclaimer">Earnings Disclaimer</a></li>
+		</ul></div>
+	</div></div>
+</footer>
+		</div>
+	</div>
+	<!-- /containor -->
+	</div>
 </div>
 
-<div id="text-holder-bottom"></div>
 
 </div>
-
-    <?php $this->load->view('global/footerlinks.php'); ?>
-
 </body>
 </html>

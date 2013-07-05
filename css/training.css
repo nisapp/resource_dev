@@ -1,0 +1,7 @@
+.first_element, #header_first_element{
+    cursor: pointer ;
+}
+.selected_row td{
+    background-color: #36c !important;
+    color: #ffffff !important;
+}

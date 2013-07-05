@@ -1,0 +1,24 @@
+#program_info{
+    overflow: hidden;
+}
+#add_program{
+    width: 100%;
+    margin: 15px;
+    font-size: 1.2em;
+}
+#program_description{
+    float: right;
+    margin: 15px;
+    width: 40%;
+}
+#home_page_main .btn{
+    margin: auto;
+}
+#home_page_main{
+}
+#program_data_left{
+    width: 50%;
+    float: left;
+    overflow: hidden;
+    padding-bottom: 10px;
+}

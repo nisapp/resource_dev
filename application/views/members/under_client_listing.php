@@ -1,5 +1,5 @@
 <?php if (isset($status) && $status=="success"){?>
-			<div class="infomessage"><?php echo "Video has been added Successfully"?> </div>
+			<div class="infomessage"><?php echo "Video has been added Successfully"; ?> </div>
 <?php } ?>
 <script>
 	function delpro(id){
@@ -20,7 +20,7 @@
 
 	<?php $this->load->view('members/components/submenu'); ?>
 
-	<div class="promoteArea">
+	<div class="promoteArea1">
 	<table id="rounded-corner" class="list" align="center">
 		<thead>
 				<th scope="col" colspan="7" style='background:url(<?php echo base_url();?>images/btnBg.png) repeat-x left top;text-align:center;color:#fff;font-weight: bold;font-size: 19px;text-transform: uppercase;'>Downline Client</th>
@@ -61,5 +61,6 @@ foreach($query->result() as $client ){
  </div>
 <!-- /promoteArea -->
 <?php if($display): ?>
-<a class="btn" href="<?php echo base_url(); ?>members/promotesite/download_downline" target="_blank" >Download</a>
+<a class="myButton" href="<?php echo base_url(); ?>members/promotesite/download_downline" target="_blank" >Download</a>
 <?php endif; ?>
+</div>

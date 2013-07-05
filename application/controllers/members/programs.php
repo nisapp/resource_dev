@@ -30,6 +30,7 @@ class Programs extends CI_Controller {
 			$this->data['client_full_data']=$this->client->get_current_login_client_detail();
 			$this->data['metatitle'] = 'Programs Sign-Up ';
 			$this->data['scriptlist'][]='jwplayer/jwplayer.js';
+			$this->data['stylelist'][]='css/members/program.css';
 			$this->data['query'] = $this->programs_model->getProgram_for_clentdashboard();
 			$this->data['video_query'] = $this->video->GetAllVideoData();
 			// echo $this->db->last_query(); 
@@ -60,6 +61,26 @@ class Programs extends CI_Controller {
 			// die();
 			// echo $id;
 	 }
+         function checkurl(){
+             $url = $this->input->post("url");
+             if(empty($url)){
+                 $url = "dhfhsdfhsjsjfejifejfiehfdha";
+             }
+             $ch = curl_init();
+             curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+             curl_setopt ($ch, CURLOPT_URL, $url);
+             curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 20);
+             curl_setopt ($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+             curl_setopt($ch, CURLOPT_HEADER, true);
+             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'HEAD');
+             curl_setopt($ch, CURLOPT_NOBODY, true);
+             $content = curl_exec ($ch);
+             curl_close ($ch);
+             $result = (preg_match("/404 Not Found/",$content))?0:1;
+             echo $result;
+             //var_dump($content);
+             //$this->load->view('test');
+         }
 	 function show_next_step($menu_id){
 		echo $next_step_html=$this->programs_model->get_next_step_by_menu_id($menu_id);
 	 }

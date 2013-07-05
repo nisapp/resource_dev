@@ -17,6 +17,7 @@
 		}
 		$this->load->model('client','',TRUE);
 		$this->load->model('video','',TRUE);
+		$this->load->helper('cookie');
 	 }
 	 
 	
@@ -101,9 +102,19 @@
 	 function logout()
 	 {
 		session_start();
+		// echo '<pre>';
+		// print_r($_COOKIE);
+		// echo '</pre>';
 		$this->session->unset_userdata('client_login');
 		$this->session->unset_userdata('menu_data_in_session');
+		  $this->session->set_userdata('client_logut', TRUE);
+		delete_cookie("username");
+		delete_cookie("password");
+		delete_cookie("remeber_me");
 		session_destroy();
+		// echo '<pre>';
+		// print_r($_COOKIE);
+		// echo '</pre>';
 		redirect('/', 'refresh');
 	 }
 	 

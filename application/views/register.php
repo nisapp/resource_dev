@@ -12,6 +12,11 @@
 	<?php 	}
         endif; ?>
 <style>  
+img#videobg {
+width: 700px !important;
+height: 452px !important;
+margin:0 !important;
+}
 .video_preveiw{
 	margin: 28px 3px 2px 91px;
 	position: absolute;
@@ -28,13 +33,15 @@
     margin: 0 auto;
     width: 685px;
     text-align:center;
-    color:crimson;
+    color:white;margin-bottom: 20px;
 }
 img#videobg{
-    width: 90%;
+    width: 93%;
+}
+#register_user {
+border-radius: 20px !important;
 }
 .formArea{
-   background: url('<?php echo base_url(); ?>images/bottom-form.png');
    margin: 10px auto;
    width: 670px;
    height: 337px;
@@ -57,11 +64,17 @@ img#videobg{
 #video_viewer{
     width: 100%;
     text-align: center;
+	height: auto;
 }
 #register_user{
     width:286px;
     height:72px;
     background: url('<?php echo base_url(); ?>images/continue.png'); 
+}
+iframe#wel_data{
+	width:700px;
+	height:395px;
+	margin-top: 25px;
 }
 .siteHeaderBg {
 background: none !important;
@@ -105,7 +118,26 @@ background: none !important;
 	// echo '<pre>';
 	// print_r($d);
 	// echo '</pre>';
-?>
+?><div id="wrapper">
+	<div class="siteHeaderBg">
+        <div class="wrapperOuter">
+             <div class="wrapperMain">
+					<!--header-->
+						<div class="siteHeader">
+							<!-- logo -->
+							<div class="logo">
+								<h3><a href="<?php echo base_url(); ?>">Logo</a></h3>
+							</div>
+							<!-- /logo -->
+							<!-- header right -->
+							<div class="siteHeaderRight">
+								
+								 
+							</div>
+							<!-- /header right -->
+						</div>
+						<!--/header-->
+			 </div>
 
 <body>
     <input type="hidden" id="baseurl" value="<?php echo base_url();?>">
@@ -113,64 +145,60 @@ background: none !important;
 	<div id="wrapper">
 		<div class="siteHeaderBg">
 			<div class="wrapperOuter">
-				<!--<div class="wrapperMain">
-					header-->
-					<?php //$this->load->view('global/header.php'); ?>
-					<!--/header-->
-				<!--</div>
-				 container -->
+				
             <!-- container -->
             <div id="container">
             	 <div class="profitsContainer">
                         <div id="video_viewer">
-                                <!--<video id="register_page_vieo" class="video-js vjs-default-skin"
-                                       controls preload="auto" width="600" height="400" autoplay
-                                       >
-                                    <source src="<?php //echo base_url(); ?>uploads/videos/<?php //echo $login_video; ?>" type='video/mp4' />
-                                </video>-->
-        <div class="video_preveiw" style="">
-            <script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
-            <div id="videopreview">Loading the player...</div>
-        </div>
-        <?php if(preg_match("/youtube\.com/", $login_video)): ?>
-        <input type="hidden" id="baseurl" value="">
-        <input type="hidden" id="video_file_path" value="">
-        <?php else: ?>
-        <input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
-        <input type="hidden" id="video_file_path" value="uploads/videos/">
-        <?php endif; ?>
-        <input type="hidden" id="id_videopreview" value="<?php echo $login_video; ?>">
-                                <img src="<?php echo base_url(); ?>images/webBg2.png" id="videobg"/>
+                               
+							<?php if(preg_match("/youtube\.com/", $login_video)): 
+								$video_str = substr($login_video,-11);
+							?>
+								<iframe id="wel_data" src="http://www.youtube.com/embed/<?php echo $video_str; ?>?modestbranding=1&rel=0&controls=0&autoplay=1" frameborder="0" allowfullscreen>
+								</iframe>
+							<?php else: ?>
+								<div class="video_preveiw" style="">
+									<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
+									<div id="videopreview">Loading the player...</div>
+								</div>
+								<input type="hidden" id="baseurl" value="<?php echo base_url(); ?>">
+								<input type="hidden" id="video_file_path" value="uploads/videos/">
+							<?php endif; ?>
+							<input type="hidden" id="id_videopreview" value="<?php echo $login_video; ?>">
                         </div>
+				</div>
+                        <div id="msgarea2"><br>
+
+                        <div id="msgarea-container3">
                      <p class="get_started"><?php if(isset($title_text) && ($title_text!='')){ echo $title_text; }else{ echo 'Get Started Right Now!'; } ?> </p>
                         <div class="formArea">
                             <form action="<?php echo base_url();?>createaccount/verifysignup" method="post" >
                                 <div class="input_line">
-                                <input class="smallinput"  type="text" name="login_firstname" id="login_firstname" placeholder="First Name*" >
-                                <input class="smallinput" type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" >
+                                <input class="smallinput"  type="text" name="login_firstname" id="login_firstname" placeholder="Name*" style="background:#141a23;">
+								<input  class="smallinput" type="email" name="login_email" required id="login_email" placeholder="Email Address*" style="background:#141a23;">
                                 </div>
+                               <!-- <div class="input_line">
+                                <input  class="smallinput" type="text" name="login_phone" id="login_phone" placeholder="Phone Number*" style="background:#141a23;" >
+                                <input class="smallinput" type="text" name="login_lastname" id="login_lastname" placeholder="Last Name*" style="background:#141a23;">
+                                </div>-->
                                 <div class="input_line">
-                                <input  class="smallinput" type="text" name="login_phone" id="login_phone" placeholder="Phone Number*" >
-                                <input  class="smallinput" type="email" name="login_email" required="required" id="login_email" placeholder="Email Address*" >
-                                </div>
-                                <div class="input_line">
-                                <input  class="smallinput" type="text" required="required" name="login_username" onkeyup="username_check()" id="login_username" placeholder="Username* (minimum length 5)" >
+                                <input  class="smallinput" type="text" required name="login_username" onKeyUp="username_check()" id="login_username" placeholder="Username* (minimum length 5)" style="background:#141a23;" >
                                 <img id="tick" class='imgtick' src="<?php echo base_url();?>images/tick.png" 
                                      style="display:none; float: left; margin-left: -34px; ">
                                 <img id="cross" class='imgtick' src="<?php echo base_url();?>images/cross.png" 
                                      style="display:none; float: left; margin-left: -34px; " >
-                                <input  class="smallinput" type="password" name="login_password" id="login_password" placeholder="Password*" >
+                                <input  class="smallinput" type="password" name="login_password" id="login_password" placeholder="Password*" style="background:#141a23;" >
                                 </div>
-							<?php
-								if(!$is_fresh_signup){
-							?>
-                                <input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $is_afflitate_user; ?>">
-				            <?php } ?>
+								<?php
+									if(!$is_fresh_signup){
+								?>
+									<input type="hidden" name="afflitate_user_id" id="afflitate_user_id" value="<?php echo $is_afflitate_user; ?>">
+								<?php } ?>
                                 <div class="input_line">
-                                <input  type="submit" id="register_user" value="">
+                                <input  type="submit" id="register_user" value="" >
                                 </div>
                             </form>
-		
+		</div></div>
 							
                         </div>
                  </div>

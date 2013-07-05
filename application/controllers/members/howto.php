@@ -32,6 +32,7 @@ class Howto extends CI_Controller {
 		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
 		$this->data['video_query'] = $this->video->GetAllVideoData();
 		$this->data['tab_menu_id'] =4 ;
+		$this->data['stylelist'][]='css/training_display.css';
 
 		$this->data['query']=$this->training_model->getCurrentCategories(3);
 		$this->data['subview']=  'members/howto_view';

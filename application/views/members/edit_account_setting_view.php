@@ -1,5 +1,5 @@
 <!-- promoteArea -->
-<div class="promoteArea">
+<div class="promoteArea3">
 <form method="post" action="<?php echo base_url()?>members/setting/updatesetting">
 	<table id="rounded-corner" align="center">
 		<thead>

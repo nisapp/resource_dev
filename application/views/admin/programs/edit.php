@@ -62,6 +62,9 @@ $(document).ready(function(){
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab">Details</a></li>
     </ul>
+    <?php if(isset($message)): ?>
+    <p style="color: red;"><?php echo $message; ?></p>
+    <?php    endif; ?>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home" style="width:50%;float: left;">
 		
@@ -107,8 +110,10 @@ $(document).ready(function(){
 			<label>Program Title: </label>
 			<input type="text" name="txtProgram_Title"  id="txtProgram_Title" class="input-xlarge val_dis_enb" value="<?php echo $prog->program_title; ?>" />
 
-			<label>Signup Link: </label>
+			<label>General Link: </label>
 			<input  name="txtSignup_Link" id="txtSignup_Link" type="text"  value="<?php echo $prog->signup_link; ?>" class="input-xlarge val_dis_enb">
+			<label>Default affiliate ID: </label>
+			<input type="text" name="affiliate_id"  id="affiliate_id" class="input-xlarge val_dis_enb" value="<?php echo $prog->affiliate_id; ?>" />
 			
 			<label>Upload Program Logo: </label>
 			<input id="file_upload_logo" name="file_upload_logo" type="file" >

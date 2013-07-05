@@ -32,4 +32,12 @@ $(document).ready(function(){
             $("#youtube_link").show();
         }
     });
+    $("#frmProgram").submit(function(){
+        var link=$("#txtSignup_Link").val();
+        var de_id = $("#affiliate_id").val();
+        if(link.search(de_id)===-1){
+            alert("General link should contain default affiliate id.");
+            return false;
+        }
+    });
 });
