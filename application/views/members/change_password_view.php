@@ -6,7 +6,7 @@
 <?php }else if (isset($status) && $status=="notconfirm"){?>
 			<div class="infomessage"><?php echo "Opps ! Password does not cofirm !!"?> </div>
 <?php } ?>
-
+<div id="page_main_content">
   <!-- promoteArea -->
 <div class="promoteArea2">
 <form method="post" action="<?php echo base_url()?>members/setting/setpassword">
@@ -60,3 +60,4 @@
 </form>
  </div>
 <!-- /promoteArea -->
+</div>

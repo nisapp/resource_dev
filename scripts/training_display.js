@@ -115,6 +115,8 @@
 		{
 			previewfile = "20051210-w50s.flv";
 		}else{
+			if($("#videopreview_"+index).length > 0)
+			{
 			jwplayer("videopreview_"+index).setup({
 					file: baseurl+'uploads/training/video/'+previewfile,
 					height: 300,
@@ -122,6 +124,7 @@
 					stretching:"exactfit",
 					image: baseurl+'uploads/images/preview.jpg',
 				}).play(false);
+			}
 		}
 	} 
 	

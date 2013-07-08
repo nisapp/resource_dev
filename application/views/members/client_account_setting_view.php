@@ -3,7 +3,7 @@
 <?php }else if (isset($status) && $status=="updatefailure"){?>
 			<div class="infomessage"><?php echo "Opps ! Error in Account updated !!"?> </div>
 <?php } ?>
-
+                        <div id="page_main_content">
 <?php $this->load->view('members/components/submenu'); ?>
 
 
@@ -78,4 +78,5 @@
 	</table>
 	
  </div></div>
+                        </div>
  

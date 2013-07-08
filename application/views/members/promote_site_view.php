@@ -2,7 +2,7 @@
 			<div class="infomessage"><?php echo "Invitation send Successfully"?> </div>
 <?php } ?>
 <!-- promoteArea -->
-
+<div id="page_main_content">
 <?php $this->load->view('members/components/submenu'); ?>
 
 	
@@ -61,3 +61,4 @@
  </div>
  </div>
 <!-- /promoteArea -->
+                        </div>

@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'resource_dev';
-$db['default']['password'] = 'sys123';
-$db['default']['database'] = 'resource_dev';
+$db['default']['username'] = 'easyacc_nisapp';
+$db['default']['password'] = 'nisapp@123';
+$db['default']['database'] = 'easyacc_profits';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -6,20 +6,20 @@
 		var baseurl = $("#baseurl").val();
 		$("#infomessage").css('display','block');
 		// $("#del_yes").prop("href", baseurl+"admin/videos/deletevideo/"+id)
-		$("#del_yes").prop("href", "#")
+		$("#del_yes").prop("href", "#");
 	}
 	function no_del(){
 		$("#infomessage").css('display','none');
 	}
 </script>
-
+<div id="page_main_content">
   <div style="display:none" id="infomessage"><div style="margin-bottom: 10px;">Are you sure to delete?</div><a href="" id="del_yes"><div class="yes">Yes</div></a><div class="no" onclick="no_del();">No</div></div>
     
 	<script src="<?php echo base_url(); ?>scripts/clientlisting.js" type="text/javascript"></script>
     <!-- promoteArea -->
 
 	<?php $this->load->view('members/components/submenu'); ?>
-
+    <div id="downline">
 	<div class="promoteArea1">
 	<table id="rounded-corner" class="list" align="center">
 		<thead>
@@ -61,6 +61,8 @@ foreach($query->result() as $client ){
  </div>
 <!-- /promoteArea -->
 <?php if($display): ?>
-<a class="myButton" href="<?php echo base_url(); ?>members/promotesite/download_downline" target="_blank" >Download</a>
+<a class="myButton" href="<?php echo base_url(); ?>members/promotesite/download_downline" target="_blank" style="position: static;" >Download</a>
 <?php endif; ?>
 </div>
+</div>
+                        </div>

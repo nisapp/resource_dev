@@ -35,8 +35,68 @@ class Landing extends CI_Controller {
 		$this->data['stylelist'][]='css/jsplayer_custom.css';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
 		//$this->load->view('landing_view',$this->data);
-		$i=mt_rand(1,4);
-		$this->load->view("landing_view{$i}",$this->data);
+		//$i=mt_rand(1,4);
+		$this->load->view("landing_view1",$this->data);
+	 }
+	 function l2()
+	 {
+		$session_login_client=$this->session->userdata('client_login');
+		if (!empty($session_login_client)) {
+			redirect('members/programs', 'refresh');
+		}//*/
+                $this->data['islanding']=true;
+		$this->load->helper(array('form'));
+		// unset previous affuserid from session
+		$this->session->unset_userdata('affuserid');
+		
+		$this->data['title']='Easy Access Profits';
+		$this->data['stylelist'][]='css/style.css';
+		$this->data['stylelist'][]='css/landing.css';
+		$this->data['stylelist'][]='css/jsplayer_custom.css';
+		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+		//$this->load->view('landing_view',$this->data);
+		//$i=mt_rand(1,4);
+		$this->load->view("landing_view2",$this->data);
+	 }
+	 function l3()
+	 {
+		$session_login_client=$this->session->userdata('client_login');
+		if (!empty($session_login_client)) {
+			redirect('members/programs', 'refresh');
+		}//*/
+                $this->data['islanding']=true;
+		$this->load->helper(array('form'));
+		// unset previous affuserid from session
+		$this->session->unset_userdata('affuserid');
+		
+		$this->data['title']='Easy Access Profits';
+		$this->data['stylelist'][]='css/style.css';
+		$this->data['stylelist'][]='css/landing.css';
+		$this->data['stylelist'][]='css/jsplayer_custom.css';
+		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+		//$this->load->view('landing_view',$this->data);
+		//$i=mt_rand(1,4);
+		$this->load->view("landing_view3",$this->data);
+	 }
+	 function l4()
+	 {
+		$session_login_client=$this->session->userdata('client_login');
+		if (!empty($session_login_client)) {
+			redirect('members/programs', 'refresh');
+		}//*/
+                $this->data['islanding']=true;
+		$this->load->helper(array('form'));
+		// unset previous affuserid from session
+		$this->session->unset_userdata('affuserid');
+		
+		$this->data['title']='Easy Access Profits';
+		$this->data['stylelist'][]='css/style.css';
+		$this->data['stylelist'][]='css/landing.css';
+		$this->data['stylelist'][]='css/jsplayer_custom.css';
+		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+		//$this->load->view('landing_view',$this->data);
+		//$i=mt_rand(1,4);
+		$this->load->view("landing_view4",$this->data);
 	 }
 	public function affuser($id=false){
 		$session_login_client=$this->session->userdata('client_login');

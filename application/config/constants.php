@@ -37,8 +37,10 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* Some useful Constant for Admin */  
-define('ADMIN_EMAIL','vipinwebguru@gmail.com');
-define('ADMIN_NAME','Nissapian');
+// define('CONTACT_SUPPORT_EMAIL','vipinwebguru@gmail.com');
+define('CONTACT_SUPPORT_EMAIL','support@easyaccessprofits.com');
+define('ADMIN_EMAIL','eap@easyaccessprofits.com');
+define('ADMIN_NAME',' Easy Access Profits');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

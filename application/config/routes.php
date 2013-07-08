@@ -41,6 +41,7 @@
 $route['default_controller'] = "landing";
 $route['signup'] = "signup";
 $route['404_override'] = '';
+$route['go/(:any)'] = "go/index/$1";
 
 
 /* End of file routes.php */

@@ -141,7 +141,7 @@ function set_init(){
 					height: 300,
 					width: 500,
 					stretching:"exactfit",
-					image: baseurl+'uploads/images/preview.jpg',
+					image: baseurl+'uploads/images/preview.jpg'
 				}).play(false);
 		}
 	} 

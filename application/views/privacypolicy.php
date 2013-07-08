@@ -18,7 +18,7 @@ if (array_key_exists('sponser_full_name', $session_data)) {
 ?>
 <html>
     <head>
-        <title>::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'Easy Access Profits';}?>-::</title>
+        <title>::-<?php if(isset($metatitle)){ echo $metatitle; }else { echo 'allMoney';}?>-::</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css">
 		<script src="<?php echo base_url()?>scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
 		<?php if(isset($stylelist)):
