@@ -8,6 +8,7 @@
 	<li><a href="<?php echo base_url(); ?>members/email/femail">Follow-up Email Rules</a></li>
 	<li><a href="<?php echo base_url(); ?>members/promotesite/downclient">Downline</a></li>
 	<li><a href="<?php echo base_url(); ?>members/promotesite" >Promote Web</a></li>
+	<li><a href="<?php echo base_url(); ?>members/plspagesetup" > PureLeverage ID set up</a></li>
 </li></ul>
 
 </div>

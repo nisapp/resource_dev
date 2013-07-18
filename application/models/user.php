@@ -308,8 +308,19 @@ Easy Access Profits
 			// echo $this->db->last_query();
 			return $status;
 		}
-
-		
+/*----Function make by kiril------*/
+		function get_pure_leverage_data($trackid){
+                    $this->db->select('pl.*');
+                    $this->db->from('users as u');
+                    $this->db->join('purelev_setup as pl', "u.id = pl.user_id");
+                    $this->db->where('u.user_track_id',$trackid);
+                    $query = $this->db->get();
+                    if($query->num_rows>0){
+                        return $query->first_row();
+                    }
+                    return FALSE;
+		}
+/*----Function make by kiril------*/
 	
 	 //here the login functions ends now the user management functions on the admin end as well as user's front end
 	 

@@ -16,4 +16,4 @@ else
 }
 ?>
 
-<?php $this->load->view('members/components/footer.php'); ?>
+<?php $this->load->view('members/components/footer.php',$this->data); ?>

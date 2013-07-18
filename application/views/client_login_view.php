@@ -6,7 +6,7 @@
 <meta name="description" content="" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/landing.css"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css"/>
 <script>
 	
 jQuery(function($){
@@ -52,8 +52,6 @@ $(document).ready(function(){
         if($(this).val()==='')$("#login_password_lable").show();
     });
 });
-
-
 
 </script>
 <style>
@@ -188,10 +186,10 @@ overflow: hidden;
 #login div.submit label{float:none;display:inline;font-size:12px;}	
 #login button{
 	border: 0px;
-        padding: 0px 71px;
-        height: 40px;
-        width: 142px;
-        margin-left: 35px;
+	padding: 0px 71px;
+	height: 40px;
+	width: 142px;
+	margin-left: 35px;
 	background:url(<?php echo base_url(); ?>images/new_components/login_button_bg.png) repeat #3C4B5E;
 	-moz-border-radius:0px;
 	-webkit-border-radius:0px;

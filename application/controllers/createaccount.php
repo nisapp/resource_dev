@@ -20,7 +20,6 @@
 		$this->data['stylelist'][]='css/style.css';
 		// $this->data['stylelist'][]='css/jsplayer_custom.css';
 
-		$this->data['scriptlist'][]='scripts/html5.js';
 		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
 		$this->data['scriptlist'][]='scripts/html5.js';
 		$this->data['scriptlist'][]='jwplayer/jwplayer.js';
@@ -31,15 +30,20 @@
 		$this->load->view('user_registration',$this->data);
                 
 	 }
+	 
 	 function index(){
-             $this->data['query'] = $this->logo->GetInitData();
-             $this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
-             $this->data['stylelist'][]='video-js/video-js.css';
-             $this->data['stylelist'][]='css/style.css';
-             $this->data['scriptlist'][]='scripts/user_registration.js';
-             $this->data['scriptlist'][]='jwplayer/jwplayer.js';
-             $this->data['scriptlist'][]='scripts/program_video.js';
-             $this->data['title'] = 'Create Account';
+		$this->data['query'] = $this->logo->GetInitData();
+		$this->data['scriptlist'][]='scripts/jquery-1.7.2.min.js';
+		$this->data['stylelist'][]='scripts/mask/jquery.loadmask.css';
+		$this->data['scriptlist'][]='scripts/mask/jquery.loadmask.js';
+		$this->data['stylelist'][]='video-js/video-js.css';
+		$this->data['stylelist'][]='css/style.css';
+		$this->data['scriptlist'][]='scripts/user_registration.js';
+		// $this->data['scriptlist'][]='jwplayer/jwplayer.js';
+		// $this->data['scriptlist'][]='scripts/program_video.js';
+		$this->data['title'] = 'Create Account';
+		$pl_email = $this->session->userdata('pl_email');
+		$affuser_id = $this->session->userdata('affuserid');
              $this->load->view('register',$this->data);
          }
                  

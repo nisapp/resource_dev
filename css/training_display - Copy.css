@@ -1,0 +1,54 @@
+.you_tube_next{
+	height: 383px;
+    margin: 7px 0;
+    width: 683px;
+}
+.nextbtn{
+	cursor:pointer;
+	background: url("../images/btnBg.png") repeat-x scroll left top transparent;
+    border: medium none red;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 7px #696948;
+    color: #78A0B1;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 15px 90px;
+    padding: 6px 0;
+    text-align: center;
+    text-transform: capitalize;
+    width: 76%;
+}
+.main_tab a {
+color: blue;
+}
+img#video_bg{
+	float:left;
+}
+
+.m_t_tab-close {
+    background: none repeat scroll 0 0 #202936;
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: 14px;
+}
+.tab_close {
+    cursor: pointer;
+    margin-top: 15px;
+}
+.video_preveiw{
+	/* margin: 19px 40px 31px 59px; */
+    min-height: 400px;
+    position: relative;
+    text-align: center;
+}
+.show-tab-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #000000;
+    min-height: 360px;
+    padding: 15px 7px 10px 9px;
+    width: 98%;
+}
+img.procees_img{
+	 margin: 5% 33%;
+	 font-size: 55px;
+}

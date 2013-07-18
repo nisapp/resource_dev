@@ -12,6 +12,11 @@
 	<?php 	}
         endif; ?>
 <style>  
+    #pl_subscribe{
+        display: none;
+        target-new:tab !important;
+    }
+
 img#videobg {
 width: 700px !important;
 height: 452px !important;
@@ -85,8 +90,6 @@ background: none !important;
 		var errors = 0;
 		var message = "";
 		frmobj=document.frmAccount;
-		var is_avail_flag=frmobj.is_avail.value;
-		// alert(is_avail_flag);
 		if (frmobj.login_firstname.value == "")
 		{
 			errors++;
@@ -134,14 +137,7 @@ background: none !important;
 			if (errors == 1)
 				frmobj.login_password.focus();
 		}
-		
-		if(is_avail_flag==0){
-			errors++;
-			message += "["+errors+"] UserName allready exist ! \n\n";
-			if (errors == 1)
-				frmobj.login_username.focus();
-		}
-		
+				
 		if (errors > 0)
 		{
 			alert("Data Not Valid: \n\n" + message);
@@ -170,7 +166,6 @@ background: none !important;
 	if(isset($is_afflitate_user) && $is_afflitate_user!=''){
 		$is_fresh_signup=0;
 	}else{
-		//echo 'Fresh Sign up';
 		
 	}
 
@@ -212,6 +207,7 @@ background: none !important;
 
 <body>
     <input type="hidden" id="baseurl" value="<?php echo base_url();?>">
+    <input type="hidden" id="is_avail" name="is_avail" value="-1">
 	<div id="wrapper">
 		<div class="siteHeaderBg">
 			<div class="wrapperOuter">
@@ -263,13 +259,23 @@ background: none !important;
                                 <div class="input_line">
                                 <input  type="submit" id="register_user" value="" onclick="return validate(this);" >
                                 </div>
-								<input type="hidden" id="is_avail" name="is_avail" value="-1">
-
                             </form>
 		</div></div>
 							
                         </div>
                  </div>
+        <?php
+        if(isset($pl_email)):?>
+<input type="hidden" id="pl_isset" value="yes" />
+<form id="pl_subscribe" target="_blank" method="post" action="http://www.gogvo.com/subscribe.php">
+<input type="hidden" id="CampaignCode" name="CampaignCode" value="<?php echo $plinfo->campaign_code; ?>" />
+<input type="hidden" id="FormId" name="FormId" value="<?php echo $plinfo->form_id; ?>" />
+<input type="hidden" id="AffiliateName" name="AffiliateName" value="<?php echo $plinfo->plev_affliate_name; ?>" />
+<input type="hidden" name="Email" id="pl_email" value="<?php echo $pl_email; ?>" />
+</form>
+        <?php else: ?>
+        <input type="hidden" id="pl_isset" value="no" />
+        <?php endif; ?>
                  <div class="clear"></div>
 				<!-- footer -->
 					<?php //$this->load->view('global/footer'); ?>
@@ -283,10 +289,4 @@ background: none !important;
   </div>
 				
 </body>
-<script type="text/javascript">
-cvn = "ReachCreateAccountPage";
-cva = "0.00";
-</script>
-<script type="text/javascript" src="http://viewthisnow.linktrackr.com/api/conversion"></script>
-<noscript><img src="http://viewthisnow.linktrackr.com/api/pixel/?cvn=ReachCreateAccountPage&cva=0.00" alt="_" width="1" height="1" border="0" /></noscript>
 </html>

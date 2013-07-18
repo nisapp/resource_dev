@@ -3,7 +3,7 @@
 <?php }else if (isset($status) && $status=="failure"){?>
 			<div class="infomessage"><?php echo "Opps ! some error occur !!"?> </div>
 <?php } ?>
-<script src="<?php echo base_url(); ?>scripts/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>ckeditor/ckeditor.js" type="text/javascript"></script>
 <style type="text/css">
 	fieldset { margin: 0 0 22px 0; border: 1px solid #095D92; padding: 12px 17px; background-color: #DFF3FF; }
 	legend { text-align: left !important;font-size: 1.1em; background-color: #095D92; color: #FFFFFF; font-weight: bold; padding: 4px 8px;-webkit-padding:4px 8px; }
@@ -38,7 +38,7 @@
 <form method="post" action="<?php echo base_url()?>members/email/setfollowrule">
 <fieldset>
 	<legend>Follow Up Email Rules</legend>
-		<table id="rounded-corner-email" align="center">
+		<table id="rounded-corner-email"  class="tools_section"  align="center">
 			<thead>
 				<tr>
 					<th scope="col" colspan="2" align="center">Follow Up Email Rules</th>
@@ -53,7 +53,7 @@
 					<td class="field_data">
 						<input type="text" name="txtSubject" id="txtSubject" placeholder="Subject of Email" class="ac_input" value="<?php echo $followup_mail_data['email_subject']; ?>" maxlength="30">
 						<font style="font-size:12px;color:red;text-align:left;">
-									<?php echo form_error('txtSubject'); ?>
+								<?php echo form_error('txtSubject'); ?>
 						</font>
 					</td>
 				</tr>

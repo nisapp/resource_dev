@@ -2,6 +2,11 @@
 $session_data = $this->session->userdata('client_login');
 $session_menu = $this->session->userdata('menu_data_in_session');
 // echo '<pre>';
+// $v=$this->session->all_userdata();
+// print_r($v);
+// echo '</pre>';
+
+// echo '<pre>';
 // print_r($session_data);
 // echo '</pre>';
 // foreach($session_menu as $key=>$value){
@@ -152,10 +157,17 @@ if (array_key_exists('sponser_full_name', $session_data)) {
                                                             <a href="#"><?php echo $sponser; ?></a></span>
 							<br/>
 							<span>Your Affiliate Id : </span>
-							<a style="font-size:11px;" id="user_affiliate_link" href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" 
-                                                           target="_blank" title="Click here to copy your affiliate id.">
-									<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
+							<?php 
+								//if($session_data['user_track_id']=='84PSgNJs'){
+							?>
+							<!--<a style="font-size:11px;" id="user_affiliate_link" href="<?php echo base_url()?>go/land/<?php echo $session_data['user_track_id'];?>" target="_blank" title="Click here to copy your affiliate id.">
+							<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
+							</a>-->
+							<?php //}else{ ?>	
+							<a style="font-size:11px;" id="user_affiliate_link" href="<?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>" target="_blank" title="Click here to copy your affiliate id.">								    <?php echo base_url()?>go/<?php echo $session_data['user_track_id'];?>
 							</a>
+							
+							<?php //} ?>
 						</div>
 					</div>
                     

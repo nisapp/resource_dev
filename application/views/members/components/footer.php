@@ -24,4 +24,15 @@
 
 </div>
 </body>
+<?php 
+if(isset($view_name) && ($view_name=='programs_view')){
+?>
+<script type="text/javascript">
+cvn = "Reached Inside EAP System";
+cva = "0.00";
+</script>
+<script type="text/javascript" src="http://viewthisnow.linktrackr.com/api/conversion"></script>
+<noscript><img src="http://viewthisnow.linktrackr.com/api/pixel/?cvn=Reached%20Inside%20EAP%20System&cva=0.00" alt="_" width="1" height="1" border="0" /></noscript>
+
+<?php } ?>
 </html>

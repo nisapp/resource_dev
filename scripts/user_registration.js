@@ -34,7 +34,6 @@ function username_check(){
 							'border':'3px pink solid',
 							'background':'green',
 							'color':'#FFF',
-							
 						});	
 						$('#tick').fadeIn();
 						$('#cross').hide();

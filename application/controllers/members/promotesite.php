@@ -69,8 +69,15 @@ class Promotesite extends CI_Controller {
             $this->training_model->download_send_headers("User_downline_export_" . date("Y-m-d") . ".csv");
             echo $this->training_model->array2csv($datalist);
         }
-
+		
 	/******* End of Code to show undersignup client **********/
+	
+	/* function test(){
+		$this->load->model('training_model','',TRUE);
+		$datalist=array(array("a"=>'applaw',"a2"=>'frusssit',"a3"=>'fruitww'),array("a"=>'fruit1',"a2"=>'fruit2',"a3"=>'fruit3'));
+		$this->training_model->download_send_headers("User_downline_export_" . date("Y-m-d") . ".csv");
+		echo $this->training_model->array2csv($datalist);
+	}	 */
 	
 	function invite()
 	{

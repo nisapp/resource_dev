@@ -34,7 +34,7 @@ $(document).ready(function() {
 			  var base_url=$("#baseurl_head").val();
 			$.ajax({
 				type: 'POST',
-				url: base_url+"clientadmin/setting/contactsupport",
+				url: base_url+"members/setting/contactsupport",
 				data: $("#contact").serialize(),
 				success: function(data) {
 						/* $("#contact").fadeOut("fast", function(){

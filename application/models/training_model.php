@@ -49,9 +49,32 @@ class Training_model extends CI_Model{
 			if($check==1){
 				$trn_html.="
 						<input type='hidden' id='first_video' value='{$training->video}'>
-						<input type='hidden' id='first_video_prev' value='videopreview_{$training->id}'>
+						<input type='hidden' id='first_video_index' value='{$training->id}'>
 					";
 			}
+                        if(empty($training->video)){
+                            $video="";
+                        }
+                        elseif(preg_match("/youtube\.com/", $training->video)){
+                            $video_str = substr($training->video,-11);
+                            $video="
+									<iframe width='500' height='300'
+											src='http://www.youtube.com/embed/$video_str?modestbranding=1&rel=0&showsearch=0&controls=0' 
+											frameborder='0' allowfullscreen 
+											style='margin: 27px 40px 30px 40px;'>
+									</iframe>
+                                ";
+                        }
+                        else{
+                            $video=
+             						"<input type='hidden' id='id_videopreview_{$training->id}' value='{$training->video}'>
+					
+						<div class='video_preveiw' style=''>
+									<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
+									<div id='videopreview_{$training->id}'>Loading the player...</div>
+						</div>";
+                       
+                        }
 	
 			$trn_html.="
 				<div class='main_tab' >
@@ -61,16 +84,11 @@ class Training_model extends CI_Model{
 					<div class='show-tab-content' id='tab_child_{$check}' style='display:none;' >
 						<p>
 							{$training->t_text}
-						</p><p>&nbsp;</p>
-						<input type='hidden' id='id_videopreview_{$training->id}' value='{$training->video}'>
-					
-						<div class='video_preveiw' style='display:none'>
-									<script type='text/javascript'>jwplayer.key='oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==';</script>
-									<div id='videopreview_{$training->id}'><!--Loading the player...--></div>
-						</div>
+						</p>".
+                                                                $video
 					
 						
-					</div>
+					."</div>
 				</div>
 					";	
 		}
@@ -107,6 +125,7 @@ class Training_model extends CI_Model{
         $this->db->insert('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+	
     function addNewTraining(){
         $query=  $this->getCategories();
         $first_category=$query->first_row();
@@ -367,6 +386,7 @@ class Training_model extends CI_Model{
         $this->db->update('training',$data);
         return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
     }
+	
     function delete_video($id){
         $this->db->where('training_id',$id);
         $this->db->delete('training_video');

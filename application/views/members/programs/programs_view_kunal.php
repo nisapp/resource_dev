@@ -22,7 +22,6 @@
 			<div class="infomessage"><?php echo "Pure leverage user name set successfully"?> </div>
 <?php }else if (isset($status) && $status=="emp_success"){?>
 			<div class="infomessage"><?php echo "Empower network user name set successfully"?> </div>
-            
 <?php }
 
 	if(isset($stylelist)):
@@ -58,7 +57,7 @@
 		var match = previewfile.match(regExp);
 		if(match=='youtube.com'){
 			var previewfile = previewfile.substr(previewfile.length - 11);
-			$('#videopreview').html();
+			$('#videopreview').html('111111');
 			$('#videopreview').html('<iframe width="500" height="300" src="http://www.youtube.com/embed/'+previewfile+'?modestbranding=1&autoplay=1&rel=0&showsearch=0&controls=0" frameborder="0" class="you_tube"></iframe>');
 			// alert("yyy");
 		}else{
@@ -112,8 +111,7 @@
 		  type: "POST",  
 		  url: base_url+"members/programs/save/"+prog_id,  
 		  data: dataString,  
-		  success: function(msg) { 
-                      alert('Your Affiliate ID Is Saved!');
+		  success: function(msg) {  
 			$("div#response").html('<div class="infomessage">Username save successfully</div>');
 			show_message_div();
 		  }  
@@ -171,26 +169,29 @@ function show_message_div(){
    
 			<div class="leftnav2"> 
 				<ul>
-				<?php 
-					$count=0;
-					foreach($query->result() as $programs )
-					{ 
-				?>
+                
+					<?php 
+						$count=0;
+						foreach($query->result() as $programs )
+						{ 
+						// echo '<pre>';
+						// print_r($programs);
+						// echo '</pre>';die();
+
+					?>
 					
 					<a href="#"  onclick="set_my_video(this,<?php echo $programs->id;?>);">
-						<div class="tab_title1">
-							<span class="number"><?php echo ++$count; ?></span>
-						</div>
-						<div class="spanarrow">
-						</div>
 						<li class="video_tabs">
-							<div class="<?php  if(strlen($programs->leftnav_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>">
-							<?php echo $programs->leftnav_title;?></div>
+							<div class="tab_title1">
+								<span class="number"><?php echo ++$count; ?></span>
+							</div>
+							<div class="<?php  if(strlen($programs->leftnav_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>"><?php echo $programs->leftnav_title;?></div>
 						</li>
 					</a>
 							
-				<input type="hidden" id="txtVideo_<?php echo $programs->id;?>"  name="txtVideo_<?php echo $programs->id;?>" value="<?php echo $programs->video_name_in_folder; ?>">
-				<input type="hidden" id="txtTitle_<?php echo $programs->id;?>"  name="txtTitle_<?php echo $programs->id;?>" value="<?php echo $programs->video_title; ?>">
+							
+							<input type="text" id="txtVideo_<?php echo $programs->id;?>"  name="txtVideo_<?php echo $programs->id;?>" value="<?php echo $programs->video_name_in_folder; ?>">
+							<input type="text" id="txtTitle_<?php echo $programs->id;?>"  name="txtTitle_<?php echo $programs->id;?>" value="<?php echo $programs->video_title; ?>">
 		
 					
 				<?php 	
@@ -200,16 +201,14 @@ function show_message_div(){
 						<div class='idArea' id='myform_{$programs->id}' name='myform_{$programs->id}' >
 							<form method='post' action='members/programs/save/{$programs->id}'>
 									<div class='affiliateLink' id='link_{$programs->id}' >
-                                                                            <a target='_blank' href='{$programs->signup_link}'>Click Here To Join {$programs->program_title}</a>
+                                                                            <a target='_blank' href='{$programs->signup_link}'>Click URL To Join {$programs->program_title}</a>
                                                                             <input type='hidden' id='default_id_{$programs->id}' value='{$programs->default_id}' />
                                                                                 
 									</div>
-									<br />
-{$programs->program_title}
-
 									<fieldset>
+										<legend>{$programs->program_title}</legend>
 										<TABLE class='sign_up_acc'>
-
+											
 											<tr>
 											<TD class='id_image'>
 												<img src='".base_url()."uploads/logo/{$programs->logo}' style='height: 100px;margin-top:-21px;width:134px;' class='img_signup' />
@@ -229,12 +228,10 @@ function show_message_div(){
 					<!-- Next Tab Li code start here -->
 					<?php if($video_data['next_video_'.$tab_menu_id]->is_show=='Y'){ ?>
 						<a href="#" class="video_tabs" onclick="set_my_video(this,'<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>');">
-                        	
+							<li>
 								<div class="tab_title1">
 									<span class="number"><?php echo ++$count; ?></span>
 								</div>
-								<div class="spanarrow"></div>
-							<li class="video_tabs">
 								<div class="<?php  if(strlen($video_data['next_video_'.$tab_menu_id]->tab_title)<=16){ echo 'tab_title'; }else{ echo 'tab_title2'; } ?>"><?php echo $video_data['next_video_'.$tab_menu_id]->tab_title; ?></div>
 							</li>
 						</a>
@@ -253,16 +250,13 @@ function show_message_div(){
 					<script type="text/javascript">jwplayer.key="oIXlz+hRP0qSv+XIbJSMMpcuNxyeLbTpKF6hmA==";</script>
 					<div id="videopreview"></div>
 		</div>
-		</div>
-		
-
+	</div>
 
 
 </div>
 
 <!-- /wrapperMain -->
 <div id="msgarea">
-    <div id="ms_container">
 <div id="msgarea-container">
 <?php 
 		if(isset($html)){
@@ -282,7 +276,7 @@ function show_message_div(){
 		<!-- end of next program button -->
 	<div class="idArea" id="myform_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" name="myform_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" >
 				 <a href="<?php echo $video_data['next_video_'.$tab_menu_id]->custom_link; ?>" ><input type="button" class="claimbtn" value="Click Here To Go To The Next Step" style="cursor:pointer;" /></a>
-	</div>
+		</div>
 	<input type="hidden" id="txtVideo_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>"  name="txtVideo_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name_in_folder; ?>">
 	<input type="hidden" id="txtTitle_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>"  name="txtTitle_<?php echo $video_data['next_video_'.$tab_menu_id]->type; ?>" value="<?php echo $video_data['next_video_'.$tab_menu_id]->file_name; ?>">
 	
@@ -292,4 +286,4 @@ function show_message_div(){
 	
 	
 </form>
-</div></div></div>
+</div></div>

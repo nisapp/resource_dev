@@ -6,7 +6,7 @@ class Landing extends CI_Controller {
 	 function __construct()
 	 {
 		parent::__construct();
-	   // $this->load->library('session');
+	    $this->load->library('session');
 	   // $this->load->library('email');
 	    $this->load->model('logo','',TRUE);
 	    $this->load->model('user','',TRUE);
@@ -134,5 +134,66 @@ class Landing extends CI_Controller {
 
 			$this->load->view('earningdisclaimer',$this->data);             
 		}
+         public function plsubscribe($param = FALSE) {
+        if ($param === FALSE) {
+            $h = curl_init();
+            curl_setopt($h, CURLOPT_URL, "http://www.gogvo.com/subscribe.php");
+            curl_setopt($h, CURLOPT_POST, true);
+            curl_setopt($h, CURLOPT_POSTFIELDS, "CampaignCode="
+                    .$this->input->post('CampaignCode')."FormId="
+                    .$this->input->post('FormId')."AffiliateName="
+                    .$this->input->post('AffiliateName')."Email=".$this->input->post('Email')
+            );
+            //curl_setopt($h, CURLOPT_HEADER, false);
+            curl_setopt($h, CURLOPT_RETURNTRANSFER, 1);
+            $result = curl_exec($h);
+            curl_close($h);
+            $h1 = curl_init();
+            curl_setopt($h1, CURLOPT_URL, "https://app.getresponse.com/add_contact_webform.html");
+            curl_setopt($h1, CURLOPT_POST, true);
+            curl_setopt($h1, CURLOPT_POSTFIELDS, "webform_id=".$this->input->post('webform_id').
+                "email=".$this->input->post('Email')
+            );
+            //curl_setopt($h1, CURLOPT_HEADER, false);
+            curl_setopt($h1, CURLOPT_RETURNTRANSFER, 1);
+            $result1 = curl_exec($h1);
+            curl_close($h1);
+            //if (!empty($result) && !empty($result1)) {
+            
+                $this->session->set_userdata('pl_subscribe_page', $result);
+                $this->session->set_userdata('gr_subscribe_page', $result1);
+                /*echo 1;
+            } else {
+                echo 0;
+            }//*///var_dump($_POST);
+                echo $this->input->post('CampaignCode');//$result1;//$this->session->userdata('pl_subscribe_page');
+        } elseif ($param === "pl_view") {
+            $this->data['plresponse'] = $this->session->userdata('pl_subscribe_page');
+
+            $this->load->view("pl_subscribe", $this->data);
+        } elseif ($param === "gr_view") {
+            $this->data['plresponse'] = $this->session->userdata('pl_subscribe_page');
+
+            $this->load->view("pl_subscribe", $this->data);
+        } else {
+            redirect('/error_page');
+        }
+        //echo $result;
+    }
+    public function setplemail(){
+        $this->session->set_userdata('pl_email', $this->input->post('email'));
+        echo $this->session->userdata('pl_email');//$this->input->post('pl_email');//
+    }
+    function pl_display(){
+        if($this->session->userdata('pl_res')){
+            $this->data["plresponse"]=$this->session->userdata('pl_res');//"This part working";//
+            echo "new test";
+            var_dump($_SESSION);
+            $this->session->unset_userdata('pl_res');
+            $this->load->view('pl_subscribe',$this->data);
+        }
+        var_dump($_SESSION);
+    }
+
 }
 

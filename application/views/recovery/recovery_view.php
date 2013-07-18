@@ -291,6 +291,7 @@ select {
 }
 input[type="text"]#loginoremail {
 	background-color:#FFF !important;
+	color:#000;
 
 }
 		

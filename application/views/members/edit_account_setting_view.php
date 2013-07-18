@@ -2,7 +2,7 @@
 <div id="page_main_content">
 <div class="promoteArea3">
 <form method="post" action="<?php echo base_url()?>members/setting/updatesetting">
-	<table id="rounded-corner" align="center">
+	<table id="rounded-corner"  class="tools_section"  align="center">
 		<thead>
 			<tr>
 				<th scope="col" colspan="2" align="center">Change Account Setting</th>
